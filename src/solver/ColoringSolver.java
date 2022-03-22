@@ -151,7 +151,7 @@ public class ColoringSolver extends AbstractSolver {
 
 	/**
 	 * Finds the next SC step.
-	 * 
+	 *
 	 * @param onlyOne
 	 * @return
 	 */
@@ -169,7 +169,7 @@ public class ColoringSolver extends AbstractSolver {
 
 	/**
 	 * Iterates over all candidates and finds SC steps.
-	 * 
+	 *
 	 * @param onlyOne
 	 * @return
 	 */
@@ -185,7 +185,7 @@ public class ColoringSolver extends AbstractSolver {
 
 	/**
 	 * Tries to find all Simple Colors steps for the given candidate.
-	 * 
+	 *
 	 * @param cand    candidate to check
 	 * @param onlyOne
 	 * @return
@@ -249,7 +249,7 @@ public class ColoringSolver extends AbstractSolver {
 	/**
 	 * Checks, if two cells in set can see each other. If so, all candidates in set
 	 * can be removed.
-	 * 
+	 *
 	 * @param set The set to check
 	 */
 	private boolean checkColorWrap(SudokuSet set) {
@@ -267,7 +267,7 @@ public class ColoringSolver extends AbstractSolver {
 	 * Utility function: All candidates, that can see a cell in set1 and a cell in
 	 * set2, can be eliminated. 20090414: Eliminations are recorded more than once,
 	 * that leads to wrong sorting; Collect all eliminations in a set first
-	 * 
+	 *
 	 * @param set1 The first set to check
 	 * @param set2 The second set to check
 	 * @param cand Candidate to check
@@ -296,7 +296,7 @@ public class ColoringSolver extends AbstractSolver {
 
 	/**
 	 * Find the next MC step.
-	 * 
+	 *
 	 * @param onlyOne
 	 * @return
 	 */
@@ -314,7 +314,7 @@ public class ColoringSolver extends AbstractSolver {
 
 	/**
 	 * Iterates over all candidates and tries to find steps.
-	 * 
+	 *
 	 * @param onlyOne
 	 * @return
 	 */
@@ -330,7 +330,7 @@ public class ColoringSolver extends AbstractSolver {
 
 	/**
 	 * Does the real work...
-	 * 
+	 *
 	 * @param cand
 	 * @param onlyOne
 	 * @return
@@ -414,7 +414,7 @@ public class ColoringSolver extends AbstractSolver {
 	/**
 	 * Checks, whether cells in set can see cells of s21 and s22. If so, all
 	 * candidates in set can be eliminated.
-	 * 
+	 *
 	 * @param set Set to be checked
 	 * @param s21 First color of other color pair
 	 * @param s22 Second color of other color pair
@@ -440,7 +440,7 @@ public class ColoringSolver extends AbstractSolver {
 
 	/**
 	 * Checks, whether some cell in set1 can see a cell in set2.
-	 * 
+	 *
 	 * @param set1 First set
 	 * @param set2 Second set
 	 * @return
@@ -460,7 +460,7 @@ public class ColoringSolver extends AbstractSolver {
 	 * Actually colors the grid. "Coloring the grid" means, that every candidate,
 	 * that is part of at least on conjugate pair, is aasigned a color. "Assigned a
 	 * color" means, that the candidate is added to one of the {@link #sets}.<br>
-	 * 
+	 *
 	 * The algorithm is easy:
 	 * <ul>
 	 * <li>first eliminate all candidates, that are not part of at least one
@@ -470,7 +470,7 @@ public class ColoringSolver extends AbstractSolver {
 	 * Colored candidates are removed from {@link #startSet}.<br>
 	 * Coloring sets are buffered: If a set has already been calculated for a given
 	 * candidate and a certain state of a sudoku the method does nothing.
-	 * 
+	 *
 	 * @param cand
 	 * @return
 	 */
@@ -522,7 +522,7 @@ public class ColoringSolver extends AbstractSolver {
 	/**
 	 * Colors the cell index with color anzColorPairs[cand]/C1 and tries to find all
 	 * conjugate pairs. Every colored candidate is removed from startSet.
-	 * 
+	 *
 	 * @param index index of the cell to color. -1 means stop the coloring
 	 * @param cand  Candidate for which the coloring is performed
 	 * @param on    true: use {@link #C1}, false: use {@link #C2}
@@ -547,7 +547,7 @@ public class ColoringSolver extends AbstractSolver {
 	 * Checks whether cell <code>index</code> belongs to a conjugate pair for
 	 * candidate <code>cand</code> in constraint <code>constraint</code>. Returns
 	 * the other cell or -1, if there is no conjugate pair.
-	 * 
+	 *
 	 * @param index      Index of cell for which a conjugate link is tried to find
 	 * @param cand       The candidate for which the search is performed
 	 * @param constraint The constraint to check against

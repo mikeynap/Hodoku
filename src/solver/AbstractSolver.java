@@ -57,7 +57,7 @@ public abstract class AbstractSolver {
 
 	/**
 	 * Creates a new instance of AbstractSolver
-	 * 
+	 *
 	 * @param finder
 	 */
 	public AbstractSolver(SudokuStepFinder finder) {
@@ -66,7 +66,7 @@ public abstract class AbstractSolver {
 
 	/**
 	 * Method for finding a new instance of a specific technique.
-	 * 
+	 *
 	 * @param type
 	 * @return
 	 */
@@ -74,7 +74,7 @@ public abstract class AbstractSolver {
 
 	/**
 	 * Method for executing a specific technique.
-	 * 
+	 *
 	 * @param step
 	 * @return
 	 */

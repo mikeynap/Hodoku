@@ -29,7 +29,7 @@ import java.util.List;
  * threads an arbitrary number of additional solver instances can be gotten from
  * this factory.<br>
  * Solvers have to be released after they are used.
- * 
+ *
  * @author hobiwan
  */
 public class SudokuSolverFactory {
@@ -81,7 +81,7 @@ public class SudokuSolverFactory {
 
 		/**
 		 * Create a new entry for {@link #instances}.
-		 * 
+		 *
 		 * @param instance
 		 */
 		private SolverInstance(SudokuSolver instance) {
@@ -102,7 +102,7 @@ public class SudokuSolverFactory {
 
 	/**
 	 * Get the {@link #defaultSolver}.
-	 * 
+	 *
 	 * @return
 	 */
 	public static SudokuSolver getDefaultSolverInstance() {
@@ -111,7 +111,7 @@ public class SudokuSolverFactory {
 
 	/**
 	 * Hand out an ununsed solver or create a new one if necessary.
-	 * 
+	 *
 	 * @return
 	 */
 	public static SudokuSolver getInstance() {
@@ -134,7 +134,7 @@ public class SudokuSolverFactory {
 
 	/**
 	 * Gives a solver back to the factory.
-	 * 
+	 *
 	 * @param solver
 	 */
 	public static void giveBack(SudokuSolver solver) {

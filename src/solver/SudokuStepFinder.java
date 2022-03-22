@@ -40,7 +40,7 @@ import sudoku.SudokuSetBase;
  * <li>It exposes the public API of the specialized solvers to the rest of the
  * program.</li>
  * </ol>
- * 
+ *
  * @author hobiwan
  */
 public class SudokuStepFinder {
@@ -195,7 +195,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Creates an instance of the class.
-	 * 
+	 *
 	 * @param simpleOnly If set, the StepFinder contains only an instance of
 	 *                   SimpleSolver
 	 */
@@ -251,7 +251,7 @@ public class SudokuStepFinder {
 	 * solver. This method is called from an extra thread from within
 	 * {@link SudokuSolverFactory}. No synchronization is done here to speed things
 	 * up, if the functionality is not used.<br>
-	 * 
+	 *
 	 * Specialized solvers, that use cleanup, have to implement synchronization
 	 * themselves.
 	 */
@@ -266,7 +266,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Gets the next step of type <code>type</code>.
-	 * 
+	 *
 	 * @param type
 	 * @return
 	 */
@@ -285,7 +285,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Executes a step.
-	 * 
+	 *
 	 * @param step
 	 */
 	public void doStep(SolutionStep step) {
@@ -313,7 +313,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Stes a new sudoku.
-	 * 
+	 *
 	 * @param sudoku
 	 */
 	public void setSudoku(Sudoku2 sudoku) {
@@ -326,7 +326,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Gets the sudoku.
-	 * 
+	 *
 	 * @return
 	 */
 	public Sudoku2 getSudoku() {
@@ -335,7 +335,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Sets the stepConfigs.
-	 * 
+	 *
 	 * @param stepConfigs
 	 */
 	public void setStepConfigs(StepConfig[] stepConfigs) {
@@ -344,7 +344,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Get the {@link TablingSolver}.
-	 * 
+	 *
 	 * @return
 	 */
 	protected TablingSolver getTablingSolver() {
@@ -357,7 +357,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all Full Houses for a given sudoku.
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -372,7 +372,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all Naked Singles for a given sudoku.
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -387,7 +387,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all Naked Subsets for a given sudoku.
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -402,7 +402,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all Hidden Singles for a given sudoku.
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -417,7 +417,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Find all hidden Subsets.
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -432,7 +432,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all Locked Candidates for a given sudoku.
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -447,7 +447,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all Locked Candidates Type 1 for a given sudoku.
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -469,7 +469,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all Locked Candidates Type 2 for a given sudoku.
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -491,7 +491,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all fishes of a given size and shape.
-	 * 
+	 *
 	 * @param newSudoku
 	 * @param minSize
 	 * @param maxSize
@@ -515,7 +515,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all kraken fishes of a given size and shape.
-	 * 
+	 *
 	 * @param newSudoku
 	 * @param minSize
 	 * @param maxSize
@@ -539,7 +539,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all Empty Rectangles
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -554,7 +554,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all Skyscrapers
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -569,7 +569,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all Two String Kites
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -584,7 +584,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all instances of all types of Uniqueness techniques
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -599,7 +599,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Find all kinds of Wings
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -614,7 +614,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Find all Simple Colors
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -629,7 +629,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Find all Multi Colors
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -644,7 +644,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Find all simple chains (X-Chain, XY-Chain, Remote Pairs, Turbot Fish).
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -659,7 +659,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all ALS-XZ, ALS-XY and ALS-Chains.
-	 * 
+	 *
 	 * @param newSudoku
 	 * @param doXz
 	 * @param doXy
@@ -677,7 +677,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Get all Death Blossoms
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -692,7 +692,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all Sue de Coqs
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -707,7 +707,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all normal Nice Loops/AICs
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -722,7 +722,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Find all Grouped Nice Loops/AICs
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -737,7 +737,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all Forcing Chains
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -752,7 +752,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all Forcing Nets
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -767,7 +767,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Finds all Templates steps
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -790,7 +790,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Returns the {@link #candidates}. Recalculates them if they are dirty.
-	 * 
+	 *
 	 * @return
 	 */
 	public SudokuSet[] getCandidates() {
@@ -802,7 +802,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Returns the {@link #positions}. Recalculates them if they are dirty.
-	 * 
+	 *
 	 * @return
 	 */
 	public SudokuSet[] getPositions() {
@@ -853,7 +853,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Returns the {@link #candidatesAllowed}. Recalculates them if they are dirty.
-	 * 
+	 *
 	 * @return
 	 */
 	public SudokuSet[] getCandidatesAllowed() {
@@ -865,7 +865,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Returns the {@link #emptyCells}. Recalculates them if they are dirty.
-	 * 
+	 *
 	 * @return
 	 */
 	public SudokuSet getEmptyCells() {
@@ -909,7 +909,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Returns delCandTemplates.
-	 * 
+	 *
 	 * @param initLists
 	 * @return
 	 */
@@ -922,7 +922,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Returns setValueTemplates.
-	 * 
+	 *
 	 * @param initLists
 	 * @return
 	 */
@@ -953,7 +953,7 @@ public class SudokuStepFinder {
 	 * AND of all templates of another candidate, are forbidden All templates, that
 	 * dont have at least one non overlapping combination with at least one template
 	 * of another candidate, are forbidden.
-	 * 
+	 *
 	 * @param initLists
 	 */
 	private void initCandTemplates(boolean initLists) {
@@ -1059,7 +1059,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Convenience method for {@link #getAlses(boolean) }.
-	 * 
+	 *
 	 * @return
 	 */
 	public List<Als> getAlses() {
@@ -1074,7 +1074,7 @@ public class SudokuStepFinder {
 	 * <br>
 	 * The list is cached in {@link #alsesOnlyLargerThanOne} or
 	 * {@link #alsesWithOne} respectively and only recomputed if necessary.
-	 * 
+	 *
 	 * @param onlyLargerThanOne
 	 * @return
 	 */
@@ -1100,7 +1100,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Does some statistics and starts the recursive search for every house.
-	 * 
+	 *
 	 * @param onlyLargerThanOne
 	 * @return
 	 */
@@ -1133,7 +1133,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Does a recursive ALS search over one house (<code>indexe</code>).
-	 * 
+	 *
 	 * @param anzahl            Number of cells already contained in
 	 *                          {@link #indexSet}.
 	 * @param startIndex        First index in <code>indexe</code> to check.
@@ -1182,7 +1182,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Do some statistics.
-	 * 
+	 *
 	 * @return
 	 */
 	public String getAlsStatistics() {
@@ -1220,7 +1220,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Getter for {@link #startIndices}.
-	 * 
+	 *
 	 * @return
 	 */
 	public int[] getStartIndices() {
@@ -1229,7 +1229,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Getter for {@link #endIndices}.
-	 * 
+	 *
 	 * @return
 	 */
 	public int[] getEndIndices() {
@@ -1238,7 +1238,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Setter for {@link #rcOnlyForward}.
-	 * 
+	 *
 	 * @param rof
 	 */
 	public void setRcOnlyForward(boolean rof) {
@@ -1247,7 +1247,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Getter for {@link #rcOnlyForward}.
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isRcOnlyForward() {
@@ -1265,7 +1265,7 @@ public class SudokuStepFinder {
 	 * {@link #startIndices}[i], the index of the last RC + 1 is written to
 	 * {@link #endIndices}[i] (needed for chain search).<br>
 	 * <br>
-	 * 
+	 *
 	 * If {@link #rcOnlyForward} is set to <code>true</code>, only RCs with
 	 * references to ALS with a greater index are collected. For ALS-XZ und
 	 * ALS-XY-Wing this is irrelevant. For ALS-Chains it greatly improves
@@ -1359,7 +1359,7 @@ public class SudokuStepFinder {
 
 	/**
 	 * Do some statistics.
-	 * 
+	 *
 	 * @return
 	 */
 	public String getRCStatistics() {

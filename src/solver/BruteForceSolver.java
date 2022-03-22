@@ -33,7 +33,7 @@ public class BruteForceSolver extends AbstractSolver {
 
 	/**
 	 * Creates a new instance of BruteForceSolver
-	 * 
+	 *
 	 * @param finder
 	 */
 	public BruteForceSolver(SudokuStepFinder finder) {
@@ -42,10 +42,10 @@ public class BruteForceSolver extends AbstractSolver {
 
 	@Override
 	protected SolutionStep getStep(SolutionType type) {
-		
+
 		SolutionStep result = null;
 		sudoku = finder.getSudoku();
-		
+
 		switch (type) {
 		case BRUTE_FORCE:
 			result = getBruteForce();
@@ -53,16 +53,16 @@ public class BruteForceSolver extends AbstractSolver {
 		default:
 			break;
 		}
-		
+
 		return result;
 	}
 
 	@Override
 	protected boolean doStep(SolutionStep step) {
-		
+
 		boolean handled = true;
 		sudoku = finder.getSudoku();
-		
+
 		switch (step.getType()) {
 		case BRUTE_FORCE:
 			int value = step.getValues().get(0);
@@ -73,7 +73,7 @@ public class BruteForceSolver extends AbstractSolver {
 		default:
 			handled = false;
 		}
-		
+
 		return handled;
 	}
 

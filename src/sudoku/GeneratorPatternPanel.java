@@ -27,7 +27,7 @@ import java.awt.event.MouseEvent;
 
 /**
  * A panel that allows to graphicallydefine a creation pattern.
- * 
+ *
  * @author hobiwan
  */
 public class GeneratorPatternPanel extends javax.swing.JPanel {
@@ -73,7 +73,7 @@ public class GeneratorPatternPanel extends javax.swing.JPanel {
 
 	/**
 	 * Toggles a cell in the pattern.
-	 * 
+	 *
 	 * @param evt
 	 */
 	private void formMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseClicked

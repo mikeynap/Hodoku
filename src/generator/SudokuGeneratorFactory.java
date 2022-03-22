@@ -29,7 +29,7 @@ import java.util.List;
  * background threads an arbitrary number of additional generator instances can
  * be gotten from this factory.<br>
  * Generators have to be released after they are used.
- * 
+ *
  * @author hobiwan
  */
 public class SudokuGeneratorFactory {
@@ -75,7 +75,7 @@ public class SudokuGeneratorFactory {
 
 		/**
 		 * Create a new entry for {@link #instances}.
-		 * 
+		 *
 		 * @param instance
 		 */
 		private generatorInstance(SudokuGenerator instance) {
@@ -96,7 +96,7 @@ public class SudokuGeneratorFactory {
 
 	/**
 	 * Get the {@link #defaultGenerator}.
-	 * 
+	 *
 	 * @return
 	 */
 	public static SudokuGenerator getDefaultGeneratorInstance() {
@@ -105,7 +105,7 @@ public class SudokuGeneratorFactory {
 
 	/**
 	 * Hand out an ununsed generator or create a new one if necessary.
-	 * 
+	 *
 	 * @return
 	 */
 	public static SudokuGenerator getInstance() {
@@ -128,7 +128,7 @@ public class SudokuGeneratorFactory {
 
 	/**
 	 * Gives a generator back to the factory.
-	 * 
+	 *
 	 * @param generator
 	 */
 	public static void giveBack(SudokuGenerator generator) {

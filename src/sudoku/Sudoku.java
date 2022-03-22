@@ -25,13 +25,13 @@ import java.util.TreeSet;
  * Compatibility class for loading Sudoku files that were stored with an older
  * version of HoDoKu (2.0 or older). It contains only the contract for
  * XMLEncoder.
- * 
+ *
  * @author hobiwan
  */
 public class Sudoku {
-	
-	private static final int[][] COLS = { 
-		{ 0, 9, 18, 27, 36, 45, 54, 63, 72 }, 
+
+	private static final int[][] COLS = {
+		{ 0, 9, 18, 27, 36, 45, 54, 63, 72 },
 		{ 1, 10, 19, 28, 37, 46, 55, 64, 73 },
 		{ 2, 11, 20, 29, 38, 47, 56, 65, 74 },
 		{ 3, 12, 21, 30, 39, 48, 57, 66, 75 },
@@ -41,7 +41,7 @@ public class Sudoku {
 		{ 7, 16, 25, 34, 43, 52, 61, 70, 79 },
 		{ 8, 17, 26, 35, 44, 53, 62, 71, 80 }
 	};
-	
+
 	private static final int CPL = 9;
 
 	// Ein Template pro Kandidat mit allen prinzipiell noch möglichen Positionen
@@ -130,7 +130,7 @@ public class Sudoku {
 	/**
 	 * Used to get a representation of the sudoku that can be fed directly into a
 	 * Sudoku2.
-	 * 
+	 *
 	 * @param mode
 	 * @param step
 	 * @return

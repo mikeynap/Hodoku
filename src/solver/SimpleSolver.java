@@ -73,7 +73,7 @@ public class SimpleSolver extends AbstractSolver {
 
 	/**
 	 * Creates a new instance of SimpleSolver
-	 * 
+	 *
 	 * @param finder
 	 */
 	protected SimpleSolver(SudokuStepFinder finder) {
@@ -165,7 +165,7 @@ public class SimpleSolver extends AbstractSolver {
 
 	/**
 	 * Finds and returns all Full Houses present in the grid.
-	 * 
+	 *
 	 * @return
 	 */
 	protected List<SolutionStep> findAllFullHouses() {
@@ -184,7 +184,7 @@ public class SimpleSolver extends AbstractSolver {
 	 * A Full House is always also a Naked Single. The method therefore traverses
 	 * the Naked Single queue and checks the number of candidates for all other
 	 * candidates in the constraint.
-	 * 
+	 *
 	 * @param all If <code>true</code>, all Full houses are returned
 	 * @return
 	 */
@@ -236,7 +236,7 @@ public class SimpleSolver extends AbstractSolver {
 
 	/**
 	 * Finds the next Naked Single in the grid
-	 * 
+	 *
 	 * @return
 	 */
 	private SolutionStep findNakedSingle() {
@@ -259,7 +259,7 @@ public class SimpleSolver extends AbstractSolver {
 
 	/**
 	 * Find all Naked Singles but do not alter the queue!
-	 * 
+	 *
 	 * @return
 	 */
 	protected List<SolutionStep> findAllNakedSingles() {
@@ -295,7 +295,7 @@ public class SimpleSolver extends AbstractSolver {
 	 * Naked Subsets are cached.<br>
 	 * If {@link SudokuStepFinder#stepNumber} has not changed since the last call to
 	 * this method, {@link #cachedSteps} is searched for a matching step.
-	 * 
+	 *
 	 * @param anz
 	 * @param lockedOnly
 	 * @return
@@ -344,7 +344,7 @@ public class SimpleSolver extends AbstractSolver {
 
 	/**
 	 * Find all Naked and Locked Subsets.
-	 * 
+	 *
 	 * @return
 	 */
 	protected List<SolutionStep> findAllNakedXle() {
@@ -373,7 +373,7 @@ public class SimpleSolver extends AbstractSolver {
 	 * cached but not returned. They can be used as result in a subsequent search if
 	 * {@link SudokuStepFinder#stepNumber} has not changed.<br>
 	 * The search uses bitmaps for optimization.
-	 * 
+	 *
 	 * @param indices
 	 * @param anz        Must be between 2 and 4.
 	 * @param lockedOnly
@@ -468,7 +468,7 @@ public class SimpleSolver extends AbstractSolver {
 
 	/**
 	 * Finds the next Hidden Single in the grid
-	 * 
+	 *
 	 * @return
 	 */
 	private SolutionStep findHiddenSingle() {
@@ -500,7 +500,7 @@ public class SimpleSolver extends AbstractSolver {
 	 * queue that is still valid, a hidden Single item is created.
 	 * {@link #singleFound} is used to ensure that only one single is recorded per
 	 * cell.
-	 * 
+	 *
 	 * @return
 	 */
 	protected List<SolutionStep> findAllHiddenSingles() {
@@ -541,7 +541,7 @@ public class SimpleSolver extends AbstractSolver {
 
 	/**
 	 * Find all Hidden Subsets in the grid.
-	 * 
+	 *
 	 * @return
 	 */
 	protected List<SolutionStep> findAllHiddenXle() {
@@ -563,7 +563,7 @@ public class SimpleSolver extends AbstractSolver {
 
 	/**
 	 * Find the next Hidden Subset with size <code>anz</code>
-	 * 
+	 *
 	 * @param anz
 	 * @return
 	 */
@@ -584,7 +584,7 @@ public class SimpleSolver extends AbstractSolver {
 	/**
 	 * Searches for Naked Subsets in the group of units <code>indices</code>. Doesnt
 	 * use recursion to squeaze a few more microseconds out of the code.
-	 * 
+	 *
 	 * @param constraintBase
 	 * @param indices
 	 * @param anz
@@ -694,7 +694,7 @@ public class SimpleSolver extends AbstractSolver {
 
 	/**
 	 * Get the next LC step. Type 1 is found first.
-	 * 
+	 *
 	 * @param type
 	 * @return
 	 */
@@ -722,7 +722,7 @@ public class SimpleSolver extends AbstractSolver {
 
 	/**
 	 * Get all LC steps.
-	 * 
+	 *
 	 * @return
 	 */
 	protected List<SolutionStep> findAllLockedCandidates() {
@@ -745,7 +745,7 @@ public class SimpleSolver extends AbstractSolver {
 	 * additional candidates are present.<br>
 	 * If <code>constraintBase == 18</code> (search in blocks) a LC1 is possible,
 	 * otherwise it could be a LC2.
-	 * 
+	 *
 	 * @param constraintBase
 	 * @param indices
 	 * @param onlyOne
@@ -828,7 +828,7 @@ public class SimpleSolver extends AbstractSolver {
 	 * candidates to delete are in the unit given by <code>indices</code>, all cells
 	 * that belong to constraint <code>skipConstraint</code> are part of the LC
 	 * itself and cannot be deleted.
-	 * 
+	 *
 	 * @param type
 	 * @param cand
 	 * @param skipConstraint
@@ -864,7 +864,7 @@ public class SimpleSolver extends AbstractSolver {
 	 * {@link #createSubsetStep(int[], short, sudoku.SolutionType, boolean, boolean)}.
 	 * The valid indices are stored in an array with the correct size to make
 	 * iterating them easier.
-	 * 
+	 *
 	 * @param i1
 	 * @param i2
 	 * @param i3
@@ -918,7 +918,7 @@ public class SimpleSolver extends AbstractSolver {
 	 * Hidden subsets all candidates except <code>cands</code> can be deleted from
 	 * the cells in <code>indices</code>.<br>
 	 * Templates are not used to avoid unnecessary template initializations.
-	 * 
+	 *
 	 * @param indices
 	 * @param cands
 	 * @param type

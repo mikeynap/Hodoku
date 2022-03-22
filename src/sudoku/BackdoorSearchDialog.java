@@ -74,7 +74,7 @@ public class BackdoorSearchDialog extends javax.swing.JDialog implements Runnabl
 
 	/**
 	 * Creates new form BackdoorSearchDialog
-	 * 
+	 *
 	 * @param parent
 	 * @param modal
 	 * @param sudokuPanel
@@ -418,7 +418,7 @@ public class BackdoorSearchDialog extends javax.swing.JDialog implements Runnabl
 
 	/**
 	 * Override to check for a valid sudoku.
-	 * 
+	 *
 	 * @param visible
 	 */
 	@Override
@@ -604,7 +604,7 @@ public class BackdoorSearchDialog extends javax.swing.JDialog implements Runnabl
 	 * Triggers an update of the progress bar from within the background thread. The
 	 * attributes have to be set via their getters and setters (they are
 	 * synchronized)
-	 * 
+	 *
 	 * @param text
 	 * @param max
 	 * @param act
@@ -619,7 +619,7 @@ public class BackdoorSearchDialog extends javax.swing.JDialog implements Runnabl
 	/**
 	 * Checks the sudoku for backdoors using combinations of candidates.
 	 * <code>depth</code> can be 1, 2 or 3 (number of candidates in each try).
-	 * 
+	 *
 	 * @param depth
 	 * @param max
 	 * @param candidates
@@ -694,7 +694,7 @@ public class BackdoorSearchDialog extends javax.swing.JDialog implements Runnabl
 	/**
 	 * Checks the sudoku for singles only backdoors. <code>depth</code> can be 1, 2
 	 * or 3 (number of cells in each try).<br>
-	 * 
+	 *
 	 * @param depth
 	 * @param max
 	 * @param stepConfigs
@@ -782,7 +782,7 @@ public class BackdoorSearchDialog extends javax.swing.JDialog implements Runnabl
 	 * they are ignored.<br>
 	 * If <code>candx</code> is not <code>null</code>, a search for a candidate
 	 * combination is done (same rules as above).
-	 * 
+	 *
 	 * @param index1
 	 * @param index2
 	 * @param index3

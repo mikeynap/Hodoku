@@ -180,7 +180,7 @@ public class ChainSolver extends AbstractSolver {
 
 	/**
 	 * Creates a new instance of ChainSolver
-	 * 
+	 *
 	 * @param finder
 	 */
 	public ChainSolver(SudokuStepFinder finder) {
@@ -242,7 +242,7 @@ public class ChainSolver extends AbstractSolver {
 
 	/**
 	 * Get an X-Chain. All chains are found and sorted, one is returned
-	 * 
+	 *
 	 * @return
 	 */
 	private SolutionStep getXChains() {
@@ -257,7 +257,7 @@ public class ChainSolver extends AbstractSolver {
 
 	/**
 	 * Get a Turbot Fish. All chains are found and sorted, one is returned
-	 * 
+	 *
 	 * @return
 	 */
 	private SolutionStep getTurbotChains() {
@@ -272,7 +272,7 @@ public class ChainSolver extends AbstractSolver {
 
 	/**
 	 * Get an XY-Chain. All chains are found and sorted, one is returned
-	 * 
+	 *
 	 * @return
 	 */
 	private SolutionStep getXYChains() {
@@ -287,7 +287,7 @@ public class ChainSolver extends AbstractSolver {
 
 	/**
 	 * Get a Remote Pair. All chains are found and sorted, one is returned
-	 * 
+	 *
 	 * @return
 	 */
 	private SolutionStep getRemotePairs() {
@@ -311,7 +311,7 @@ public class ChainSolver extends AbstractSolver {
 
 	/**
 	 * Convenience method: Finds all simple chains and stores them a list-
-	 * 
+	 *
 	 * @return
 	 */
 	protected List<SolutionStep> getAllChains() {
@@ -324,7 +324,7 @@ public class ChainSolver extends AbstractSolver {
 
 	/**
 	 * Gets all simple chains and stores them in <code>allSteps</code>.
-	 * 
+	 *
 	 * @param allSteps
 	 * @return
 	 */
@@ -360,7 +360,7 @@ public class ChainSolver extends AbstractSolver {
 	 * Iterates over all candidates in the sudoku and does a complete search for
 	 * simple chains (up to a given maximum length). Collects all links for the
 	 * <code>type</code> of chain and then performes the search.
-	 * 
+	 *
 	 * @param typ
 	 */
 	private void getChains(int type) {
@@ -507,7 +507,7 @@ public class ChainSolver extends AbstractSolver {
 	 * existing buddies of the start cell is precalculated: It is ANDed with the
 	 * buddies of the new last cell. If the result is not empty, a chain has been
 	 * found.
-	 * 
+	 *
 	 * @param entry
 	 * @param typ
 	 */
@@ -651,7 +651,7 @@ public class ChainSolver extends AbstractSolver {
 	 * {@link #TURBOT_FISH}), first and last link have to be strong and for the same
 	 * candidate, chain must not be a loop, candidates can be eliminated
 	 * (precalculated set in <code>m1</code> and <code>m2</code>).
-	 * 
+	 *
 	 * @param m1
 	 * @param m2
 	 * @param isTurbot
@@ -700,7 +700,7 @@ public class ChainSolver extends AbstractSolver {
 	 * chain must be at least three links long, first and last link have to be
 	 * strong and for the same candidate, chain must not be a loop, candidates can
 	 * be eliminated (precalculated set in <code>m1</code> and <code>m2</code>).
-	 * 
+	 *
 	 * @param m1
 	 * @param m2
 	 */
@@ -744,7 +744,7 @@ public class ChainSolver extends AbstractSolver {
 	 * with opposite polarity.<br>
 	 * Since we find only RPs where first and last link are for the same candidate
 	 * we find longer chains with more eliminations as two separate shorter RPs.
-	 * 
+	 *
 	 * @param m1
 	 * @param m2
 	 * @param endIndex
@@ -810,7 +810,7 @@ public class ChainSolver extends AbstractSolver {
 
 	/**
 	 * Nice Loops have been moved to the {@link TablingSolver}.
-	 * 
+	 *
 	 * Wenn die erste und die letzte Zelle der Chain identisch sind, ist es ein Nice
 	 * Loop.
 	 *
@@ -963,7 +963,7 @@ public class ChainSolver extends AbstractSolver {
 	 * Turbot in the default configuration. If a search for one type is done after a
 	 * search for the other has found nothing and the sudoku has not changed since,
 	 * it is not necessary to reca�culate the links.
-	 * 
+	 *
 	 * @param type
 	 */
 	private void getAllLinks(int type) {
@@ -1082,7 +1082,7 @@ public class ChainSolver extends AbstractSolver {
 	/**
 	 * For debugging only: Print the contents of a set contained in two long values
 	 * to the console.
-	 * 
+	 *
 	 * @param text
 	 * @param m1
 	 * @param m2

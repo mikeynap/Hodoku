@@ -41,7 +41,7 @@ public class ConfigTrainingDialog extends javax.swing.JDialog {
 
 	/**
 	 * Creates new form ConfigDialog
-	 * 
+	 *
 	 * @param parent
 	 * @param modal
 	 */

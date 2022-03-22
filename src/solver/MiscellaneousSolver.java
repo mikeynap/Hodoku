@@ -113,7 +113,7 @@ public class MiscellaneousSolver extends AbstractSolver {
 
 	/**
 	 * Creates a new instance of MiscellaneousSolver
-	 * 
+	 *
 	 * @param finder
 	 */
 	public MiscellaneousSolver(SudokuStepFinder finder) {
@@ -177,7 +177,7 @@ public class MiscellaneousSolver extends AbstractSolver {
 	 * Builds all possible intersections of <code>blocks</code> and
 	 * <code>nonBlocks</code>. Delegates the check to
 	 * {@link #checkIntersection(boolean) }.
-	 * 
+	 *
 	 * @param nonBlocks Sets containing all lines or all columns
 	 * @param blocks    Sets containing all blocks
 	 * @param onlyOne
@@ -215,7 +215,7 @@ public class MiscellaneousSolver extends AbstractSolver {
 	 * exist.<br>
 	 * The method doesnt use recursion. There can be only two or three cells in an
 	 * intersection for an SDC.
-	 * 
+	 *
 	 * @param onlyOne
 	 * @return
 	 */
@@ -269,7 +269,7 @@ public class MiscellaneousSolver extends AbstractSolver {
 	 * Builds a set with all cells in the row/col that are not part of the
 	 * intersection and delegates the check to
 	 * {@link #checkHouses(int, sudoku.SudokuSet, short, short, boolean, boolean) }.
-	 * 
+	 *
 	 * @param nPlus   How many more candidates than cells
 	 * @param cand    Candidates in the intersection
 	 * @param onlyOne
@@ -297,7 +297,7 @@ public class MiscellaneousSolver extends AbstractSolver {
 	 * The second run builds all possible sets of cells for the block. For every
 	 * combination that meets the SDC criteria a check for deleteable candidates is
 	 * made.
-	 * 
+	 *
 	 * @param nPlus
 	 * @param sourceSet
 	 * @param allowedCandSet
@@ -481,7 +481,7 @@ public class MiscellaneousSolver extends AbstractSolver {
 	 * <code>dest</code>.<br>
 	 * Convenience method: Some candidates are written as fins/endo fins for display
 	 * purposes.
-	 * 
+	 *
 	 * @param srcSet1
 	 * @param srcSet2
 	 * @param candSet
@@ -504,7 +504,7 @@ public class MiscellaneousSolver extends AbstractSolver {
 	/**
 	 * Checks if one of the cells in <code>tmpSet</code> contains candidates from
 	 * <code>tmpCandSet</code>. If so, they can be eliminated.
-	 * 
+	 *
 	 * @param tmpSet
 	 * @param tmpCandSet
 	 */

@@ -45,7 +45,7 @@ public class FindAllStepsProgressDialog extends javax.swing.JDialog {
 
 	/**
 	 * Creates new form FindAllStepsProgressDialog
-	 * 
+	 *
 	 * @param parent
 	 * @param modal
 	 * @param sudoku

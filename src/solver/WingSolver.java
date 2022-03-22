@@ -54,7 +54,7 @@ public class WingSolver extends AbstractSolver {
 
 	/**
 	 * Creates a new instance of WingSolver
-	 * 
+	 *
 	 * @param finder
 	 */
 	public WingSolver(SudokuStepFinder finder) {
@@ -101,7 +101,7 @@ public class WingSolver extends AbstractSolver {
 
 	/**
 	 * get the next XY-Wing
-	 * 
+	 *
 	 * @return
 	 */
 	private SolutionStep getXYWing() {
@@ -110,7 +110,7 @@ public class WingSolver extends AbstractSolver {
 
 	/**
 	 * get the next XYZ-Wing
-	 * 
+	 *
 	 * @return
 	 */
 	private SolutionStep getXYZWing() {
@@ -119,7 +119,7 @@ public class WingSolver extends AbstractSolver {
 
 	/**
 	 * Searches for all types of wings.
-	 * 
+	 *
 	 * @return
 	 */
 	protected List<SolutionStep> getAllWings() {
@@ -159,7 +159,7 @@ public class WingSolver extends AbstractSolver {
 	 * <li>z can be excluded from all cells that see both pincers (for xyz they must
 	 * see the pivot as well)</li>
 	 * </ul>
-	 * 
+	 *
 	 * @param xyz
 	 * @param onlyOne
 	 * @return
@@ -289,7 +289,7 @@ public class WingSolver extends AbstractSolver {
 	 * Searches for W-Wings: look for all combinations of bivalue cells with the
 	 * same candidates. If one is found and it could theoretically eliminate
 	 * something, a connecting strong link is searched for.
-	 * 
+	 *
 	 * @param onlyOne
 	 * @return
 	 */
@@ -337,7 +337,7 @@ public class WingSolver extends AbstractSolver {
 	 * Searches for a strong link for candidate <code>cand</code> that connects
 	 * <code>index1</code> and <code>index2</code> (both indices are seen by the
 	 * strong link).
-	 * 
+	 *
 	 * @param cand1
 	 * @param cand2
 	 * @param index1
@@ -389,7 +389,7 @@ public class WingSolver extends AbstractSolver {
 	 * <code>index1</code> and <code>index2</code> are the bivalue cells,
 	 * {@link #wIndex1} and {@link #wIndex2} are the strong link.
 	 * <code>elimSet</code> holds all cells where candidates can be eliminated.
-	 * 
+	 *
 	 * @param cand1
 	 * @param cand2
 	 * @param index1

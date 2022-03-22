@@ -33,9 +33,9 @@ import solver.TablingSolver;
  *
  * Since more than one chain can share the same array, the chain starts with
  * <code>chain[start]</code> and it ends with <code>chain[end]</code>.
- * 
+ *
  * Every entry is a 32-bit Integer. Format of one entry:
- * 
+ *
  * <pre>
  * |       |       |       |       |       |       |       |       |
  * |x x|x x x x|x x x x x x x|x x x x x x x|x x x x x x x|x|x x x x|
@@ -49,11 +49,11 @@ import solver.TablingSolver;
  *                  (e.g. turns an ALS into a LS)
  *  4: normal node: not used
  *     group node:  index of second cell or 0x7f if not used
- *     als, aur...: lower 7 bits of the index in appropriate array 
+ *     als, aur...: lower 7 bits of the index in appropriate array
  *                  (stored outside the chain, normally in {@link SolutionStep})
  *  5: normal node: not used
  *     group node:  third cell or 0x7f if not used
- *     als, aur...: higher 7 bits of the index in appropriate array 
+ *     als, aur...: higher 7 bits of the index in appropriate array
  *                  (stored outside the chain, normally in {@link SolutionStep})
  *  6: type of node:
  *       0 ... normal node
@@ -61,7 +61,7 @@ import solver.TablingSolver;
  *       2 ... ALS node
  *  7: reserved
  * </pre>
- * 
+ *
  * This format is used in chains and in {@link TableEntry table entries} (see
  * {@link TablingSolver}).<br>
  * <br>
@@ -161,7 +161,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Create and initialize a new chain.
-	 * 
+	 *
 	 * @param start
 	 * @param end
 	 * @param chain
@@ -175,7 +175,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Makes a deep copy of the current chain.
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -210,7 +210,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Convenience method, delegates to {@link #getLength(java.util.List)}.
-	 * 
+	 *
 	 * @return
 	 */
 	public int getLength() {
@@ -220,7 +220,7 @@ public class Chain implements Cloneable {
 	/**
 	 * Returns the length of the chain, recalculates it if necessary using
 	 * {@link #calculateLength(java.util.List)}.
-	 * 
+	 *
 	 * @param alses An array containing all the ALSes of the current grid.
 	 * @return
 	 */
@@ -236,7 +236,7 @@ public class Chain implements Cloneable {
 	 * penalty is added (the chain is treated as if it were longer). This is used in
 	 * sorting. A chain containing fewer nodes but consisting of large ALS would
 	 * otherwise be preferred over a slightly larger simple chain.
-	 * 
+	 *
 	 * @param alses
 	 * @return
 	 */
@@ -262,7 +262,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Getter for {@link #start}.
-	 * 
+	 *
 	 * @return
 	 */
 	public int getStart() {
@@ -271,7 +271,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Setter for {@link #start}.
-	 * 
+	 *
 	 * @param start
 	 */
 	public void setStart(int start) {
@@ -280,7 +280,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Getter for {@link #end}.
-	 * 
+	 *
 	 * @return
 	 */
 	public int getEnd() {
@@ -289,7 +289,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Setter for {@link #end}.
-	 * 
+	 *
 	 * @param end
 	 */
 	public void setEnd(int end) {
@@ -298,7 +298,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Getter for {@link #chain}.
-	 * 
+	 *
 	 * @return
 	 */
 	public int[] getChain() {
@@ -307,7 +307,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Setter for {@link #chain}.
-	 * 
+	 *
 	 * @param chain
 	 */
 	public void setChain(int[] chain) {
@@ -317,7 +317,7 @@ public class Chain implements Cloneable {
 	/**
 	 * Creates a new node. Delegates to
 	 * {@link #makeSEntry(int, int, int, int, boolean, int)}.
-	 * 
+	 *
 	 * @param cellIndex
 	 * @param candidate
 	 * @param isStrong
@@ -330,7 +330,7 @@ public class Chain implements Cloneable {
 	/**
 	 * Creates a new node. Delegates to
 	 * {@link #makeSEntry(int, int, int, int, boolean, int)}.
-	 * 
+	 *
 	 * @param cellIndex
 	 * @param candidate
 	 * @param isStrong
@@ -345,7 +345,7 @@ public class Chain implements Cloneable {
 	 * Creates a new node. Delegates to
 	 * {@link #makeSEntry(int, int, int, int, boolean, int)}. Before delegation the
 	 * <code>alsIndex</code> is split in two parts that are then stored separately.
-	 * 
+	 *
 	 * @param cellIndex
 	 * @param alsIndex
 	 * @param candidate
@@ -361,7 +361,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Creates a new link.
-	 * 
+	 *
 	 * @param cellIndex1 Index of the first/only cell
 	 * @param cellIndex2 Index of the second cell in a group node, lower 7 bits of
 	 *                   an ALS index or -1 if unused
@@ -414,7 +414,7 @@ public class Chain implements Cloneable {
 	/**
 	 * Directly set the complete link contained in <code>entry</code> into the chain
 	 * slot denoted by <code>index</code>.
-	 * 
+	 *
 	 * @param index
 	 * @param entry
 	 */
@@ -424,7 +424,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Create a new node and store it at position <code>index</code>.
-	 * 
+	 *
 	 * @param index
 	 * @param cellIndex
 	 * @param candidate
@@ -436,7 +436,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Return the upper 7 bits of an index.
-	 * 
+	 *
 	 * @param alsIndex
 	 * @return
 	 */
@@ -446,7 +446,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Return the lower 7 bits of an index.
-	 * 
+	 *
 	 * @param alsIndex
 	 * @return
 	 */
@@ -456,7 +456,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Get the first cell index of the node.
-	 * 
+	 *
 	 * @param entry
 	 * @return
 	 */
@@ -470,7 +470,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Get the second cell index of the node.
-	 * 
+	 *
 	 * @param entry
 	 * @return
 	 */
@@ -489,7 +489,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Get the third cell index of the node.
-	 * 
+	 *
 	 * @param entry
 	 * @return
 	 */
@@ -508,7 +508,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Retrieve the index in the als array for the <code>entry</code>.
-	 * 
+	 *
 	 * @param entry
 	 * @return
 	 */
@@ -526,7 +526,7 @@ public class Chain implements Cloneable {
 	 * nodes are stored in a {@link SolutionStep}: Only the ALS, that are really
 	 * needed by the step, are stored, which means, that the index for the ALSes
 	 * changes.
-	 * 
+	 *
 	 * @param entry
 	 * @param newAlsIndex
 	 * @return
@@ -541,7 +541,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * See {@link #replaceSAlsIndex(int, int)}.
-	 * 
+	 *
 	 * @param entryIndex
 	 * @param newAlsIndex
 	 */
@@ -551,7 +551,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Returns the first index of the current entry.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -561,7 +561,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Returns the link candidate contained in <code>entry</code>.
-	 * 
+	 *
 	 * @param entry
 	 * @return
 	 */
@@ -576,7 +576,7 @@ public class Chain implements Cloneable {
 	/**
 	 * Returns the link candidate of the node contained in
 	 * {@link #chain}<code>[index]</code>.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -586,7 +586,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Tests if <code>entry</code> is a strong link.
-	 * 
+	 *
 	 * @param entry
 	 * @return
 	 */
@@ -600,7 +600,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Tests if {@link #chain}<code>[index]</code> is a strong link.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -610,7 +610,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Retrieves the node type from <code>entry</code>.
-	 * 
+	 *
 	 * @param entry
 	 * @return
 	 */
@@ -624,7 +624,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Retrieves the node type from {@link #chain}<code>[index]</code>.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -634,7 +634,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Changes the link type (weak/strong) of <code>entry</code>.
-	 * 
+	 *
 	 * @param entry
 	 * @param strong
 	 * @return
@@ -652,7 +652,7 @@ public class Chain implements Cloneable {
 	 * Fills an instance of type {@link SudokuSetBase} with all cells, that can see
 	 * the complete node. Delegates to
 	 * {@link #getSNodeBuddies(int, int, java.util.List, sudoku.SudokuSetBase)}.
-	 * 
+	 *
 	 * @param index
 	 * @param set
 	 * @param alses
@@ -670,7 +670,7 @@ public class Chain implements Cloneable {
 	 * <li>for ALS takes the anded buddies of all ALS cells, that contain that
 	 * candidate</li>
 	 * </ul>
-	 * 
+	 *
 	 * @param entry     The entry
 	 * @param candidate Only valid for als entries: the candidate for which the
 	 *                  buddies should be calculated
@@ -704,7 +704,7 @@ public class Chain implements Cloneable {
 	/**
 	 * Returns a string representation for the node contained in <code>entry</code>.
 	 * Mostely used for testing.
-	 * 
+	 *
 	 * @param entry
 	 * @return
 	 */
@@ -727,7 +727,7 @@ public class Chain implements Cloneable {
 
 	/**
 	 * Returns a string representation of the chain.
-	 * 
+	 *
 	 * @return
 	 */
 	@Override

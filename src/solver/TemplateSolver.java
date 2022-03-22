@@ -54,7 +54,7 @@ public class TemplateSolver extends AbstractSolver {
 
 	/**
 	 * Creates a new instance of TemplateSolver
-	 * 
+	 *
 	 * @param finder
 	 */
 	public TemplateSolver(SudokuStepFinder finder) {
