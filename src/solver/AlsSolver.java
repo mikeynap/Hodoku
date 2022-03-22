@@ -137,7 +137,7 @@ public class AlsSolver extends AbstractSolver {
 
 	/**
 	 * Creates a new instance of AlsSolver
-	 * 
+	 *
 	 * @param finder
 	 */
 	public AlsSolver(SudokuStepFinder finder) {
@@ -197,7 +197,7 @@ public class AlsSolver extends AbstractSolver {
 	/**
 	 * Finds all ALS steps except Death Blossom present in the current grid. The
 	 * parameters specify, which types should be searched.
-	 * 
+	 *
 	 * @param doXz
 	 * @param doXy
 	 * @param doChain
@@ -245,7 +245,7 @@ public class AlsSolver extends AbstractSolver {
 
 	/**
 	 * Finds all Death Blossoms present in the current grid.
-	 * 
+	 *
 	 * @return
 	 */
 	protected List<SolutionStep> getAllDeathBlossoms() {
@@ -358,7 +358,7 @@ public class AlsSolver extends AbstractSolver {
 	 * Check all restricted commons: For every RC check all candidates common to
 	 * both ALS but minus the RC candidate(s). If buddies exist outside the ALS they
 	 * can be eliminated.<br>
-	 * 
+	 *
 	 * Doubly linked ALS-XZ: If two ALS are linked by 2 RCs, the rest of each ALS
 	 * becomes a locked set and eliminates additional candidates; plus each of the
 	 * two RCs can be used for "normal" ALS-XZ eliminations.<br>
@@ -416,7 +416,7 @@ public class AlsSolver extends AbstractSolver {
 	 * <li>if RC1 and RC2 both have only one candidate that candidate must
 	 * differ</li>
 	 * </ul>
-	 * 
+	 *
 	 * If a valid combination could be found, identify ALS C and check ALS A and B
 	 * for possible eliminations.
 	 *
@@ -528,7 +528,7 @@ public class AlsSolver extends AbstractSolver {
 	 * chain -> can be eliminated (the candidate can be eliminated from the chain as
 	 * well but not from the start and end ALS -> cannibalistic ALS-chain)</li>
 	 * </ul>
-	 * 
+	 *
 	 * Adjacency rules for RCs joining ALS1 and ALS2:
 	 * <ul>
 	 * <li>get all RCs between ALS1 and ALS2 ("possible RCs" - "PRC")</li>
@@ -536,7 +536,7 @@ public class AlsSolver extends AbstractSolver {
 	 * becomes the new ARC(s)</li>
 	 * <li>if no ARC is left, the chain ends at ALS1</li>
 	 * </ul>
-	 * 
+	 *
 	 * If a new ALS is already contained within the chain, the chain becomes a whip
 	 * (not handled)<br>
 	 * Its unclear whether the search has to go in both directions (currently only
@@ -582,10 +582,10 @@ public class AlsSolver extends AbstractSolver {
 	 * the chain, the als is added and the search is continued recursively. When the
 	 * chain size reaches 4, every step is tested for possible eliminations.<br>
 	 * <br>
-	 * 
+	 *
 	 * Caution: If the first RC has two candidates, both of them have to be tried
 	 * independently.
-	 * 
+	 *
 	 * @param alsIndex index of the last added ALS
 	 * @param lastRC   RC of the last step (needed for adjacency check)
 	 */
@@ -731,7 +731,7 @@ public class AlsSolver extends AbstractSolver {
 
 	/**
 	 * For debugging only: show the current state of {@link #chain}.
-	 * 
+	 *
 	 * @param recDepth
 	 */
 	@SuppressWarnings("unused")
@@ -820,7 +820,7 @@ public class AlsSolver extends AbstractSolver {
 	 * Recursively tries all ALS for <code>candidate</code> in the cell
 	 * {@link #stemCellIndex}. If <code>candidate</code> equals {@link #maxDBCand}
 	 * eliminations have to be checked.
-	 * 
+	 *
 	 * @param cand
 	 * @param onlyOne
 	 * @return
@@ -1001,7 +1001,7 @@ public class AlsSolver extends AbstractSolver {
 	 * (minus all restrx). If candidates exist, that are outside (als1 + als2) and
 	 * see all occurences of one of the common candidates (see above) they can be
 	 * eliminated.<br>
-	 * 
+	 *
 	 * @param als1             The first flanking ALS
 	 * @param als2             The second flanking ALS
 	 * @param als3             The middle ALS in an XY-Wing, the second last ALS for
@@ -1084,7 +1084,7 @@ public class AlsSolver extends AbstractSolver {
 	 * <code>als2</code> as endo fins to the step (only for display). If
 	 * <code>withChain</code> is set, a chain is added between the pair of
 	 * candidates in both ALS that have the smallest distance.
-	 * 
+	 *
 	 * @param als1
 	 * @param als2
 	 * @param cand
@@ -1128,9 +1128,9 @@ public class AlsSolver extends AbstractSolver {
 	 * als1 and als2 are doubly linked by RCs rc1 and rc2; check whether the locked
 	 * set {als1 - rc1 - rc2 } can eliminate candidates that are not in als2.<br>
 	 * <br>
-	 * 
+	 *
 	 * The method has to be called twice with als1 and als2 swapped.<br>
-	 * 
+	 *
 	 * @param als1 The als that becomes a locked set
 	 * @param als2 The doubly linked second als, no candidates can be eliminated
 	 *             from it
@@ -1224,7 +1224,7 @@ public class AlsSolver extends AbstractSolver {
 	 * <code>rcdb[i].candMask</code> is checked against the real candidate mask of
 	 * the cell: if they are equal, a possible Death Blossom exists.<br>
 	 * <br>
-	 * 
+	 *
 	 * Calculate all buddies for all candidates in all ALSs -> they are all possible
 	 * stem cells.
 	 */
@@ -1303,7 +1303,7 @@ public class AlsSolver extends AbstractSolver {
 		/**
 		 * Adds an ALS for candidate <code>candidate</code>. {@link #candMask} is
 		 * updated accordingly.
-		 * 
+		 *
 		 * @param als
 		 * @param candidate
 		 */
@@ -1334,12 +1334,12 @@ public class AlsSolver extends AbstractSolver {
 		// 472 473 277 483 683 388:481:c28 r68");
 		// sudoku.setSudoku(":0000:x:7.2.34.8.........2.8..51.74.......51..63.27..29.......14.76..2.8.........2.51.8.7:::");
 		// sudoku.setSudoku(":0000:x:5837..4.2.1.............1....9...63.........47.1.45928..52.38....6..427.12..6.3..:::");
-//        sudoku.setSudoku(":0000:x:..65.849..15.4.7.2..9...65.9..867315681.5.279..7.9.864.63...5..1...3.94..9.7..1..:324 326 331 332 339 261 262 364 366 871 891::");        
-//        sudoku.setSudoku(":0000:x:.78.6519393..1..7.516739842.9..76.1..6539.28..4..2..69657142938.2.983.5.389657421:::");        
-//        sudoku.setSudoku(":0000:x:65.17....382469.5...18..6...36.4...5.27...46.845.1....2.3.845.6...5...825.8.21.34:917 931 738 739 246 147 747 947 355 356 959 266 366 767 967 978 181 981::");        
-//        sudoku.setSudoku(":0000:x:8...742.5.248.57...3.621.9...94.2....1...8.2.2....63...5.263.7...214965....587..2:541 847 849 653 469 869 391 491 497::");        
-//        sudoku.setSudoku(":0000:x:1.7.5.....8.17..3.3...98...7628394..8.1245.67..471682....58...6.1..67.9....92.5..:927 237 637 438 569 372 277 377 281 389 392 199::");        
-//        sudoku.setSudoku(":0000:x:8..7...4...43....667.1248.9.6.2.9...4..871625...6.3.9.3.6.12.871....73.2.2..3...4:112 512 513 913 515 922 525 128 343 543 743 167 972 982 485 585 985 596::");        
+//        sudoku.setSudoku(":0000:x:..65.849..15.4.7.2..9...65.9..867315681.5.279..7.9.864.63...5..1...3.94..9.7..1..:324 326 331 332 339 261 262 364 366 871 891::");
+//        sudoku.setSudoku(":0000:x:.78.6519393..1..7.516739842.9..76.1..6539.28..4..2..69657142938.2.983.5.389657421:::");
+//        sudoku.setSudoku(":0000:x:65.17....382469.5...18..6...36.4...5.27...46.845.1....2.3.845.6...5...825.8.21.34:917 931 738 739 246 147 747 947 355 356 959 266 366 767 967 978 181 981::");
+//        sudoku.setSudoku(":0000:x:8...742.5.248.57...3.621.9...94.2....1...8.2.2....63...5.263.7...214965....587..2:541 847 849 653 469 869 391 491 497::");
+//        sudoku.setSudoku(":0000:x:1.7.5.....8.17..3.3...98...7628394..8.1245.67..471682....58...6.1..67.9....92.5..:927 237 637 438 569 372 277 377 281 389 392 199::");
+//        sudoku.setSudoku(":0000:x:8..7...4...43....667.1248.9.6.2.9...4..871625...6.3.9.3.6.12.871....73.2.2..3...4:112 512 513 913 515 922 525 128 343 543 743 167 972 982 485 585 985 596::");
 		// doubly linked ALS-XZ, 16 eliminations
 		// sudoku.setSudoku(":9001:23568:3.2....1.1..97........1....5..18.6....15...7..8.74.1..9....1.27.1.4.......5..79.1::285
 		// 286 291 292 385 386 585 612 616 619 626 634 636 685 686 834:");
@@ -1404,7 +1404,7 @@ public class AlsSolver extends AbstractSolver {
  * <li>number of ALS (XY lt XY-Wing)</li>
  * <li>number of indices in all ALS</li>
  * </ul>
- * 
+ *
  * @author hobiwan
  */
 class AlsComparator implements Comparator<SolutionStep> {

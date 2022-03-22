@@ -37,18 +37,18 @@ public class StatusColorPanel extends javax.swing.JPanel {
 
 	/**
 	 * Creates new form StatusColorPanel
-	 * 
+	 *
 	 * @param index
 	 */
 	public StatusColorPanel(int index) {
-		
+
 		this.index = index;
 		if (index == -2) {
 			reset = true;
 			font = new Font(Font.SANS_SERIF, Font.PLAIN, 11);
 			// font = new Font("Tahoma",Font.BOLD, 12);
 		}
-		
+
 		setColor();
 		initComponents();
 	}

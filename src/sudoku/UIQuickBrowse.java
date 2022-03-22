@@ -43,54 +43,54 @@ public class UIQuickBrowse extends JFrame {
 	JComboBox<String> comboBox;
 	MainFrame mainFrame;
 	ResourceBundle bundle;
-	
+
 	public UIQuickBrowse(MainFrame mainFrame) {
-		
+
 		super();
 		setLayout(new FlowLayout());
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(false);
-		
+
 		this.mainFrame = mainFrame;
 		this.bundle = ResourceBundle.getBundle("intl/UIQuickBrowse");
-		
-		setTitle(bundle.getString("title"));		
-		
+
+		setTitle(bundle.getString("title"));
+
 		initUI(400, 200);
 	}
-	
+
 	private void initUI(int w, int h) {
-		
+
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panel.setLayout(new GridBagLayout());
-		
+
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		constraints.weightx = 1;
 		constraints.gridx = 0;
-		
+
 		constraints.gridy = 0;
 		importLinesPanel = createImportLinesPanel(w, h);
 		panel.add(importLinesPanel, constraints);
-		
+
 		constraints.gridy = 1;
 		navigationPanel = createNavigationPanel();
 		panel.add(navigationPanel, constraints);
-		
+
 		add(panel);
 		pack();
 	}
-	
+
 	private String[] splitIntoLines(String text) {
-		
+
 		List<String> lines = new ArrayList<String>();
-		
+
 		StringReader stringReader = new StringReader(text);
 		BufferedReader bufferedReader = new BufferedReader(stringReader);
 		String line = "";
-		
+
 		try {
 			while ((line = bufferedReader.readLine()) != null){
 				lines.add(line);
@@ -99,16 +99,16 @@ public class UIQuickBrowse extends JFrame {
 			e.printStackTrace();
 			return new String[] {};
 		}
-		
+
 		String[] asArray = new String[lines.size()];
 		lines.toArray(asArray);
 		return asArray;
 	}
-	
+
 	private boolean cleanAndValidateLines(String[] lines) {
-		
+
 		for (int i = 0; i < lines.length; i++) {
-			
+
 			String line = lines[i];
 			String[] tokens = line.split(" ");
 			String importLine = tokens[0];
@@ -119,14 +119,14 @@ public class UIQuickBrowse extends JFrame {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	private void onUpdate(JTextArea textArea, JPanel panel) {
-		
+
 		String[] lines = splitIntoLines(textArea.getText());
-		
+
 		if (cleanAndValidateLines(lines)) {
 			comboBox.removeAllItems();
 			comboBox.setModel(new DefaultComboBoxModel<String>(lines));
@@ -135,16 +135,16 @@ public class UIQuickBrowse extends JFrame {
 			repaint();
 		}
 	}
-	
+
 	private JPanel createImportLinesPanel(int w, int h) {
-		
+
 		JPanel panel;
 		JTextArea textArea;
 		JScrollPane textAreaScrollPane;
 		JButton buttonLoad;
 		JButton buttonImport;
 		JButton buttonClear;
-		
+
 		panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
 		panel.setBorder(
@@ -156,13 +156,13 @@ public class UIQuickBrowse extends JFrame {
 				panel.getBorder()
 			)
 		);
-		
+
 		textArea = new JTextArea();
 		textArea.setLineWrap(false);
 		textAreaScrollPane = new JScrollPane(textArea);
 		textAreaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		textAreaScrollPane.setPreferredSize(new Dimension(w, h));
-		
+
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		constraints.gridwidth = 3;
@@ -170,45 +170,45 @@ public class UIQuickBrowse extends JFrame {
 		constraints.gridy = 0;
 		constraints.gridx = 0;
 		panel.add(textAreaScrollPane, constraints);
-		
+
 		constraints.fill = GridBagConstraints.HORIZONTAL;
 		constraints.gridwidth = 1;
 		constraints.weightx = 0.3;
 		constraints.gridy = 1;
 		constraints.insets.top = 10;
-		
+
 		buttonLoad = new JButton(bundle.getString("btn_load"));
 		buttonLoad.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				JFileChooser chooser = new JFileChooser();
 				int choice = chooser.showOpenDialog(null);
 				if (choice == JFileChooser.APPROVE_OPTION) {
-					
+
 					File file = chooser.getSelectedFile();
-					
+
 					try {
-						
+
 						byte[] fileBuffer = Files.readAllBytes(file.toPath());
 						String text = new String(fileBuffer);
 						textArea.setText(text);
 						onUpdate(textArea, panel);
-						
+
 					} catch (IOException e1) {
 						e1.printStackTrace();
 						return;
 					}
 				}
-			}			
+			}
 		});
-		
+
 		constraints.gridx = 0;
 		panel.add(buttonLoad, constraints);
 		buttonImport = new JButton(bundle.getString("btn_import"));
 		buttonImport.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {				
+			public void actionPerformed(ActionEvent e) {
 				onUpdate(textArea, panel);
 			}
 		});
@@ -219,41 +219,41 @@ public class UIQuickBrowse extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				textArea.setText("");
-				comboBox.removeAllItems();				
+				comboBox.removeAllItems();
 				repaint();
-			}			
+			}
 		});
 		constraints.gridx = 2;
 		panel.add(buttonClear, constraints);
 
 		return panel;
 	}
-	
+
 	private void scrollComboBoxIndex(int amount, JComboBox<String> comboBox) {
-		
+
 		if (comboBox.getItemCount() < 1 || amount == 0) {
 			return;
 		}
-		
+
 		int index = comboBox.getSelectedIndex() + amount;
-		
+
 		if (index < 0) {
 			index = 0;
 		} else if (index >= comboBox.getItemCount()) {
 			index = comboBox.getItemCount()-1;
 		}
-		
+
 		mainFrame.loadFromImportLine(comboBox.getItemAt(index));
-		
+
 		comboBox.setSelectedIndex(index);
 	}
-	
+
 	private JPanel createNavigationPanel() {
-		
+
 		RelativeLayout layout = new RelativeLayout(RelativeLayout.X_AXIS);
-		layout.setFill(true);	
-		
-		JPanel panel = new JPanel();		
+		layout.setFill(true);
+
+		JPanel panel = new JPanel();
 		panel.setLayout(layout);
 		panel.setBorder(
 			BorderFactory.createCompoundBorder(
@@ -264,7 +264,7 @@ public class UIQuickBrowse extends JFrame {
 				panel.getBorder()
 			)
 		);
-		
+
 		JButton leftBtn = new JButton("<");
 		leftBtn.addActionListener(new ActionListener() {
 			@Override
@@ -272,7 +272,7 @@ public class UIQuickBrowse extends JFrame {
 				scrollComboBoxIndex(-1, comboBox);
 			}
 		});
-		
+
 		comboBox = new JComboBox<String>();
 		comboBox.addActionListener(new ActionListener() {
 			@Override
@@ -280,15 +280,15 @@ public class UIQuickBrowse extends JFrame {
 				if (comboBox.getSelectedIndex() >= 0 && comboBox.getSelectedIndex() < comboBox.getItemCount()) {
 					mainFrame.loadFromImportLine(comboBox.getItemAt(comboBox.getSelectedIndex()));
 				}
-			}			
+			}
 		});
 		comboBox.addMouseWheelListener(new MouseWheelListener() {
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent e) {
 				scrollComboBoxIndex(e.getWheelRotation(), comboBox);
-			}		
+			}
 		});
-		
+
 		JButton rightBtn = new JButton(">");
 		rightBtn.addActionListener(new ActionListener() {
 			@Override
@@ -296,11 +296,11 @@ public class UIQuickBrowse extends JFrame {
 				scrollComboBoxIndex(1, comboBox);
 			}
 		});
-		
+
 		panel.add(leftBtn, new Float(10));
 		panel.add(comboBox, new Float(80));
 		panel.add(rightBtn, new Float(10));
-		
+
 		return panel;
 	}
 }

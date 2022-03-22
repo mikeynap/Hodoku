@@ -54,7 +54,7 @@ public final class AllStepsPanel extends javax.swing.JPanel implements TreeSelec
 
 	/**
 	 * Creates new form AllStepsPanel
-	 * 
+	 *
 	 * @param mainFrame
 	 * @param sudoku
 	 */
@@ -803,7 +803,7 @@ public final class AllStepsPanel extends javax.swing.JPanel implements TreeSelec
 //        if (root.getChildCount() == 0) {
 //            return;
 //        }
-//        
+//
 //        // zuerst die Rekursion
 //        Enumeration nodes = root.children();
 //        while (nodes.hasMoreElements()) {

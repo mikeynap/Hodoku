@@ -56,7 +56,7 @@ public final class Options {
 
 	public static final String FILE_NAME = "hodoku.hcfg";
 	private static final ProgressComparator progressComparator = new ProgressComparator();
-	
+
 	// Schwierigkeitsstufen
 	public static final DifficultyLevel[] DEFAULT_DIFFICULTY_LEVELS = {
 			new DifficultyLevel(DifficultyType.INCOMPLETE, 0,
@@ -375,7 +375,7 @@ public final class Options {
 	// Coloring Solver
 	public static final Color DEFAULT_PRIMARY_COLOR = new Color(134, 242, 128);
 	public static final Color DEFAULT_SECONDARY_COLOR = new Color(247, 165, 167);
-	public static final Color[] COLORING_COLORS = { 
+	public static final Color[] COLORING_COLORS = {
 		new Color(255, 192, 89),  // 'a' - first color of first color pair
 		new Color(247, 222, 143), // 'A' - second color of first color pair
 		new Color(177, 165, 243), // 'b' - first color of second color pair
@@ -389,7 +389,7 @@ public final class Options {
 		new Color(51, 204, 255),  // first color of sixth color pair
 		new Color(255, 255, 0)    // second color of sixth color pair
 	};
-	
+
 	public static final boolean COLOR_VALUES = true;
 	private Color[] coloringColors = null;
 	private boolean colorValues = COLOR_VALUES;
@@ -695,7 +695,7 @@ public final class Options {
 	 * adjusted accordingly. New sudokus are always inserted at the start of the
 	 * list and deleted from the end of the list, effectively turning the list in a
 	 * queue (the performance overhead can be ignored here).
-	 * 
+	 *
 	 * @param sudoku
 	 */
 	public void addSudokuToHistory(Sudoku2 sudoku) {
@@ -937,7 +937,7 @@ public final class Options {
 	/**
 	 * Returns a String that contains a comma seperated list of all steps, that are
 	 * configured for training mode.
-	 * 
+	 *
 	 * @param ellipsis
 	 * @return
 	 */
@@ -1000,10 +1000,10 @@ public final class Options {
 	}
 
 	public static void readOptions() {
-		
+
 		String tmp = System.getProperty("java.io.tmpdir");
 		String fileName = null;
-		
+
 		if (tmp.endsWith(File.separator)) {
 			fileName = tmp + FILE_NAME;
 		} else {
@@ -1014,9 +1014,9 @@ public final class Options {
 	}
 
 	public static void readOptions(String fileName) {
-		
+
 		Logger.getLogger(Options.class.getName()).log(Level.INFO, "Reading options from {0}", fileName);
-		
+
 		File file = new File(fileName);
 		boolean isFileEmpty = file.length() == 0;
 		if (isFileEmpty) {
@@ -1024,26 +1024,26 @@ public final class Options {
 				System.out.println("Fatal error, unable to modify: " + fileName);
 			}
 		}
-		
+
 		try {
-			
+
 			XMLDecoder in = new XMLDecoder(new BufferedInputStream(new FileInputStream(fileName)));
 			instance = (Options) in.readObject();
 			in.close();
-			
+
 		} catch (FileNotFoundException ex) {
-			
+
 			Logger.getLogger(Options.class.getName()).log(Level.INFO, "No config file found");
 
 			instance = new Options();
-			
+
 			try {
 				instance.writeOptions();
 			} catch (FileNotFoundException exi) {
 				Logger.getLogger(Options.class.getName()).log(Level.SEVERE, "Error writing options", exi);
 			}
 		}
-		
+
 		// readObject() passt nur orgSolverSteps an,
 		// nicht aber solverSteps -> neu kopieren!
 		// the same for solverStepsProgress
@@ -1057,15 +1057,15 @@ public final class Options {
 		boolean changed = false;
 		int maxScore = instance.difficultyLevels[1].getMaxScore();
 		for (int i = 2; i < instance.difficultyLevels.length; i++) {
-			
+
 			if (instance.difficultyLevels[i].getMaxScore() <= maxScore) {
 				instance.difficultyLevels[i].setMaxScore(maxScore + 100);
 				changed = true;
 			}
-			
+
 			maxScore = instance.difficultyLevels[i].getMaxScore();
 		}
-		
+
 		if (changed) {
 			BackgroundGeneratorThread.getInstance().resetAll();
 		}
@@ -1592,7 +1592,7 @@ public final class Options {
 
 	/**
 	 * Find a {@link DifficultyLevel} via its ordinal.
-	 * 
+	 *
 	 * @param ordinal
 	 * @return
 	 */
@@ -1801,7 +1801,7 @@ public final class Options {
 	public void setPossibleCellColor(Color possibleCellColor) {
 		this.possibleCellColor = possibleCellColor;
 	}
-	
+
 	public Color getPossibleFixedCellColor() {
 		return possibleFixedCellColor;
 	}
@@ -2454,7 +2454,7 @@ public final class Options {
 	public boolean isEditModeAutoAdvance() {
 		return editModeAutoAdvance;
 	}
-	
+
 	/**
 	 * @return set click mode
 	 */
@@ -2475,27 +2475,27 @@ public final class Options {
 	public void setEditModeAutoAdvance(boolean editModeAutoAdvance) {
 		this.editModeAutoAdvance = editModeAutoAdvance;
 	}
-	
+
 	public void setAutoHighlighting(boolean autoHighlight) {
 		this.isAutoHighlighting = autoHighlight;
 	}
-	
+
 	public void setColoringVisible(boolean visible) {
 		this.isColoringVisible = visible;
 	}
-	
+
 	public void setHighlightingGivens(boolean highlightGivens) {
 		this.isHighlightingGivens = highlightGivens;
 	}
-	
+
 	public boolean isAutoHighlighting() {
 		return isAutoHighlighting;
 	}
-	
+
 	public boolean isColoringVisible() {
 		return isColoringVisible;
 	}
-	
+
 	public boolean isHighlightingGivens() {
 		return isHighlightingGivens;
 	}

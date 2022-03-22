@@ -69,7 +69,7 @@ public class FindAllSteps implements Runnable {
 	 * The class can be called by FindAllStepsProgressDialog in which case the
 	 * configuration from Options.solverSteps has to be read. If it is called from
 	 * BatchSolveThread only all Steps for testType have to be found
-	 * 
+	 *
 	 * @param type
 	 * @return
 	 */

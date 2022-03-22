@@ -22,7 +22,7 @@ package sudoku;
  * Compatibility class for loading Sudoku files that were stored with an older
  * version of HoDoKu (2.0 or older). It contains only the public contract for
  * XMLEncoder.
- * 
+ *
  * @author hobiwan
  */
 public class SudokuCell {

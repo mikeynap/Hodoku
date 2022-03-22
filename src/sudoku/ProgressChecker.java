@@ -27,11 +27,11 @@ import solver.SudokuSolverFactory;
 /**
  * Checks the actual progress a sudoku has made. It should only be used for
  * sudokus, that are valid (have a unique solution).<br>
- * 
+ *
  * The progress checker runs in its own background thread. It is invoked every
  * time, the sudoku changes in the GUI. It then solves the sudoku and sets the
  * current level and score in the {@link MainFrame}.
- * 
+ *
  * @author hobiwan
  */
 public class ProgressChecker implements Runnable {
@@ -53,7 +53,7 @@ public class ProgressChecker implements Runnable {
 	/**
 	 * Creates a new instance of ProgressChecker. The thread is created, but not
 	 * started yet.
-	 * 
+	 *
 	 * @param mainFrame
 	 */
 	public ProgressChecker(MainFrame mainFrame) {
@@ -65,7 +65,7 @@ public class ProgressChecker implements Runnable {
 	 * Schedules a new check. If the thread is not yet running, it is started. The
 	 * sudoku is stored and the thread is signalled. Since it is possible, that the
 	 * thread is still busy with another check run, a flag is set as well.
-	 * 
+	 *
 	 * @param actSudoku
 	 */
 	public void startCheck(Sudoku2 actSudoku) {

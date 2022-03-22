@@ -65,7 +65,7 @@ public class SudokuSolver {
 	 * dialog is displayed. The dialog is created anyway, it starts the solver in a
 	 * seperate thread. If the thread does not complete in a given time,
 	 * setVisible(true) is called.
-	 * 
+	 *
 	 * @param withGui
 	 * @return
 	 */
@@ -99,7 +99,7 @@ public class SudokuSolver {
 
 	/**
 	 * Solves the sudoku without any restrictions.
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean solve() {
@@ -110,7 +110,7 @@ public class SudokuSolver {
 	/**
 	 * Tries to solve the sudoku using only singles.<br>
 	 * The internal variables are not changed
-	 * 
+	 *
 	 * @param newSudoku
 	 * @return
 	 */
@@ -132,7 +132,7 @@ public class SudokuSolver {
 	/**
 	 * Tries to solve the sudoku using only singles.<br>
 	 * The internal variables are not changed
-	 * 
+	 *
 	 * @param newSudoku
 	 * @param stepConfigs
 	 * @return
@@ -155,7 +155,7 @@ public class SudokuSolver {
 
 	/**
 	 * Solves a sudoku using all available techniques.
-	 * 
+	 *
 	 * @param maxLevel
 	 * @param tmpSudoku
 	 * @param rejectTooLowScore
@@ -169,7 +169,7 @@ public class SudokuSolver {
 
 	/**
 	 * Solves a sudoku using all available techniques.
-	 * 
+	 *
 	 * @param maxLevel
 	 * @param tmpSudoku
 	 * @param rejectTooLowScore
@@ -193,7 +193,7 @@ public class SudokuSolver {
 	 * If the <code>gameMode</code> is any other than <code>PLAYING</code>, any
 	 * puzzle is accepted, that contains at least one step with
 	 * <code>StepConfig.isEnabledTraining()</code> true.
-	 * 
+	 *
 	 * @param maxLevel
 	 * @param tmpSudoku
 	 * @param rejectTooLowScore
@@ -208,7 +208,7 @@ public class SudokuSolver {
 		if (tmpSudoku != null) {
 			setSudoku(tmpSudoku);
 		}
-//        System.out.println("        Solver started (" + maxLevel.getName() + "/" + 
+//        System.out.println("        Solver started (" + maxLevel.getName() + "/" +
 //                rejectTooLowScore + "/" + singlesOnly + "/" + gameMode.name() + ")!");
 
 		// Eine Lösung wird nur gesucht, wenn zumindest 10 Kandidaten gesetzt sind
@@ -294,7 +294,7 @@ public class SudokuSolver {
 	/**
 	 * Calculates the progress scores of all steps in <code>steps</code> (see
 	 * {@link #getProgressScoreSingles(sudoku.Sudoku2, sudoku.SolutionStep) }).
-	 * 
+	 *
 	 * @param tmpSudoku
 	 * @param stepsTocheck
 	 * @param dlg
@@ -342,7 +342,7 @@ public class SudokuSolver {
 	 * Calculates the progress score for <code>step</code>. The progress score is
 	 * defined as the number of singles the step unlocks in the sudoku, if
 	 * {@link Options#solverStepsProgress} is used.
-	 * 
+	 *
 	 * @param tmpSudoku
 	 * @param orgStep
 	 */
@@ -406,34 +406,34 @@ public class SudokuSolver {
 	 * set, only singles are tried.<br>
 	 * The current state of the solver instance is saved and restored after the
 	 * search is complete.
-	 * 
+	 *
 	 * @param sudoku
 	 * @param singlesOnly
 	 * @return
 	 */
 	public SolutionStep getHint(Sudoku2 sudoku, boolean singlesOnly) {
-		
+
 		Sudoku2 save = this.sudoku;
 		DifficultyLevel oldMaxLevel = maxLevel;
 		DifficultyLevel oldLevel = level;
 		maxLevel = Options.getInstance().getDifficultyLevel(DifficultyType.EXTREME.ordinal());
 		level = Options.getInstance().getDifficultyLevel(DifficultyType.EASY.ordinal());
-		
+
 		setSudoku(sudoku);
-		
+
 		SolutionStep step = getHint(singlesOnly);
 		maxLevel = oldMaxLevel;
 		level = oldLevel;
-		
+
 		setSudoku(save);
-		
+
 		return step;
 	}
 
 	/**
 	 * Get the next logical step for the internal sudoku. If
 	 * <code>singlesOnly</code> is set, only singles are tried.
-	 * 
+	 *
 	 * @param singlesOnly
 	 * @return
 	 */
@@ -449,7 +449,7 @@ public class SudokuSolver {
 	 * state.<br>
 	 * Any step is accepted, if the GameMode is not GameMode.PLAYING and one of the
 	 * training techniques is already in the solution.
-	 * 
+	 *
 	 * @param singlesOnly
 	 * @param solverSteps
 	 * @param acceptAnyway
@@ -511,7 +511,7 @@ public class SudokuSolver {
 	}
 
 	public void doStep(Sudoku2 sudoku, SolutionStep step) {
-		
+
 		// we must not call setSudoku() here or all internal
 		// data structures get changed -> just set the field itself
 		Sudoku2 oldSudoku = getSudoku();
@@ -619,7 +619,7 @@ public class SudokuSolver {
 	 * Loads all relevant objects into <code>state</code>. If <code>copy</code> is
 	 * true, all objects are copied.<br>
 	 * Some objects have to be copied regardless of parameter <code>copy</code>.
-	 * 
+	 *
 	 * @param state
 	 * @param copy
 	 */
@@ -638,10 +638,10 @@ public class SudokuSolver {
 	 * Loads back a saved state. Whether the objects had been copied before is
 	 * irrelevant here.<br>
 	 * <br>
-	 * 
+	 *
 	 * Dont forget to set the score or loading saved sudokus will not display
 	 * correctly in the summary panel (relies on it!).
-	 * 
+	 *
 	 * @param state
 	 */
 	public void setState(GuiState state) {
@@ -675,7 +675,7 @@ public class SudokuSolver {
 
 	/**
 	 * Prints runtime statistics for solver
-	 * 
+	 *
 	 * @param out
 	 */
 	public void printStatistics(BufferedWriter out) {
@@ -685,7 +685,7 @@ public class SudokuSolver {
 
 	/**
 	 * Prints runtime statistics for solver
-	 * 
+	 *
 	 * @param out
 	 */
 	public void printStatistics(PrintStream out) {
@@ -706,7 +706,7 @@ public class SudokuSolver {
 
 	/**
 	 * Prints runtime statistics for solver
-	 * 
+	 *
 	 * @param out
 	 */
 	public void printStatistics(PrintWriter out) {

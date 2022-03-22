@@ -37,7 +37,7 @@ public class FishChooseCandidatesDialog extends javax.swing.JDialog {
 
 	/**
 	 * Creates new form FishChooseCandidatesDialog
-	 * 
+	 *
 	 * @param parent
 	 * @param fishCandidates
 	 */

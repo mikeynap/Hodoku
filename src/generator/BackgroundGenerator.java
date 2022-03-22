@@ -42,7 +42,7 @@ import sudoku.Sudoku2;
  * time.<br>
  * If it is called from a {@link BackgroundGeneratorThread}, it simply delivers
  * the generated puzzle or <code>null</code>, if no puzzle could be found.
- * 
+ *
  * @author hobiwan
  */
 public class BackgroundGenerator {
@@ -69,7 +69,7 @@ public class BackgroundGenerator {
 	/**
 	 * Creates a sudoku without responses to the GUI. Delegates to
 	 * {@link #generate(sudoku.DifficultyLevel, sudoku.GameMode, sudoku.GenerateSudokuProgressDialog) }.
-	 * 
+	 *
 	 * @param level
 	 * @param mode
 	 * @return
@@ -89,7 +89,7 @@ public class BackgroundGenerator {
 	 * If <code>dlg</code> is not <code>null</code>, the creation process goes on
 	 * until a puzzle has been found or until {@link #MAX_TRIES} tries have been
 	 * run.
-	 * 
+	 *
 	 * @param level
 	 * @param mode
 	 * @param dlg

@@ -45,7 +45,7 @@ public class GroupNode {
 
 	/**
 	 * Creates a new instance of GroupNode
-	 * 
+	 *
 	 * @param cand
 	 * @param indices
 	 */
@@ -85,7 +85,7 @@ public class GroupNode {
 	 * For all candidates in all lines and all cols do: - check if they have a
 	 * candidate left - if so, check if an intersection of line/col and a block
 	 * contains more than one candidate; if yes -> group node found
-	 * 
+	 *
 	 * @param finder
 	 * @return
 	 */

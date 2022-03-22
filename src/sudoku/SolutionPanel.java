@@ -64,11 +64,11 @@ public class SolutionPanel extends javax.swing.JPanel {
 
 	/**
 	 * Creates new form SolutionPanel
-	 * 
+	 *
 	 * @param mainFrame
 	 */
 	public SolutionPanel(MainFrame mainFrame) {
-		
+
 		this.mainFrame = mainFrame;
 
 		initComponents();
@@ -77,7 +77,7 @@ public class SolutionPanel extends javax.swing.JPanel {
 		if (getFont().getSize() > 12) {
 			fontSize = getFont().getSize();
 		}
-		
+
 		Font font = titleLabel.getFont();
 		titleLabel.setFont(new Font(font.getName(), Font.BOLD, fontSize));
 
@@ -292,12 +292,12 @@ public class SolutionPanel extends javax.swing.JPanel {
 	}
 
 	private void solutionListMouseClicked(java.awt.event.MouseEvent evt) {
-		
+
 		getActTab();
-		
+
 		// Element in der Liste ausgewählt
 		if (evt.getButton() == 1) {
-			
+
 			int index = solutionList.getSelectedIndex();
 			if (index != -1) {
 				if (evt.getClickCount() == 2) {
@@ -307,7 +307,7 @@ public class SolutionPanel extends javax.swing.JPanel {
 				mainFrame.setSolutionStep(actSteps.get(index), true);
 			}
 		} else if (evt.getButton() == 3) {
-			
+
 			rightMouseClickedIndex = solutionList.locationToIndex(evt.getPoint());
 			if (actSteps.get(rightMouseClickedIndex).getType() == SolutionType.INCOMPLETE) {
 				deleteFromHereMenuItem.setEnabled(false);
@@ -318,10 +318,10 @@ public class SolutionPanel extends javax.swing.JPanel {
 				toStepMenuItem.setEnabled(true);
 				solveFromHereMenuItem.setEnabled(false);
 			}
-			
+
 			solutionPopupMenu.show(evt.getComponent(), evt.getX(), evt.getY());
 		}
-		
+
 		mainFrame.fixFocus();
 	}
 
@@ -348,7 +348,7 @@ public class SolutionPanel extends javax.swing.JPanel {
 	}
 
 	private void weiterButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		
+
 		getActTab();
 		if (actSelectedIndex != -1) {
 			if (actList.getSelectedIndex() != actSelectedIndex) {
@@ -360,14 +360,14 @@ public class SolutionPanel extends javax.swing.JPanel {
 				mainFrame.stepAusfuehren();
 			}
 		}
-		
+
 		if (actSelectedIndex < actSteps.size() - 1) {
 			setActSelectedIndex(actSelectedIndex + 1);
 			actList.setSelectedIndex(actSelectedIndex);
 			actList.ensureIndexIsVisible(actSelectedIndex);
 			mainFrame.setSolutionStep(actSteps.get(actSelectedIndex), true);
 		}
-		
+
 		mainFrame.fixFocus();
 	}
 
@@ -376,19 +376,19 @@ public class SolutionPanel extends javax.swing.JPanel {
 		if (evt.getButton() != 3) {
 			return;
 		}
-		
+
 		for (int i = 0; i < solutionTabbedPane.getTabCount(); i++) {
-			
+
 			Rectangle rect = solutionTabbedPane.getBoundsAt(i);
 			if (rect == null || !rect.contains(evt.getPoint())) {
 				continue;
 			}
-			
+
 			getActTab();
 			if (actSteps == null || actSteps.isEmpty()) {
 				return;
 			}
-			
+
 			tabPopupMenu.show(evt.getComponent(), evt.getX(), evt.getY());
 			return;
 		}
@@ -396,19 +396,19 @@ public class SolutionPanel extends javax.swing.JPanel {
 	}
 
 	private void tabNewNameMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-		
+
 		int index = solutionTabbedPane.getSelectedIndex();
 		if (index == -1) {
 			return;
 		}
-		
+
 		String init = titels.get(index);
 		String newTitel = JOptionPane.showInputDialog(java.util.ResourceBundle.getBundle("intl/SolutionPanel").getString("SolutionPanel.new_name"), init);
-		
+
 		if (newTitel != null) {
 			setNewTabTitle(index, newTitel);
 		}
-		
+
 		mainFrame.fixFocus();
 	}
 
@@ -429,7 +429,7 @@ public class SolutionPanel extends javax.swing.JPanel {
 			// nichts tun, sonst gibts Chaos
 			return;
 		}
-		
+
 		getActTab();
 		if (actList != null && actSteps != null) {
 			int index = actList.getSelectedIndex();
@@ -442,11 +442,11 @@ public class SolutionPanel extends javax.swing.JPanel {
 	}
 
 	private void tabPrintMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-		
+
 		if (actSteps != null) {
-			
+
 			String initialState = mainFrame.getSudokuPanel().getSudoku().getInitialState();
-			
+
 			if (initialState == null) {
 				initialState = mainFrame.getSudokuPanel().getSudoku().getSudoku(ClipboardMode.CLUES_ONLY);
 			}
@@ -462,7 +462,7 @@ public class SolutionPanel extends javax.swing.JPanel {
 	}
 
 	public void initialize(List<SolutionStep> newSteps) {
-		
+
 		// first reset to one Tab
 		inTabbedPaneRemoveAll = true;
 		solutionTabbedPane.removeAll();
@@ -485,18 +485,18 @@ public class SolutionPanel extends javax.swing.JPanel {
 	/**
 	 * Resets the panel so that all solutions are shown. All indices are reset to
 	 * -1.
-	 * 
+	 *
 	 * @param titels    The titels of the solutions
 	 * @param solutions The lists with SolutionSteps for all solutions
 	 */
 	public void initialize(List<String> titels, List<List<SolutionStep>> solutions) {
-		
+
 		if (titels.size() != solutions.size()) {
 			Logger.getLogger(getClass().getName()).log(Level.SEVERE,
 					"SolutionPanel.initialize(): titels and solutions don''t have the same length " + "({0}/{1})",
 					new Object[] { titels.size(), solutions.size() });
 		}
-		
+
 		int size = titels.size();
 		if (solutions.size() < size) {
 			size = solutions.size();
@@ -513,9 +513,9 @@ public class SolutionPanel extends javax.swing.JPanel {
 	}
 
 	public void addStep(SolutionStep step) {
-		
+
 		getActTab();
-		
+
 		if (actSteps.get(actSteps.size() - 1).getType() != SolutionType.INCOMPLETE) {
 			JOptionPane.showMessageDialog(
 				this,
@@ -530,15 +530,15 @@ public class SolutionPanel extends javax.swing.JPanel {
 	}
 
 	private void resetSudokuToIndex(int index) {
-		
+
 		getActTab();
 		Sudoku2 sudoku = mainFrame.getSudokuPanel().getSudoku();
 		sudoku.resetSudoku();
-		
+
 		for (int i = 0; i < index; i++) {
 			solver.doStep(sudoku, actSteps.get(i));
 		}
-		
+
 		setActSelectedIndex(index);
 		mainFrame.getSudokuPanel().clearUndoRedo();
 		mainFrame.getSudokuPanel().clearColoring();
@@ -546,7 +546,7 @@ public class SolutionPanel extends javax.swing.JPanel {
 	}
 
 	private void processDoubleClick(int index) {
-		
+
 		// bei Doppelklick wird das Sudoku2 neu geladen, dann werden alle Schritte bis
 		// zum
 		// geklickten ausgeführt
@@ -570,7 +570,7 @@ public class SolutionPanel extends javax.swing.JPanel {
 
 	@SuppressWarnings("unchecked")
 	private void setStepsInList() {
-		
+
 		getActTab();
 		String[] data = new String[actSteps.size()];
 		actStepBackgroundColors = new Color[actSteps.size()];
@@ -580,7 +580,7 @@ public class SolutionPanel extends javax.swing.JPanel {
 		stepForegroundColors.remove(tmpIndex);
 		stepBackgroundColors.add(tmpIndex, actStepBackgroundColors);
 		stepForegroundColors.add(tmpIndex, actStepForegroundColors);
-		
+
 		for (int i = 0; i < actSteps.size(); i++) {
 			data[i] = actSteps.get(i).toString(2);
 			actStepBackgroundColors[i] = Options.getInstance().getDifficultyLevels()[SolutionType
@@ -588,12 +588,12 @@ public class SolutionPanel extends javax.swing.JPanel {
 			actStepForegroundColors[i] = Options.getInstance().getDifficultyLevels()[SolutionType
 					.getStepConfig(actSteps.get(i).getType()).getLevel()].getForegroundColor();
 		}
-		
+
 		actList.setListData(data);
 	}
 
 	private void stepListMouseClicked(java.awt.event.MouseEvent evt) {
-		
+
 		// Element in der Liste ausgewählt
 		getActTab();
 		if (evt.getButton() == 1) {
@@ -622,7 +622,7 @@ public class SolutionPanel extends javax.swing.JPanel {
 				}
 			}
 		}
-		
+
 		mainFrame.fixFocus();
 	}
 
@@ -638,7 +638,7 @@ public class SolutionPanel extends javax.swing.JPanel {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void addTabPane(List<SolutionStep> steps, String titel) {
-		
+
 		JList tmpList = new JList();
 		tmpList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		// tmpList.setCellRenderer(listRenderer);
@@ -661,7 +661,7 @@ public class SolutionPanel extends javax.swing.JPanel {
 		selectedIndices.add(-1);
 		stepBackgroundColors.add(null); // will be replaced in setStepsInList()
 		stepForegroundColors.add(null); // will be replaced in setStepsInList()
-		
+
 		if (steps != null) {
 			List<SolutionStep> newSteps = new ArrayList<SolutionStep>();
 			for (SolutionStep step : steps) {
@@ -677,7 +677,7 @@ public class SolutionPanel extends javax.swing.JPanel {
 	}
 
 	private void deleteTabPane() {
-		
+
 		if (solutionTabbedPane.getTabCount() <= 1) {
 			JOptionPane.showMessageDialog(
 				this,
@@ -687,12 +687,12 @@ public class SolutionPanel extends javax.swing.JPanel {
 			);
 			return;
 		}
-		
+
 		int index = solutionTabbedPane.getSelectedIndex();
 		if (index == -1) {
 			return;
 		}
-		
+
 		solutionTabbedPane.remove(index);
 		titels.remove(index);
 		tabSteps.remove(index);
@@ -703,12 +703,12 @@ public class SolutionPanel extends javax.swing.JPanel {
 	}
 
 	private void getActTab() {
-		
+
 		int index = solutionTabbedPane.getSelectedIndex();
 		if (index == -1) {
 			index = 0;
 		}
-		
+
 		if (lists.size() > index) {
 			actList = lists.get(index);
 			actSteps = tabSteps.get(index);
@@ -725,31 +725,31 @@ public class SolutionPanel extends javax.swing.JPanel {
 	}
 
 	private void setActSelectedIndex(int selectedIndex) {
-		
+
 		int index = solutionTabbedPane.getSelectedIndex();
 		if (index == -1) {
 			index = 0;
 		}
-		
+
 		selectedIndices.remove(index);
 		selectedIndices.add(index, selectedIndex);
 		actSelectedIndex = selectedIndex;
 	}
 
 	private void setActSteps(List<SolutionStep> steps) {
-		
+
 		int index = solutionTabbedPane.getSelectedIndex();
 		if (index == -1) {
 			index = 0;
 		}
-		
+
 		tabSteps.remove(index);
 		List<SolutionStep> tmpSteps = new ArrayList<SolutionStep>(steps.size());
-		
+
 		for (SolutionStep step : steps) {
 			tmpSteps.add(step);
 		}
-		
+
 		tabSteps.add(index, tmpSteps);
 		actSteps = steps;
 	}
@@ -772,13 +772,13 @@ public class SolutionPanel extends javax.swing.JPanel {
 	 * Loads all relevant objects into <code>state</code>. If <code>copy</code> is
 	 * true, all objects are copied.<br>
 	 * Some objects have to be copied regardless of parameter <code>copy</code>.
-	 * 
+	 *
 	 * @param state
 	 * @param copy
 	 */
 	@SuppressWarnings("unchecked")
 	public void getState(GuiState state, boolean copy) {
-		
+
 		if (copy) {
 			state.setTitels((List<String>) ((ArrayList<String>) titels).clone());
 			state.setTabSteps((List<List<SolutionStep>>) ((ArrayList<List<SolutionStep>>) tabSteps).clone());
@@ -791,7 +791,7 @@ public class SolutionPanel extends javax.swing.JPanel {
 	/**
 	 * Loads back a saved state. Whether the objects had been copied before is
 	 * irrelevant here.
-	 * 
+	 *
 	 * @param state
 	 */
 	public void setState(GuiState state) {
@@ -800,7 +800,7 @@ public class SolutionPanel extends javax.swing.JPanel {
 
 	@SuppressWarnings("rawtypes")
 	class SolutionListRenderer extends JLabel implements ListCellRenderer {
-		
+
 		private static final long serialVersionUID = 1L;
 
 		SolutionListRenderer() {
@@ -809,30 +809,30 @@ public class SolutionPanel extends javax.swing.JPanel {
 
 		@Override
 		public Component getListCellRendererComponent(
-				JList list, 
-				Object value, 
-				int index, 
+				JList list,
+				Object value,
+				int index,
 				boolean isSelected,
 				boolean cellHasFocus) {
-			
+
 			setBackground(Color.WHITE);
 			if (actStepBackgroundColors != null) {
 				setBackground(actStepBackgroundColors[index]);
 			}
-			
+
 			setForeground(Color.BLACK);
 			if (actStepForegroundColors != null) {
 				setForeground(actStepForegroundColors[index]);
 			}
-			
+
 			if (isSelected) {
 				setBackground(actList.getSelectionBackground());
 				setForeground(actList.getSelectionForeground());
 			}
-			
+
 			String text = (value != null) ? value.toString() : "";
 			setText("  " + text);
-			
+
 			return this;
 		}
 

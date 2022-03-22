@@ -49,7 +49,7 @@ import sudoku.StepConfig;
  * <li>When a configuration is loaded from a file, all puzzles are redone</li>
  * </ul>
  * This class is a singleton.
- * 
+ *
  * @author hobiwan
  */
 public class BackgroundGeneratorThread implements Runnable {
@@ -76,7 +76,7 @@ public class BackgroundGeneratorThread implements Runnable {
 
 	/**
 	 * Retrieves the singleton instance, generates it if necessary.
-	 * 
+	 *
 	 * @return
 	 */
 	public static BackgroundGeneratorThread getInstance() {
@@ -88,7 +88,7 @@ public class BackgroundGeneratorThread implements Runnable {
 
 	/**
 	 * Checks, if a puzzle matching the requirements is available.
-	 * 
+	 *
 	 * @param level
 	 * @param mode
 	 * @return
@@ -116,7 +116,7 @@ public class BackgroundGeneratorThread implements Runnable {
 
 	/**
 	 * Writes a new sudoku into the cache.
-	 * 
+	 *
 	 * @param level
 	 * @param mode
 	 * @param sudoku
@@ -164,7 +164,7 @@ public class BackgroundGeneratorThread implements Runnable {
 	/**
 	 * The level has been changed, check if the PRACTISING puzzles have to be
 	 * recreated.
-	 * 
+	 *
 	 * @param newLevel
 	 */
 	public synchronized void setNewLevel(int newLevel) {
@@ -347,7 +347,7 @@ public class BackgroundGeneratorThread implements Runnable {
 
 	/**
 	 * Gets the correct cache array from Options.
-	 * 
+	 *
 	 * @param level
 	 * @param mode
 	 * @return
@@ -377,7 +377,7 @@ public class BackgroundGeneratorThread implements Runnable {
 	 * change of the games current DifficultyLevel (if the current level is lower
 	 * than the level of the hardest training step, no new PRACTISING puzzles have
 	 * to be created).
-	 * 
+	 *
 	 * @return
 	 */
 	private int getTrainingLevel() {

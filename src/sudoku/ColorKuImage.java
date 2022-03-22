@@ -17,16 +17,16 @@ import javax.imageio.ImageIO;
  * A <code>ColorKuImage</code> is a <code>BufferedImage</code> that has a
  * specific color and has an overlay applied to it.<br>
  * <br>
- * 
+ *
  * Overlays are in the package <code>overlay</code> and named
  * <code>ovnnn.png</code>, where "nnn" stands for a number between
  * {@link #IMG_MIN} and {@link #IMG_MAX} (both inclusive) with an increment of
  * {@link #IMG_FACTOR}.<br>
  * <br>
- * 
+ *
  * When creating a ColoKuImage, the best matched overlay is taken and centered
  * within the image.
- * 
+ *
  * @author hobiwan
  */
 public class ColorKuImage extends BufferedImage {
@@ -55,7 +55,7 @@ public class ColorKuImage extends BufferedImage {
 	 * necessary. Then paint a filled circle using <code>color</code> centered on
 	 * the image and apply the pattern from <code>lastOverlay</code>.<br>
 	 * <br>
-	 * 
+	 *
 	 * Pixels, that are white in <code>lastOverlay</code>, become completely
 	 * transparent in <code>this</code>.
 	 */
@@ -103,7 +103,7 @@ public class ColorKuImage extends BufferedImage {
 //     * {@link #lastOverlay} if necessary. Then paint a
 //     * filled circle using <code>color</code> centered
 //     * on the image and apply the pattern from <code>lastOverlay</code>.<br><br>
-//     * 
+//     *
 //     * Pixels, that are white in <code>lastOverlay</code>, become
 //     * completely transparent in <code>this</code>.
 //     */
@@ -146,7 +146,7 @@ public class ColorKuImage extends BufferedImage {
 //        rgb[0] = color.getRed();
 //        rgb[1] = color.getGreen();
 //        rgb[2] = color.getBlue();
-//        
+//
 //        // where do we start with the new image?
 //        int delta = (getWidth() - sizeR) / 2;
 //
@@ -170,12 +170,12 @@ public class ColorKuImage extends BufferedImage {
 //                dest.setPixel(x + delta, y + delta, destPixel);
 //            }
 //        }
-//        
+//
 //        // paint a frame
 ////        Graphics2D g2 = createGraphics();
 ////        g2.setColor(Color.WHITE);
 ////        g2.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
-//        
+//
 //        ticks = System.nanoTime() - ticks;
 ////        System.out.println("createImage(): " + (ticks / 1000000) + "ms");
 //    }
@@ -183,7 +183,7 @@ public class ColorKuImage extends BufferedImage {
 	 * Convenience method that returns a scaled instance of the provided
 	 * {@code BufferedImage}.<br>
 	 * <br>
-	 * 
+	 *
 	 * This method will use a multi-step scaling technique that provides higher
 	 * quality than the usual one-step technique (only useful in downscaling cases,
 	 * where {@code targetSize} is smaller than the original dimensions, and

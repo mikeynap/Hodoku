@@ -30,7 +30,7 @@ public class IncompleteSolver extends AbstractSolver {
 
 	/**
 	 * Creates a new instance of IncompleteSolver
-	 * 
+	 *
 	 * @param finder
 	 */
 	public IncompleteSolver(SudokuStepFinder finder) {

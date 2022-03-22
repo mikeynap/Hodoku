@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 /**
  * A singleton wrapper for launching websites using an external web browser. The
  * launching process is delegated to <code>java.awt.Desktop</code>.
- * 
+ *
  * @author hobiwan
  */
 public class MyBrowserLauncher {
@@ -62,7 +62,7 @@ public class MyBrowserLauncher {
 
 	/**
 	 * Gets the singleton instance.
-	 * 
+	 *
 	 * @return
 	 */
 	public static MyBrowserLauncher getInstance() {
@@ -115,7 +115,7 @@ public class MyBrowserLauncher {
 	/**
 	 * Tries to open the web site given by <code>url</code> with an external web
 	 * browser.
-	 * 
+	 *
 	 * @param url
 	 */
 	private void browse(String url) {

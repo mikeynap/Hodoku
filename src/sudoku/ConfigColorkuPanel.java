@@ -41,7 +41,7 @@ public class ConfigColorkuPanel extends javax.swing.JPanel {
 
 	/**
 	 * Creates new form ConfigColorkuPanel
-	 * 
+	 *
 	 * @param mainFrame
 	 */
 	public ConfigColorkuPanel(Component mainFrame) {

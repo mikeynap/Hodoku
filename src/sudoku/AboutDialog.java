@@ -30,9 +30,9 @@ import javax.swing.KeyStroke;
  * @author hobiwan
  */
 public class AboutDialog extends javax.swing.JDialog {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private javax.swing.JButton closeButton;
 	private javax.swing.JLabel copyleftLabel;
 	private javax.swing.JLabel copyrightLabel;
@@ -41,12 +41,12 @@ public class AboutDialog extends javax.swing.JDialog {
 
 	/**
 	 * Creates new form AboutDialog
-	 * 
+	 *
 	 * @param parent
 	 * @param modal
 	 */
 	public AboutDialog(java.awt.Frame parent, boolean modal) {
-		
+
 		super(parent, modal);
 		initComponents();
 
@@ -61,7 +61,7 @@ public class AboutDialog extends javax.swing.JDialog {
 				setVisible(false);
 			}
 		};
-		
+
 		getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escapeKeyStroke, "ESCAPE");
 		getRootPane().getActionMap().put("ESCAPE", escapeAction);
 	}

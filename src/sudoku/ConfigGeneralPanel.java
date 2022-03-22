@@ -36,7 +36,7 @@ import javax.swing.UIManager;
  * @author hobiwan
  */
 public class ConfigGeneralPanel extends javax.swing.JPanel {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private String language;
@@ -64,7 +64,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 
 	/**
 	 * Creates new form ConfigGeneralPanel
-	 * 
+	 *
 	 * @param mainFrame
 	 */
 	public ConfigGeneralPanel(Frame mainFrame) {
@@ -298,10 +298,10 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 		editModeAutoAdvanceCheckBox.setMnemonic(java.util.ResourceBundle.getBundle("intl/ConfigGeneralPanel")
 				.getString("ConfigGeneralPanel.editModeAutoAdvanceCheckBox.mnemonic").charAt(0));
 		editModeAutoAdvanceCheckBox.setText(bundle.getString("ConfigGeneralPanel.editModeAutoAdvanceCheckBox.text"));
-		
+
 		showFilterOnGivens.setText(bundle.getString("ConfigGeneralPanel.showFilterOnGivens.text"));
 		autoHighlight.setText(bundle.getString("ConfigGeneralPanel.autoHighlight.text"));
-		
+
 		drawExtraBoxesCheckBox.setMnemonic(java.util.ResourceBundle.getBundle("intl/ConfigGeneralPanel")
 				.getString("ConfigGeneralPanel.drawExtraBoxesCheckBox.mnemonic").charAt(0));
 		drawExtraBoxesCheckBox.setText(bundle.getString("ConfigGeneralPanel.drawExtraBoxesCheckBox.text"));
@@ -400,7 +400,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 	}
 
 	public void okPressed() {
-		
+
 		boolean oldUseDefaultFontSize = Options.getInstance().isUseDefaultFontSize();
 		Options.getInstance().setUseDefaultFontSize(defaultSizeCheckBox.isSelected());
 		int oldFontSize = Options.getInstance().getCustomFontSize();
@@ -487,9 +487,9 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 			deleteCursorAfterCheckBox.setSelected(Options.DELETE_CURSOR_DISPLAY);
 			deleteCursorAfterMsTextField.setText(String.valueOf(Options.DELETE_CURSOR_DISPLAY_LENGTH));
 			toggleFilterAndOrCheckBox.setSelected(Options.USE_OR_INSTEAD_OF_AND_FOR_FILTER);
-			
+
 		} else {
-			
+
 			defaultSizeCheckBox.setSelected(Options.getInstance().isUseDefaultFontSize());
 			fontSizeTextField.setText(String.valueOf(Options.getInstance().getCustomFontSize()));
 			showCandidatesCheckBox.setSelected(Options.getInstance().isShowCandidates());
@@ -586,7 +586,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 			availableLafClassNames.add(lafs[i].getClassName());
 		}
 	}
-	
+
 	// Variables declaration
 	private javax.swing.JCheckBox singleClickModeCheckBox;
 	private javax.swing.JCheckBox colorValuesCheckBox;

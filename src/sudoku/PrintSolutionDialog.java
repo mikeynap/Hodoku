@@ -91,7 +91,7 @@ public class PrintSolutionDialog extends javax.swing.JDialog implements Printabl
 
 	/**
 	 * Creates new form PrintSolutionDialog
-	 * 
+	 *
 	 * @param parent
 	 * @param modal
 	 * @param stepsAsList
@@ -531,7 +531,7 @@ public class PrintSolutionDialog extends javax.swing.JDialog implements Printabl
 
 	/**
 	 * Prints the solution, uses a SudokuPanel for it
-	 * 
+	 *
 	 * @param graphics
 	 * @param pageFormat
 	 * @param pageIndex

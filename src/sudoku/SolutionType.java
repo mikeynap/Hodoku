@@ -230,7 +230,7 @@ public enum SolutionType {
 	 * Custom compare order: the order of steps matches the order configured in the
 	 * solver; exception: fishes are sorted for (size, fin status, type) fin status:
 	 * finned & sashimi are treated separately
-	 * 
+	 *
 	 * @param t The SolutionType which should be compared with this
 	 * @return &lt; 0 for this &lt; t, == 0 for this == t, &gt; 0 for this &gt; t
 	 */
@@ -359,7 +359,7 @@ public enum SolutionType {
 	/**
 	 * Don't forget SolutionTypes tat don't have StepConfigs (e.g.
 	 * DISCONTINUOUS_NICE_LOOP or DUAL_TWO_STRING_KITE)
-	 * 
+	 *
 	 * @param type The SolutionType for which the StepConfig should be retrieved
 	 * @return The StepConfig appropriate for type
 	 */

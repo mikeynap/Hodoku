@@ -31,7 +31,7 @@
  |  3  .  .  |  3# .  .  |  .  .  3  |
  |  3  .  .  |  .  .  .  |  3  .  3  |
  |  3  3@ .  |  .  .  3# |  3  .  .  |
- +-----------------------------------+ 
+ +-----------------------------------+
  */
 
 package solver;
@@ -48,10 +48,10 @@ import sudoku.SudokuSet;
 
 /**
  * Empty Rectangles:
- * 
+ *
  * Every box can hold nine different empty rectangles ('X' means 'candidate not
  * present', digits below are lines/cols):
- * 
+ *
  * + - - - + + - - - + + - - - + | X X . | | X . X | | . X X | | X X . | | X . X
  * | | . X X | | . . . | | . . . | | . . . | + - - - + + - - - + + - - - + 2 2 2
  * 1 2 0 + - - - + + - - - + + - - - + | X X . | | X . X | | . X X | | . . . | |
@@ -59,12 +59,12 @@ import sudoku.SudokuSet;
  * 1 2 1 1 1 0 + - - - + + - - - + + - - - + | . . . | | . . . | | . . . | | X X
  * . | | X . X | | . X X | | X X . | | X . X | | . X X | + - - - + + - - - + + -
  * - - + 0 2 0 1 0 0
- * 
+ *
  * The '.' cells must contain at least three candidates, at least one
  * exclusively within the row/col (with two candidates the basic ER move
  * degenerates into an X-Chain, with all three candidates only in a row/col it
  * doesn't work at all).
- * 
+ *
  * For easy comparison SudokuSets with all possible combinations of empty cells
  * for all blocks are created at startup.
  *
@@ -111,7 +111,7 @@ public class SingleDigitPatternSolver extends AbstractSolver {
 
 	/**
 	 * Creates a new instance of SimpleSolver
-	 * 
+	 *
 	 * @param finder
 	 */
 	protected SingleDigitPatternSolver(SudokuStepFinder finder) {
@@ -190,7 +190,7 @@ public class SingleDigitPatternSolver extends AbstractSolver {
 
 	/**
 	 * Finds all Empty Rectangles
-	 * 
+	 *
 	 * @return
 	 */
 	protected List<SolutionStep> findAllEmptyRectangles() {
@@ -208,7 +208,7 @@ public class SingleDigitPatternSolver extends AbstractSolver {
 	/**
 	 * Find a single ER. If {@link Options#allowDualsAndSiamese} is set, Dual ERs
 	 * are found as well.
-	 * 
+	 *
 	 * @return
 	 */
 	protected SolutionStep findEmptyRectangle() {
@@ -229,7 +229,7 @@ public class SingleDigitPatternSolver extends AbstractSolver {
 	 * Finds all empty rectangles that provide eliminations (only simple case with
 	 * one conjugate pair). The search is actually delegated to
 	 * {@link #findEmptyRectanglesForCandidate(int)}.
-	 * 
+	 *
 	 * @param onlyOne
 	 * @return
 	 */
@@ -248,11 +248,11 @@ public class SingleDigitPatternSolver extends AbstractSolver {
 	 * erSets[block][i] don't have the candidate in question. If this is true
 	 * neither the ER line nor the ER col may be empty (without crossing point!) and
 	 * at least one of them has to hold at least two candidates.
-	 * 
+	 *
 	 * For any ER try to find a conjugate pair with one candidate in the row/col of
 	 * the ER, and one single candidate in ther intersection of the second ca didate
 	 * of the conjugate pair and the col/row of the ER.
-	 * 
+	 *
 	 * @param cand    candidate for which the grid is searched
 	 * @param onlyOne
 	 * @return
@@ -329,12 +329,12 @@ public class SingleDigitPatternSolver extends AbstractSolver {
 	 * Checks possible eliminations for a given ER. The names of the parameters are
 	 * chosen for a conjugate pair search in the columns, but it works for the lines
 	 * too, if all indices/col parameters are exchanged in the method call.
-	 * 
+	 *
 	 * The method tries to find a conjugate pair in a column where one of the
 	 * candidates is in indices firstLine. If so all candidates in the indices of
 	 * the second cell of the conjugate pair are checked. If one of them lies in
 	 * column firstCol, it can be eliminated.
-	 * 
+	 *
 	 * @param cand            The candidate for which the check is made
 	 * @param block           The index of the block holding the ER
 	 * @param blockCands      All Candidates that comprise the ER
@@ -424,12 +424,12 @@ public class SingleDigitPatternSolver extends AbstractSolver {
 	/**
 	 * A dual Empty Rectangle consists of two ERs, that have the same candidates in
 	 * the ER box but lead to different eliminations.
-	 * 
+	 *
 	 * Try all combinations of steps: - entity and entityNumber have to be the same
 	 * - box candidiates have to be the same (fins!) - elimination has to be
 	 * different Create new step with indices/eliminations from both, fins from
 	 * first, add to ers
-	 * 
+	 *
 	 * @param kites All available 2-String-Kites
 	 */
 	private void findDualEmptyRectangles(List<SolutionStep> ers) {
@@ -481,7 +481,7 @@ public class SingleDigitPatternSolver extends AbstractSolver {
 
 	/**
 	 * Search for all Skyscrapers
-	 * 
+	 *
 	 * @return
 	 */
 	protected List<SolutionStep> findAllSkyscrapers() {
@@ -498,7 +498,7 @@ public class SingleDigitPatternSolver extends AbstractSolver {
 
 	/**
 	 * Search the grid for Skyscrapers
-	 * 
+	 *
 	 * @return
 	 */
 	protected SolutionStep findSkyscraper() {
@@ -521,7 +521,7 @@ public class SingleDigitPatternSolver extends AbstractSolver {
 	 * <li></li>
 	 * <li></li>
 	 * </ul>
-	 * 
+	 *
 	 * @param lines
 	 * @param onlyOne
 	 * @return
@@ -630,7 +630,7 @@ public class SingleDigitPatternSolver extends AbstractSolver {
 
 	/**
 	 * FIns all 2-String-Kites in the grid
-	 * 
+	 *
 	 * @return
 	 */
 	protected List<SolutionStep> findAllTwoStringKites() {
@@ -649,7 +649,7 @@ public class SingleDigitPatternSolver extends AbstractSolver {
 
 	/**
 	 * Find the next 2-String-Kite
-	 * 
+	 *
 	 * @return
 	 */
 	protected SolutionStep findTwoStringKite() {
@@ -671,7 +671,7 @@ public class SingleDigitPatternSolver extends AbstractSolver {
 	 * Search for 2-String-Kites: We need a strong link in a line and one in a col.
 	 * The two strong links must be connected by a box and the "free ends" must see
 	 * a candidate.
-	 * 
+	 *
 	 * @param onlyOne
 	 * @return
 	 */
@@ -770,11 +770,11 @@ public class SingleDigitPatternSolver extends AbstractSolver {
 	/**
 	 * A dual 2-String-Kite consists of two kites, that have the same candidates in
 	 * the connecting box but lead to different eliminations.
-	 * 
+	 *
 	 * Try all combinations of steps: - box candidates have to be the same (fins!) -
 	 * elimination has to be different Create new step with indices/eliminations
 	 * from both, fins from first, add to kites
-	 * 
+	 *
 	 * @param kites All available 2-String-Kites
 	 */
 	private void findDualTwoStringKites(List<SolutionStep> kites) {

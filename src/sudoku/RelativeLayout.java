@@ -34,7 +34,7 @@ public class RelativeLayout implements LayoutManager2, java.io.Serializable
 {
 
 	private static final long serialVersionUID = 5115551135920521952L;
-	
+
 	//  Used in the constructor
 	public final static int X_AXIS = 0;
 	public final static int Y_AXIS = 1;

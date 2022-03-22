@@ -81,7 +81,7 @@ public class UniquenessSolver extends AbstractSolver {
 
 	/**
 	 * Creates a new instance of SimpleSolver
-	 * 
+	 *
 	 * @param finder
 	 */
 	public UniquenessSolver(SudokuStepFinder finder) {
@@ -164,7 +164,7 @@ public class UniquenessSolver extends AbstractSolver {
 	 * no step is found but the sudoku has not changed the already found and stored
 	 * URs ({@link #rectangles}) are not reset (they have already been searched and
 	 * if a step was in them it would have been cached).
-	 * 
+	 *
 	 * @param type
 	 * @return
 	 */
@@ -190,7 +190,7 @@ public class UniquenessSolver extends AbstractSolver {
 
 	/**
 	 * More or less equal to {@link #getUniqueness(sudoku.SolutionType)}.
-	 * 
+	 *
 	 * @param type
 	 * @return
 	 */
@@ -216,7 +216,7 @@ public class UniquenessSolver extends AbstractSolver {
 
 	/**
 	 * Find all Uniqueness steps except BUG+1
-	 * 
+	 *
 	 * @return
 	 */
 	protected List<SolutionStep> getAllUniqueness() {
@@ -238,7 +238,7 @@ public class UniquenessSolver extends AbstractSolver {
 	/**
 	 * Find all available Avoidable Rectangles. If <code>onlyone</code> is
 	 * <code>true</code>, the first one found is returned.
-	 * 
+	 *
 	 * @param type
 	 * @param onlyOne
 	 * @return
@@ -266,7 +266,7 @@ public class UniquenessSolver extends AbstractSolver {
 	/**
 	 * Find all bivalue cells and take them as starting point for a search. the
 	 * search itself is delegated to ....
-	 * 
+	 *
 	 * @param type
 	 * @param onlyOne
 	 * @return
@@ -291,7 +291,7 @@ public class UniquenessSolver extends AbstractSolver {
 	 * Only one cell exists with three candidates, all other cells have two
 	 * candidates. All candidates appear in all units exactly twice, except one of
 	 * the candidates in the cell with the three candidates.
-	 * 
+	 *
 	 * @return
 	 */
 	private SolutionStep getBugPlus1() {
@@ -364,7 +364,7 @@ public class UniquenessSolver extends AbstractSolver {
 	 * finden - Alle Zellen dieser Unit2(s) durchgehen, die nicht im selben Block
 	 * wie die Unit1(s) sind - Wenn beide Zellen die selben beiden Kandidaten haben
 	 * -> mögliches Unique Rectangle, SolutionStep prüfen
-	 * 
+	 *
 	 * when checking for avoidable rectangles some rules change: index11/index12
 	 * have to be solved cells, they designate the candidates; the other side of the
 	 * avoidable rectangle has to have at least one not solved cell. All solved
@@ -462,7 +462,7 @@ public class UniquenessSolver extends AbstractSolver {
 	 * Checks the UR in {@link #indexe} for a possible UR. All UR types are checked
 	 * at once, if <code>onlyOne</code> is set and a UR of type
 	 * <code>searchType</code> could be found it is returned immediately.
-	 * 
+	 *
 	 * @param searchType
 	 * @param onlyOne
 	 * @return
@@ -751,7 +751,7 @@ public class UniquenessSolver extends AbstractSolver {
 	 * contain cand2, cell22 must contain cand1 and both cells have to have the same
 	 * additional candidate. This candidate can be deleted from all cells that see
 	 * both cell21 and cell22.
-	 * 
+	 *
 	 * @param index21
 	 * @param index22
 	 * @param type
@@ -868,7 +868,7 @@ public class UniquenessSolver extends AbstractSolver {
 	 * <code>line</code> and <code>col</code>.<br>
 	 * CAUTION: the condition "only twice" is invalid if a UR candidate is missing
 	 * from the additional cell itself!
-	 * 
+	 *
 	 * @param line
 	 * @param col
 	 * @param cand1
@@ -917,7 +917,7 @@ public class UniquenessSolver extends AbstractSolver {
 	/**
 	 * Collect all cells that have to be checked and call the recursive check
 	 * method.
-	 * 
+	 *
 	 * @param unitType
 	 * @param unit
 	 * @param u3Cands
@@ -956,7 +956,7 @@ public class UniquenessSolver extends AbstractSolver {
 
 	/**
 	 * Do the recursive check for UR 3.
-	 * 
+	 *
 	 * @param type
 	 * @param unit
 	 * @param u3Indices
@@ -1070,7 +1070,7 @@ public class UniquenessSolver extends AbstractSolver {
 	/**
 	 * If all cells in <code>aktIndices</code> belong to the same block, return that
 	 * block (for UR3 check)
-	 * 
+	 *
 	 * @param aktIndices
 	 * @return
 	 */
@@ -1090,7 +1090,7 @@ public class UniquenessSolver extends AbstractSolver {
 	/**
 	 * Checks, if all indices in <code>aktIndices</code> are in the same line or
 	 * column (for UR check).
-	 * 
+	 *
 	 * @param aktIndices
 	 * @return
 	 */
@@ -1115,7 +1115,7 @@ public class UniquenessSolver extends AbstractSolver {
 
 	/**
 	 * Initialize {@link #globalStep} for a Unique Rectangle.
-	 * 
+	 *
 	 * @param type
 	 */
 	private void initStep(SolutionType type) {
@@ -1135,7 +1135,7 @@ public class UniquenessSolver extends AbstractSolver {
 	 * Get all cells that hold only {@link #cand1} and {@link #cand2} (or possibly
 	 * only one of them). Collect all additional candidates in
 	 * {@link #additionalCandidates}.
-	 * 
+	 *
 	 * @param indices
 	 */
 	private void initCheck(int[] indices) {
@@ -1156,7 +1156,7 @@ public class UniquenessSolver extends AbstractSolver {
 	 * Checks if the UR formed by the four indices is already contained in
 	 * {@link #rectangles}. If the buffer is full, the UR is treated as if it were
 	 * not already handled.
-	 * 
+	 *
 	 * @param i11
 	 * @param i12
 	 * @param i21

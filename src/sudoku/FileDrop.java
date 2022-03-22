@@ -21,7 +21,7 @@ import java.io.Reader;
  *      JPanel myPanel = new JPanel();
  *      new FileDrop( myPanel, new FileDrop.Listener()
  *      {   public void filesDropped( java.io.File[] files )
- *          {   
+ *          {
  *              // handle file drop
  *              ...
  *          }   // end filesDropped
@@ -580,7 +580,7 @@ public class FileDrop {
 	 * <p>
 	 * I'm releasing this code into the Public Domain. Enjoy.
 	 * </p>
-	 * 
+	 *
 	 * @author Robert Harder
 	 * @author rob@iharder.net
 	 * @version 1.2
@@ -622,7 +622,7 @@ public class FileDrop {
 	 * dropping in your Java programs! When you need to create a
 	 * {@link java.awt.datatransfer.Transferable} object, use this class to wrap
 	 * your object. For example:
-	 * 
+	 *
 	 * <pre>
 	 * <code>
 	 *      ...
@@ -631,12 +631,12 @@ public class FileDrop {
 	 *      ...
 	 * </code>
 	 * </pre>
-	 * 
+	 *
 	 * Or if you need to know when the data was actually dropped, like when you're
 	 * moving data out of a list, say, you can use the
 	 * {@link TransferableObject.Fetcher} inner class to return your object Just in
 	 * Time. For example:
-	 * 
+	 *
 	 * <pre>
 	 * <code>
 	 *      ...
@@ -661,7 +661,7 @@ public class FileDrop {
 	 * <p>
 	 * I'm releasing this code into the Public Domain. Enjoy.
 	 * </p>
-	 * 
+	 *
 	 * @author Robert Harder
 	 * @author rob@iharder.net
 	 * @version 1.2

@@ -63,7 +63,7 @@ public class Als {
 	 * <br>
 	 * <b>Note:</b> An ALS created with this constructor cannot be used unless
 	 * {@link #computeFields(solver.SudokuStepFinder) } has been called.
-	 * 
+	 *
 	 * @param indices
 	 * @param candidates
 	 */
@@ -75,7 +75,7 @@ public class Als {
 	/**
 	 * Computes all the additional fields; is done after the initial search to
 	 * optimize finding doubles.
-	 * 
+	 *
 	 * @param finder
 	 */
 	public void computeFields(SudokuStepFinder finder) {
@@ -100,7 +100,7 @@ public class Als {
 	 * ALS in chains count as one link. This prefers chains containing large ALS
 	 * over slightly longer chains with smaller (or non at all) ALS. The penalty is
 	 * added to the chain length to suppress that behaviour.
-	 * 
+	 *
 	 * @param candSize Number of candidates in the ALS
 	 * @return Number of links to be added to the chain size
 	 */
@@ -117,7 +117,7 @@ public class Als {
 
 	/**
 	 * Returns the chain penalty of the ALS (see {@link #getChainPenalty(int)}).
-	 * 
+	 *
 	 * @return Number of links to be added to the chain size
 	 */
 	public int getChainPenalty() {
@@ -129,7 +129,7 @@ public class Als {
 
 	/**
 	 * Two ALS are equal if they contain the same indices
-	 * 
+	 *
 	 * @param o
 	 * @return
 	 */
@@ -147,7 +147,7 @@ public class Als {
 
 	/**
 	 * Fitting for {@link #equals(java.lang.Object) }.
-	 * 
+	 *
 	 * @return
 	 */
 	@Override

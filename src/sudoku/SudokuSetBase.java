@@ -126,7 +126,7 @@ public class SudokuSetBase implements Cloneable, Serializable {
 
 	/**
 	 * Sets only the first 32 bits of the set.
-	 * 
+	 *
 	 * @param data
 	 */
 	public void set(int data) {
@@ -184,7 +184,7 @@ public class SudokuSetBase implements Cloneable, Serializable {
 	/**
 	 * Wenn this und b sich überschneiden, werden die gemeinsamen Kandidaten in c
 	 * hinzugefügt
-	 * 
+	 *
 	 * @param b
 	 * @param c
 	 * @return
@@ -208,7 +208,7 @@ public class SudokuSetBase implements Cloneable, Serializable {
 
 	/**
 	 * Gibt true zurück, wenn b zur Gänze in this enthalten ist
-	 * 
+	 *
 	 * @param b
 	 * @return
 	 */
@@ -242,7 +242,7 @@ public class SudokuSetBase implements Cloneable, Serializable {
 
 	/**
 	 * gibt ((this & set) == this) zurück
-	 * 
+	 *
 	 * @param set
 	 * @return
 	 */
@@ -254,7 +254,7 @@ public class SudokuSetBase implements Cloneable, Serializable {
 
 	/**
 	 * gibt ((this & ~set) == this) zurück
-	 * 
+	 *
 	 * @param set
 	 * @return
 	 */
@@ -266,7 +266,7 @@ public class SudokuSetBase implements Cloneable, Serializable {
 
 	/**
 	 * gibt ((this & set) == 0) zurück
-	 * 
+	 *
 	 * @param set
 	 * @return
 	 */
@@ -292,7 +292,7 @@ public class SudokuSetBase implements Cloneable, Serializable {
 
 	/**
 	 * Calculates this | (s1 & s2);
-	 * 
+	 *
 	 * @param s1
 	 * @param s2
 	 */
@@ -304,7 +304,7 @@ public class SudokuSetBase implements Cloneable, Serializable {
 
 	/**
 	 * Calculates this = (s1 & s2)
-	 * 
+	 *
 	 * @param s1
 	 * @param s2
 	 */
@@ -316,7 +316,7 @@ public class SudokuSetBase implements Cloneable, Serializable {
 
 	/**
 	 * Calculates this = (s1 & s2) and returns this.isEmpty()
-	 * 
+	 *
 	 * @param s1
 	 * @param s2
 	 * @return
@@ -327,7 +327,7 @@ public class SudokuSetBase implements Cloneable, Serializable {
 
 	/**
 	 * Calculates this = (s1 | s2)
-	 * 
+	 *
 	 * @param s1
 	 * @param s2
 	 */

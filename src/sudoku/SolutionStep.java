@@ -75,7 +75,7 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 
 	/**
 	 * Creates a new instance of SolutionStep
-	 * 
+	 *
 	 * @param type
 	 */
 	public SolutionStep(SolutionType type) {
@@ -153,7 +153,7 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 	 * Chain wird als Forcing Chain ausgegeben. Wenn weakLinks nicht gesetzt ist,
 	 * werden die weak links übersprungen. Der erste und der letzte Link werden
 	 * immer ausgegeben (egal ob strong oder weak und auch innerhalb von Klammern)
-	 * 
+	 *
 	 * @param chain
 	 * @param start
 	 * @param end
@@ -700,23 +700,23 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 	public String toString() {
 		return toString(2);
 	}
-	
+
 	public boolean isGiveUp() {
 		return type == SolutionType.GIVE_UP;
 	}
 
 	/**
 	 * art == 0: Kurzform art == 1: Mittellang art == 2: ausführlich
-	 * 
+	 *
 	 * @param art
 	 * @return
 	 */
 	public String toString(int art) {
-		
+
 		String str = null;
 		int index = 0;
 		StringBuffer tmp;
-		
+
 		switch (type) {
 		case FULL_HOUSE:
 		case HIDDEN_SINGLE:
@@ -1308,7 +1308,7 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 
 	/**
 	 * Gets information about vertices, fins, eliminations...
-	 * 
+	 *
 	 * @param tmp
 	 * @param cells
 	 */
@@ -1551,7 +1551,7 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 	/**
 	 * Calculates the String representation of an RC: -ARC- ARC are the actual RCs
 	 * depending on the value of actualRC.
-	 * 
+	 *
 	 * @param rc  The Restricted Common to be displayed
 	 * @param tmp Result is appended to tmp
 	 */
@@ -1579,7 +1579,7 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 	/**
 	 * Returns all candidates that are deleted in this. Is needed for displaying ALS
 	 * Chains (chain should start and end with the deleted candidates (no indices").
-	 * 
+	 *
 	 * @param tmp Result is appended to tmp
 	 */
 	private void getCandidatesToDeleteDigits(StringBuffer tmp) {
@@ -1865,11 +1865,11 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 	/**
 	 * Prüft, ob Index index in einem AlsInSolutionStep enthalten ist. Wenn ja,
 	 * wird der index in alses zurückgegeben, sonst -1;
-	 * 
+	 *
 	 * Doesnt work: if a step has more than one chain, a cell can be part of more
 	 * than one ALS; index has to be checked against a chain (only when a certain
 	 * chain is requested, which means if chainIndex != -1)!
-	 * 
+	 *
 	 * @param index
 	 * @param chainIndex
 	 * @return
@@ -1898,7 +1898,7 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 
 	/**
 	 * Adds a new colored candidate
-	 * 
+	 *
 	 * @param index
 	 * @param color
 	 */
@@ -1918,7 +1918,7 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 	 *
 	 * Es wurde absichtlich nicht equals() überschrieben, weil es ein ganz anderer
 	 * Gleichheitsbegriff ist.
-	 * 
+	 *
 	 * @param s
 	 * @return
 	 */
@@ -1944,31 +1944,31 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 	/**
 	 * Zwei Steps sind äquivalent, wenn sie die gleichen zu löschenden Kandidaten
 	 * bewirken (oder die gleichen Kandidaten setzen).
-	 * 
+	 *
 	 * 20081013: Problems with AllStepsPanel, so new try: two steps cannot be equal,
 	 * if they have not the same SolutionType Exception: both steps are fish
 	 * 20120112: All steps handled specially in compareTo() are to be treated as
 	 * equivalent!
-	 * 
+	 *
 	 * @param s
 	 * @return
 	 */
 	public boolean isEquivalent(SolutionStep s) {
-		
+
 		// Special steps first:
 //        if (getType() != s.getType() && (!SolutionType.isFish(getType()) ||
 //                !SolutionType.isFish(s.getType()))) {
 //            return false;
 //        }
-		
+
 		if (type.isFish() && s.getType().isFish()) {
 			return true;
 		}
-		
+
 		if (type.isKrakenFish() && s.getType().isKrakenFish()) {
 			return true;
 		}
-		
+
 		if (getType() != s.getType()) {
 			return false;
 		}
@@ -1976,14 +1976,14 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 		if (candidatesToDelete.size() > 0) {
 			return isEqualCandidate(candidatesToDelete, s.candidatesToDelete);
 		}
-		
+
 		return isEqualInteger(indices, s.indices);
 	}
 
 	/**
 	 * Der aktuelle Step ist eun Substep des übergebenen Steps, wenn alle zu
 	 * löschenden Kandidaten auch im übergebenen Step enthalten sind.
-	 * 
+	 *
 	 * @param s
 	 * @return
 	 */
@@ -2035,7 +2035,7 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 	 */
 	@Override
 	public int compareTo(SolutionStep o) {
-		
+
 		int sum1 = 0;
 		int sum2 = 0;
 
@@ -2056,7 +2056,7 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 		if (!isEquivalent(o)) {
             // change 20110512: short chains first!
 			// change 2019-11-28, this was commented out, but without it, the comparator would crash when
-			// trying to solve this example edge case: 
+			// trying to solve this example edge case:
 			// 5.2.8..4.93..64.........93.....7.6.9..6....58.....62...7..9....4....38....3.5...7
             int chainDiff = compareChainLengths(o);
             if (chainDiff != 0) {
@@ -2068,7 +2068,7 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 			sum2 = getIndexSumme(o.candidatesToDelete); // 40
 			// BUG 20110512: Sort order is intransitiv - doesnt work with Java7 anymore
 //            return sum1 == sum2 ? 1 : sum1 - sum2;
-			// 
+			//
 			return (sum1 - sum2); // 23 - 40
 		}
 
@@ -2174,17 +2174,17 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 	}
 
 	private boolean isEqualInteger(List<Integer> l1, List<Integer> l2) {
-		
+
 		if (l1.size() != l2.size()) {
 			return false;
 		}
-		
+
 		int anz = l1.size();
 		for (int i = 0; i < anz; i++) {
-			
+
 			int i1 = l1.get(i);
 			boolean found = false;
-			
+
 			for (int j = 0; j < anz; j++) {
 				int i2 = l2.get(j);
 				if (i1 == i2) {
@@ -2192,12 +2192,12 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 					break;
 				}
 			}
-			
+
 			if (!found) {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -2232,7 +2232,7 @@ public class SolutionStep implements Comparable<SolutionStep>, Cloneable {
 	 * criteria. For this to work, the indices have to be weighted or else two
 	 * combinations of different indices could lead to the same sum.<br>
 	 * <br>
-	 * 
+	 *
 	 * @param list
 	 * @return
 	 */

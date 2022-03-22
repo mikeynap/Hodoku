@@ -70,7 +70,7 @@ public class SudokuSinglesQueue implements Cloneable {
 
 	/**
 	 * Set the queue with the values of queue <code>src</code>.
-	 * 
+	 *
 	 * @param src
 	 */
 	public void set(SudokuSinglesQueue src) {
@@ -83,7 +83,7 @@ public class SudokuSinglesQueue implements Cloneable {
 
 	/**
 	 * Checks if the queue is empty.
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isEmpty() {
@@ -92,7 +92,7 @@ public class SudokuSinglesQueue implements Cloneable {
 
 	/**
 	 * Add a new Single to the queue
-	 * 
+	 *
 	 * @param index
 	 * @param value
 	 */
@@ -105,7 +105,7 @@ public class SudokuSinglesQueue implements Cloneable {
 	/**
 	 * Gets the index of the next Single or -1, if the queue is empty. The index is
 	 * incremented, which removes the oldest Single from the queue.
-	 * 
+	 *
 	 * @return
 	 */
 	public int getSingle() {
@@ -122,7 +122,7 @@ public class SudokuSinglesQueue implements Cloneable {
 
 	/**
 	 * Returns the cell index at queue position <code>queueIndex</code>.
-	 * 
+	 *
 	 * @param queueIndex
 	 * @return
 	 */
@@ -132,7 +132,7 @@ public class SudokuSinglesQueue implements Cloneable {
 
 	/**
 	 * Returns the cell value at queue position <code>queueIndex</code>.
-	 * 
+	 *
 	 * @param queueIndex
 	 * @return
 	 */
@@ -143,7 +143,7 @@ public class SudokuSinglesQueue implements Cloneable {
 	/**
 	 * Used together with {@link #getNextIndex() } to iterate the queue without
 	 * removing elements. If the queue is empty, -1 is returned.
-	 * 
+	 *
 	 * @return
 	 */
 	public int getFirstIndex() {
@@ -155,7 +155,7 @@ public class SudokuSinglesQueue implements Cloneable {
 	 * Used together with {@link #getFirstIndex() } to iterate the queue without
 	 * removing elements. If the queue is empty, -1 is returned. The method does not
 	 * check for concurrent modifications of the queue!
-	 * 
+	 *
 	 * @return
 	 */
 	public int getNextIndex() {
@@ -219,7 +219,7 @@ public class SudokuSinglesQueue implements Cloneable {
 	/**
 	 * Return a formatted String containing the contents of the queue. For debugging
 	 * only.
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
