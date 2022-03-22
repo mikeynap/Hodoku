@@ -116,7 +116,7 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 	private boolean showDeviations = Options.getInstance().isShowDeviations();
 	private boolean invalidCells = Options.getInstance().isInvalidCells();
 	private boolean showInvalidOrPossibleCells = false;
-	private boolean[] showHintCellValues = new boolean[11];
+	private boolean[] showHintCellValues = new boolean[12];
 	private boolean showAllCandidatesAkt = false;
 	private boolean showAllCandidates = false;
 	private int delta = DELTA;
@@ -1589,6 +1589,20 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 			}
 
 			break;
+		case KeyEvent.VK_F11:
+			if ((modifiers & KeyEvent.ALT_DOWN_MASK) == 0) {
+
+				if (showHintCellValues[11]) {
+					showHintCellValues[11] = false;
+					resetShowHintCellValues();
+				} else {
+					showHintCellValues[11] = true;
+					resetShowHintCellValues();
+					setShowHintCellValue(11);
+					checkIsShowInvalidOrPossibleCells();
+				}
+			}
+			break;
 		case KeyEvent.VK_F10:
 			if ((modifiers & KeyEvent.ALT_DOWN_MASK) == 0) {
 
@@ -1629,8 +1643,9 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 				if ((modifiers & KeyEvent.CTRL_DOWN_MASK) != 0) {
 					// just toggle the candidate
 					showHintCellValues[number] = !showHintCellValues[number];
-					// no bivalue cells!
+					// no bi/tri value cells!
 					showHintCellValues[10] = false;
+					showHintCellValues[11] = false;
 				} else {
 
 					if ((modifiers & KeyEvent.SHIFT_DOWN_MASK) != 0) {
@@ -2398,7 +2413,10 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 				}
 
 				boolean isHighlightingBivalue = showHintCellValues[10];
-				boolean isCellBivalue = sudoku.getAllCandidates(cellIndex).length == 2;
+				boolean isHighlightingTrivalue = showHintCellValues[11];
+				int candidateLength = sudoku.getAllCandidates(cellIndex).length;
+				boolean isCellBivalue = candidateLength == 2;
+				boolean isCellTrivalue = candidateLength == 3;
 
 				// highlight (filter)
 				if (isShowInvalidOrPossibleCells()) {
@@ -2718,12 +2736,19 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 								    isHighlightingBivalue &&
 								    isCellBivalue;
 
-							// highlight/filters candidates instead of cells
-							if (candidateValid && (isFilteringCandidates || isFilteringBivalueCandidates) && !isInvalidCells()) {
+							boolean isFilteringTrivalueCandidates =
+									sudoku.getValue(cellIndex) == 0 &&
+								    Options.getInstance().isOnlySmallFilters() &&
+								    isHighlightingTrivalue &&
+								    isCellTrivalue;
 
-								if (isFilteringCandidates) {
-									setColor(g2, allBlack, Options.getInstance().getPossibleCellColor());
-								} else if (isFilteringBivalueCandidates) {
+							// highlight/filters candidates instead of cells
+							if (candidateValid && (isFilteringCandidates || isFilteringBivalueCandidates || isFilteringTrivalueCandidates) && !isInvalidCells()) {
+								if (isFilteringTrivalueCandidates) {
+									// TODO: make this configerable
+									Color lightYellow = new Color(255,255,153);
+									setColor(g2, allBlack, lightYellow);
+								} else {
 									setColor(g2, allBlack, Options.getInstance().getPossibleCellColor());
 								}
 
@@ -3736,14 +3761,17 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 
 	public void setShowHintCellValue(int candidate) {
 
-		if (candidate == 10) {
+		if (candidate == 10 || candidate == 11) {
 			// filter bivalue cells
-			for (int i = 0; i < showHintCellValues.length - 1; i++) {
-				showHintCellValues[i] = false;
+			for (int i = 0; i < showHintCellValues.length; i++) {
+				if (i != candidate) {
+					showHintCellValues[i] = false;
+				}
 			}
-			showHintCellValues[10] = !showHintCellValues[10];
+			showHintCellValues[candidate] = !showHintCellValues[candidate];
 		} else {
 			showHintCellValues[10] = false;
+			showHintCellValues[11] = false;
 			for (int i = 0; i < showHintCellValues.length - 1; i++) {
 				if (i == candidate) {
 					showHintCellValues[i] = !showHintCellValues[i];
