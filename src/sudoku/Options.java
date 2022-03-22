@@ -443,6 +443,7 @@ public final class Options {
 	public static final boolean EDIT_MODE_AUTO_ADVANCE = false;
 	public static final boolean SINGLE_CLICK_MODE = false;
 	public static final boolean AUTO_HIGHLIGHTING = false;
+	public static final boolean TOGGLE_CANDIDATES_BY_DEFAULT = true;
 	public static final boolean COLORS_VISIBLE = true;
 	public static final boolean HIGHLIGHT_GIVENS = false;
 	private boolean showCandidates = SHOW_CANDIDATES;
@@ -477,6 +478,7 @@ public final class Options {
 	private boolean editModeAutoAdvance = EDIT_MODE_AUTO_ADVANCE;
 	private boolean isSingleClickMode = SINGLE_CLICK_MODE;
 	private boolean isAutoHighlighting = AUTO_HIGHLIGHTING;
+	private boolean isToggleCandidatesByDefault = TOGGLE_CANDIDATES_BY_DEFAULT;
 	private boolean isColoringVisible = COLORS_VISIBLE;
 	private boolean isHighlightingGivens = HIGHLIGHT_GIVENS;
 	// Clipboard
@@ -1471,6 +1473,10 @@ public final class Options {
 	 */
 	public boolean isUseOrInsteadOfAndForFilter() {
 		return useOrInsteadOfAndForFilter;
+	}
+
+	public boolean isToggleCandidatesByDefault() {
+		return isToggleCandidatesByDefault;
 	}
 
 	/**
@@ -2478,6 +2484,10 @@ public final class Options {
 
 	public void setAutoHighlighting(boolean autoHighlight) {
 		this.isAutoHighlighting = autoHighlight;
+	}
+
+	public void setToggleCandidatesByDefault(boolean toggle) {
+		this.isToggleCandidatesByDefault = toggle;
 	}
 
 	public void setColoringVisible(boolean visible) {
