@@ -35,7 +35,7 @@ public class SolverProgressDialog extends javax.swing.JDialog implements Runnabl
 
 	/**
 	 * Creates new form SolverProgressDialog
-	 * 
+	 *
 	 * @param parent
 	 * @param modal
 	 * @param solver

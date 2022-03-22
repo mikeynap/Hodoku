@@ -388,7 +388,7 @@ public class ConfigGeneratorPanel extends javax.swing.JPanel {
 	/**
 	 * Initialize all fields of the panel: the values from {@link Options} are
 	 * copied locally.
-	 * 
+	 *
 	 * @param setDefault
 	 */
 	private void initAll(boolean setDefault) {
@@ -418,7 +418,7 @@ public class ConfigGeneratorPanel extends javax.swing.JPanel {
 
 	/**
 	 * Makes a deep copy of <code>src</code> to <code>dest</code>.
-	 * 
+	 *
 	 * @param src
 	 * @param dest
 	 */
@@ -433,7 +433,7 @@ public class ConfigGeneratorPanel extends javax.swing.JPanel {
 	/**
 	 * Sets the number of givens in the GUI. Callback from
 	 * {@link GeneratorPatternPanel}.
-	 * 
+	 *
 	 * @param anz
 	 */
 	public final void setAnzGivens(int anz) {
@@ -447,7 +447,7 @@ public class ConfigGeneratorPanel extends javax.swing.JPanel {
 
 	/**
 	 * Sets the {@link #patternIndex} and adjusts the state of the check button.
-	 * 
+	 *
 	 * @param index
 	 */
 	private void setPatternIndex(int index) {

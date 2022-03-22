@@ -32,12 +32,12 @@ import javax.swing.UIManager;
  * @author hobiwan
  */
 public class ConfigColorPanel extends javax.swing.JPanel {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private JButton[] buttons = null;
 	private Color[] colors = null;
-	
+
 	private javax.swing.JButton alsHintBGButton1;
 	private javax.swing.JButton alsHintBGButton2;
 	private javax.swing.JButton alsHintBGButton3;
@@ -120,13 +120,13 @@ public class ConfigColorPanel extends javax.swing.JPanel {
 
 	/** Creates new form ConfigColorPanel */
 	public ConfigColorPanel() {
-		
+
 		initComponents();
 
-		buttons = new JButton[] { 
+		buttons = new JButton[] {
 			frameStrongButton, frameWeakButton, cluesButton, valuesButton, candidatesButton,
-			invalidFGButton, wrongButton, normalBGButton, cursorBGButton, invalidBGButton, validBGButton, 
-			normalHintFGButton, normalHintBGButton, delHintFGButton, delHintBGButton, 
+			invalidFGButton, wrongButton, normalBGButton, cursorBGButton, invalidBGButton, validBGButton,
+			normalHintFGButton, normalHintBGButton, delHintFGButton, delHintBGButton,
 			finsHintFGButton, finsHintBGButton, endoFinsHintFGButton, endoFinsHintBGButton, cannibalisticHintFGButton,
 			cannibalisticHintBGButton, arrowButton, alsHintFGButton1, alsHintBGButton1, alsHintFGButton2,
 			alsHintBGButton2, alsHintFGButton3, alsHintBGButton3, alsHintFGButton4, alsHintBGButton4, stiftButtona,
@@ -366,7 +366,7 @@ public class ConfigColorPanel extends javax.swing.JPanel {
 
 		backGroundPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null,
 				bundle.getString("ConfigColorPanel.backGroundPanel.border.title")));
-		
+
 		normalBGLabel.setText(bundle.getString("ConfigColorPanel.normalBGLabel.text"));
 
 		cursorBGLabel.setText(bundle.getString("ConfigColorPanel.cursorBGLabel.text"));
@@ -374,7 +374,7 @@ public class ConfigColorPanel extends javax.swing.JPanel {
 		invalidBGLabel.setText(bundle.getString("ConfigColorPanel.invalidBGLabel.text"));
 
 		validBGLabel.setText(bundle.getString("ConfigColorPanel.validBGLabel.text"));
-		
+
 		filterDigitBGButtonLabel.setText(bundle.getString("ConfigColorPanel.filterDigitBGButtonLabel.text"));
 
 		normalBGButton.setText("...");
@@ -404,7 +404,7 @@ public class ConfigColorPanel extends javax.swing.JPanel {
 				validBGButtonActionPerformed(evt);
 			}
 		});
-		
+
 		filterDigitBGButton.setText("...");
 		filterDigitBGButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -644,7 +644,7 @@ public class ConfigColorPanel extends javax.swing.JPanel {
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 						.addComponent(backGroundPanel, javax.swing.GroupLayout.PREFERRED_SIZE,
 								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(91, Short.MAX_VALUE)));		
+						.addContainerGap(91, Short.MAX_VALUE)));
 
 		hintPanel.setBorder(javax.swing.BorderFactory
 				.createTitledBorder(bundle.getString("ConfigColorPanel.hintPanel.border.title")));
@@ -892,7 +892,7 @@ public class ConfigColorPanel extends javax.swing.JPanel {
 		stiftLabelD.setText(bundle.getString("ConfigColorPanel.stiftLabelD.text"));
 
 		stiftLabelE.setText(bundle.getString("ConfigColorPanel.stiftLabelE.text"));
-		
+
 		stiftLabelF.setText(bundle.getString("ConfigColorPanel.stiftLabelF.text"));
 
 		stiftButtone.setText("...");
@@ -908,7 +908,7 @@ public class ConfigColorPanel extends javax.swing.JPanel {
 				stiftButtonEActionPerformed(evt);
 			}
 		});
-		
+
 		stiftButtonf.setText("...");
 		stiftButtonf.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1070,7 +1070,7 @@ public class ConfigColorPanel extends javax.swing.JPanel {
 				.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
 						Short.MAX_VALUE)
 				.addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-						Short.MAX_VALUE));		
+						Short.MAX_VALUE));
 	}
 
 	private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1152,7 +1152,7 @@ public class ConfigColorPanel extends javax.swing.JPanel {
 	private void normalHintFGButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		chooseColor(11);
 	}
-	
+
 	private void filterDigitBGButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		chooseColor(43);
 	}
@@ -1240,11 +1240,11 @@ public class ConfigColorPanel extends javax.swing.JPanel {
 	private void stiftButtonEActionPerformed(java.awt.event.ActionEvent evt) {
 		chooseColor(39);
 	}
-	
+
 	private void stiftButtonFActionPerformed(java.awt.event.ActionEvent evt) {
 		chooseColor(42);
 	}
-	
+
 	private void stiftButtonfActionPerformed(java.awt.event.ActionEvent evt) {
 		chooseColor(41);
 	}
@@ -1265,7 +1265,7 @@ public class ConfigColorPanel extends javax.swing.JPanel {
 	}
 
 	public void okPressed() {
-		
+
 		Options.getInstance().setGridColor(colors[0]);
 		Options.getInstance().setInnerGridColor(colors[1]);
 		Options.getInstance().setCellFixedValueColor(colors[2]);
@@ -1313,11 +1313,11 @@ public class ConfigColorPanel extends javax.swing.JPanel {
 	}
 
 	private void initAll(boolean setDefault) {
-		
+
 		if (colors == null) {
 			colors = new Color[buttons.length];
 		}
-		
+
 		if (setDefault) {
 			colors[0] = Options.GRID_COLOR;
 			colors[1] = Options.INNER_GRID_COLOR;

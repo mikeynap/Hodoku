@@ -31,13 +31,13 @@ import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- * 
+ *
  * @author hobiwan
  */
 public class WriteAsPNGDialog extends javax.swing.JDialog {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private File bildFile;
 	private int aufloesung;
 	private double bildSize;
@@ -47,7 +47,7 @@ public class WriteAsPNGDialog extends javax.swing.JDialog {
 
 	/**
 	 * Creates new form WriteAsPNGDialog
-	 * 
+	 *
 	 * @param parent
 	 * @param modal
 	 * @param size

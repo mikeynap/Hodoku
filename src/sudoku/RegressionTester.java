@@ -34,7 +34,7 @@ import solver.SudokuStepFinder;
 
 /**
  * A class that implements a Regression Tester for HoDoKu
- * 
+ *
  * Changes 20090910: - call specialised solvers for performance reasons - report
  * unknown techniques - implement subvariants in techniques - allow techniques
  * that set values in cells - allow fail cases (no step of the technique must be
@@ -143,7 +143,7 @@ public class RegressionTester {
 	 *
 	 * Now search for all occurences of that technique in the grid and compare the
 	 * results.
-	 * 
+	 *
 	 * @param testCase test case sudoku in library format
 	 */
 	public void test(String testCase) {
@@ -630,7 +630,7 @@ public class RegressionTester {
 	 *
 	 * With chains more than one chain with different chain lengths may exist. This
 	 * has to be tested separately.
-	 * 
+	 *
 	 * @param testCase
 	 * @param steps
 	 * @param sudoku

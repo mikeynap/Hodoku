@@ -54,7 +54,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 	private static final int DIFF_SIZE = 1;
 	private static final String[] NUMBERS = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 	private static final int COLOR_BUTTON_COUNT = 12;
-	
+
 	private MainFrame mainFrame;
 	private Font buttonFont = null;
 	private Font iconFont = null;
@@ -70,7 +70,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 	private int colorImageHeight = -1;
 	private Icon[] colorKuIcons = new Icon[9];
 	private boolean isInitialized = false;
-	
+
 	private javax.swing.JPanel chooseColorPanel;
 	private javax.swing.JButton jFontButton;
 	private javax.swing.JPanel jPanel1;
@@ -89,19 +89,19 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 
 	/**
 	 * Creates new form CellZoomPanel
-	 * 
+	 *
 	 * @param mainFrame
 	 */
 	public CellZoomPanel(MainFrame mainFrame) {
-		
+
 		this.mainFrame = mainFrame;
-		
+
 		cellPanels = new JPanel[COLOR_BUTTON_COUNT];
-		setValueButtons = new JButton[Sudoku2.UNITS];		
+		setValueButtons = new JButton[Sudoku2.UNITS];
 		toggleCandidatesButtons = new JButton[Sudoku2.UNITS];
-		
+
 		initComponents();
-		
+
 		JButton defaultButton = new JButton();
 		normButtonForeground = defaultButton.getForeground();
 		normButtonBackground = defaultButton.getBackground();
@@ -117,18 +117,18 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 		if (getFont().getSize() > 12) {
 			fontSize = getFont().getSize();
 		}
-		
+
 		Font font = titleLabel.getFont();
 		titleLabel.setFont(new Font(font.getName(), Font.BOLD, fontSize));
-		
+
 		isInitialized = true;
 		calculateLayout();
 	}
-	
+
 	private JPanel createColorButtonPanel(int id) {
-		
+
 		JPanel panel = new StatusColorPanel(id);
-		
+
 		panel.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				chooseCellColorPanelMouseClicked(evt);
@@ -153,18 +153,18 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 		toggleCandidatesPanel = new javax.swing.JPanel();
 		chooseColorPanel = new javax.swing.JPanel();
 		jFontButton = new javax.swing.JButton();
-		
+
 		colorPalette = new UIColorPalette(this);
 		add(colorPalette);
-		
+
 		colorTools = new UIColorTools();
 		add(colorTools);
-		
+
 		ResourceBundle bundle = java.util.ResourceBundle.getBundle("intl/CellZoomPanel");
 		String defaultText = bundle.getString("CellZoomPanel.radioButtonDefault.text");
 		String colorCandidatesText = bundle.getString("CellZoomPanel.radioButtonColorCandidates.text");
 		String colorCellsText = bundle.getString("CellZoomPanel.radioButtonColorCells.text");
-		
+
 		radioButtonPanel = new JPanel(new GridLayout(3, 1));
 		radioButtonPanel.setSize(130, colorPalette.getHeight());
 		radioButtonGroup = new ButtonGroup();
@@ -211,7 +211,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 
 		// initialize all set value buttons
 		for (int index = 0; index < Sudoku2.UNITS; index++) {
-			
+
 			setValueButtons[index] = new JButton();
 			setValueButtons[index].setText(NUMBERS[index]);
 			setValueButtons[index].addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +219,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 					setValueButtonActionPerformed(evt);
 				}
 			});
-			
+
 			setValuePanel.add(setValueButtons[index]);
 		}
 
@@ -233,7 +233,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 
 		// initialize all toggle candidate buttons
 		for (int index = 0; index < Sudoku2.UNITS; index++) {
-			
+
 			toggleCandidatesButtons[index] = new JButton();
 			toggleCandidatesButtons[index].setText(NUMBERS[index]);
 			toggleCandidatesButtons[index].addActionListener(new java.awt.event.ActionListener() {
@@ -241,22 +241,22 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 					toggleCandidatesButtonActionPerformed(evt);
 				}
 			});
-			
+
 			toggleCandidatesPanel.add(toggleCandidatesButtons[index]);
 		}
 
 		add(toggleCandidatesPanel);
 		toggleCandidatesPanel.setBounds(0, 0, 117, 69);
 		chooseColorPanel.setLayout(new java.awt.GridLayout(2, 6, 1, 1));
-		
+
 		for (int i = 0; i < COLOR_BUTTON_COUNT; i++) {
 			cellPanels[i] = createColorButtonPanel(i);
 		}
-		
+
 		for (int i = 0; i < COLOR_BUTTON_COUNT; i += 2) {
 			chooseColorPanel.add(cellPanels[i]);
 		}
-		
+
 		for (int i = 1; i < COLOR_BUTTON_COUNT; i += 2) {
 			chooseColorPanel.add(cellPanels[i]);
 		}
@@ -288,16 +288,16 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 	}
 
 	private void onToggleCandidate(JButton button) {
-		
+
 		int candidate = -1;
-		
+
 		for (int i = 0; i < toggleCandidatesButtons.length; i++) {
 			if (button == toggleCandidatesButtons[i]) {
 				candidate = i + 1;
 				break;
 			}
 		}
-		
+
 		if (sudokuPanel != null && candidate != -1) {
 			if (isDefaultMouse()) {
 				sudokuPanel.toggleCandidateFromCellSelection(candidate);
@@ -309,26 +309,26 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 	}
 
 	private void setValue(JButton button) {
-		
+
 		int number = -1;
-		
+
 		for (int i = 0; i < setValueButtons.length; i++) {
 			if (button == setValueButtons[i]) {
 				number = i + 1;
 				break;
 			}
 		}
-		
+
 		if (sudokuPanel != null && number != -1) {
 			sudokuPanel.setCellFromCellZoomPanel(number);
 		}
 	}
 
 	private void handleColorChange(JPanel panel, boolean isCtrlDown) {
-		
+
 		boolean found = false;
 		int colorNumber = -1;
-		
+
 		for (int i = 0; i < cellPanels.length; i++) {
 			if (panel == cellPanels[i]) {
 				colorNumber = i;
@@ -336,12 +336,12 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 				break;
 			}
 		}
-		
+
 		if (colorNumber >= 0 && !isCtrlDown) {
 			Color color = Options.getInstance().getColoringColors()[colorNumber];
 			colorPalette.setPrimaryColor(color);
 		}
-		
+
 		if (found && mainFrame != null) {
 			if (isCtrlDown && colorNumber > 0) {
 				if (isColoringCells()) {
@@ -359,17 +359,17 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 				}
 			}
 		}
-		
+
 		sudokuPanel.repaint();
 	}
 
 	public final void calculateLayout() {
-		
+
 		if (!isInitialized) {
 			// not yet initialized!
 			return;
 		}
-		
+
 		int width = getWidth();
 		int height = getHeight();
 		int y = Y_OFFSET;
@@ -389,22 +389,22 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 		if (colorPanelHeight > COLOR_PANEL_MAX_HEIGHT) {
 			colorPanelHeight = COLOR_PANEL_MAX_HEIGHT;
 		}
-		
+
 		if (buttonPanelHeight > (width - 2 * X_OFFSET)) {
 			buttonPanelHeight = width - 2 * X_OFFSET;
 		}
-		
+
 		// adjust color panels
 		if (buttonPanelHeight < 120) {
 			colorPanelHeight -= (120 - buttonPanelHeight);
 			buttonPanelHeight = 120;
 		}
-		
+
 		int colorPanelGesWidth = colorPanelHeight * 4;
 		if (colorPanelGesWidth > width - 2 * X_OFFSET) {
 			colorPanelHeight = (int) ((width - 2 * X_OFFSET) / 4.5);
 		}
-		
+
 		colorPanelGesWidth = colorPanelHeight * 4;
 		int newColorImageHeight = colorPanelHeight * 2 / 3;
 
@@ -433,7 +433,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 		radioButtonPanel.setLocation(colorPalette.getX() + colorPalette.getWidth() + 10, colorPalette.getY());
 		y += colorPalette.getHeight();
 		y += LARGE_GAP;
-		
+
 		chooseColorPanel.setSize(colorPanelHeight/2*COLOR_BUTTON_COUNT/2, colorPanelHeight);
 		chooseColorPanel.setLocation(setValuePanel.getX(), y);
 		chooseColorPanel.doLayout();
@@ -457,19 +457,19 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 				toggleCandidatesButtons[i].setFont(buttonFont);
 			}
 		}
-		
+
 		// ColorKu icons should be the same size as the candidate numbers
 		// icons are only created, if colorKu mode is active
-		if (newColorImageHeight > 0 && 
-			Options.getInstance().isShowColorKuAct() && 
+		if (newColorImageHeight > 0 &&
+			Options.getInstance().isShowColorKuAct() &&
 			newColorImageHeight != colorImageHeight) {
-			
+
 			colorImageHeight = newColorImageHeight;
 			for (int i = 0; i < colorKuIcons.length; i++) {
 				colorKuIcons[i] = new ImageIcon(new ColorKuImage(colorImageHeight, Options.getInstance().getColorKuColor(i + 1)));
 			}
 		}
-		
+
 		repaint();
 	}
 
@@ -490,7 +490,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 	 * <li>if a set of cells is selected, coloredCells and coloredCandidates are
 	 * null</li>
 	 * </ul>
-	 * 
+	 *
 	 * @param values
 	 * @param candidates
 	 * @param aktColor
@@ -501,13 +501,13 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 	 * @param coloredCandidates
 	 */
 	public void update(
-			SudokuSet values, 
-			SudokuSet candidates, 
-			int index, 
-			boolean singleCell, 
+			SudokuSet values,
+			SudokuSet candidates,
+			int index,
+			boolean singleCell,
 			SortedMap<Integer, Color> coloredCells,
 			SortedMap<Integer, Color> coloredCandidates) {
-		
+
 		// reset all buttons
 		for (int i = 0; i < setValueButtons.length; i++) {
 			setValueButtons[i].setText("");
@@ -524,7 +524,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 
 		// now set accordingly
 		if (isDefaultMouse()) {
-			
+
 			// no coloring -> buttons are available
 			for (int i = 0; i < values.size(); i++) {
 				int cand = values.get(i) - 1;
@@ -539,7 +539,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 					setValueButtons[cand].setEnabled(true);
 				}
 			}
-			
+
 			for (int i = 0; i < candidates.size(); i++) {
 				int cand = candidates.get(i) - 1;
 				if (cand >= 0 && cand <= 8) {
@@ -553,7 +553,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 					toggleCandidatesButtons[cand].setEnabled(true);
 				}
 			}
-			
+
 			ResourceBundle bundle = ResourceBundle.getBundle("intl/CellZoomPanel");
 			if (singleCell) {
 				toggleCandidatesLabel.setText(bundle.getString("CellZoomPanel.toggleCandidatesLabel.text"));
@@ -563,10 +563,10 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 			} else {
 				toggleCandidatesLabel.setText(bundle.getString("CellZoomPanel.toggleCandidatesLabel.text2"));
 			}
-			
+
 		} else {
-			
-			// coloring			
+
+			// coloring
 			if (coloredCells != null) {
 
 				if (isColoringCells()) {
@@ -588,16 +588,16 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 	}
 
 	private ImageIcon createImage(int size, Color color, int cand) {
-		
+
 		if (size > 0) {
-			
+
 			Image img = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
 			Graphics2D g = (Graphics2D) img.getGraphics();
-			
+
 			if (color == null) {
 				color = Options.getInstance().getDefaultCellColor();
 			}
-			
+
 			g.setColor(color);
 			g.fillRect(0, 0, size, size);
 			if (cand > 0) {
@@ -615,7 +615,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 					g.drawString(String.valueOf(cand), (size - strWidth) / 2, (size + strHeight - 2) / 2);
 				}
 			}
-			
+
 			return new ImageIcon(img);
 		} else {
 			return null;
@@ -637,34 +637,34 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 		this.colorPalette.setSudokuPanel(sudokuPanel);
 		this.colorTools.setSudokuPanel(sudokuPanel);
 	}
-	
+
 	public void swapColors() {
 		colorPalette.swap();
 		repaint();
 	}
-	
+
 	public boolean isDefaultMouse() {
 		return radioButtonDefault.isSelected();
 	}
-	
+
 	public boolean isColoringCells() {
 		return radioButtonColorCells.isSelected();
 	}
-	
+
 	public boolean isColoringCandidates() {
 		return radioButtonColorCandidates.isSelected();
 	}
-	
+
 	public boolean isColoring() {
 		return isColoringCells() || isColoringCandidates();
 	}
-	
+
 	public void setDefaultMouse(boolean enable) {
 		if (!radioButtonDefault.isSelected() && enable) {
 			radioButtonDefault.setSelected(true);
 		}
 	}
-	
+
 	public void setColorCells(boolean enable) {
 		if (radioButtonColorCells.isSelected() && !enable) {
 			radioButtonDefault.setSelected(true);
@@ -672,7 +672,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 			radioButtonDefault.setSelected(true);
 		}
 	}
-	
+
 	public void setColorCandidates(boolean enable) {
 		if (radioButtonColorCandidates.isSelected() && !enable) {
 			radioButtonDefault.setSelected(true);
@@ -680,18 +680,18 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 			radioButtonDefault.setSelected(true);
 		}
 	}
-	
+
 	public Color getPrimaryColor() {
 		return colorPalette.getPrimaryColor();
 	}
-	
+
 	public Color getSecondaryColor() {
 		return colorPalette.getSecondaryColor();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == radioButtonDefault) {
 			mainFrame.setColoring(null, false);
 		} else if (e.getSource() == radioButtonColorCells) {
@@ -699,8 +699,8 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 		} else if (e.getSource() == radioButtonColorCandidates) {
 			mainFrame.setColoring(getPrimaryColor(), false);
 		}
-		
-		mainFrame.check();		
+
+		mainFrame.check();
 		mainFrame.repaint();
 	}
 }

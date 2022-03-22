@@ -31,7 +31,7 @@ public class UIImportLine extends JFrame implements ActionListener, WindowListen
 	public UIImportLine(MainFrame mainFrame) {
 
 		super();
-		
+
 		ResourceBundle bundle = ResourceBundle.getBundle("intl/UIImportLine");
 
 		this.setVisible(false);
@@ -66,9 +66,9 @@ public class UIImportLine extends JFrame implements ActionListener, WindowListen
 	}
 
 	private void importLine() {
-		
+
 		boolean wasImported = this.mainFrame.loadFromImportLine(this.textField.getText());
-		
+
 		if (wasImported) {
 			this.textField.setText("");
 			this.setVisible(false);

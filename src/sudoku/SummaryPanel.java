@@ -36,19 +36,19 @@ import solver.SudokuSolver;
  * @author hobiwan
  */
 public class SummaryPanel extends javax.swing.JPanel {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private MainFrame mainFrame;
 	private SummaryTableModel model;
 
 	/**
 	 * Creates new form SummaryPanel
-	 * 
+	 *
 	 * @param mainFrame
 	 */
 	public SummaryPanel(MainFrame mainFrame) {
-		
+
 		this.mainFrame = mainFrame;
 
 		initComponents();
@@ -57,7 +57,7 @@ public class SummaryPanel extends javax.swing.JPanel {
 		summaryTable.setModel(model);
 		summaryTable.setDefaultRenderer(Object.class, new SummaryTableRenderer());
 		TableColumn column = null;
-		
+
 		for (int i = 0; i < 3; i++) {
 			column = summaryTable.getColumnModel().getColumn(i);
 			if (i == 0 || i == 2) {
@@ -66,16 +66,16 @@ public class SummaryPanel extends javax.swing.JPanel {
 				column.setPreferredWidth(200);
 			}
 		}
-		
+
 		FontMetrics metrics = getFontMetrics(getFont());
 		int rowHeight = (int) (metrics.getHeight() * 1.1);
 		summaryTable.setRowHeight(rowHeight);
 		int fontSize = 12;
-		
+
 		if (getFont().getSize() > 12) {
 			fontSize = getFont().getSize();
 		}
-		
+
 		Font font = titleLabel.getFont();
 		titleLabel.setFont(new Font(font.getName(), Font.BOLD, fontSize));
 	}
@@ -127,19 +127,19 @@ public class SummaryPanel extends javax.swing.JPanel {
 	}
 
 	class SummaryTableModel extends AbstractTableModel {
-		
+
 		private static final long serialVersionUID = 1L;
-		
+
 		String[] columnNames = {
 			java.util.ResourceBundle.getBundle("intl/SummaryPanel").getString("SummaryPanel.count"),
 			java.util.ResourceBundle.getBundle("intl/SummaryPanel").getString("SummaryPanel.technique"),
 			java.util.ResourceBundle.getBundle("intl/SummaryPanel").getString("SummaryPanel.score")
 		};
-		
+
 		Object[][] content = { { "", "", "", null } };
 
 		public void initialize(SudokuSolver solver) {
-			
+
 			if (solver != null) {
 				content = new Object[solver.getAnzUsedSteps() + 1][4];
 				int[] anzSteps = solver.getAnzSteps();
@@ -154,19 +154,19 @@ public class SummaryPanel extends javax.swing.JPanel {
 						index++;
 					}
 				}
-				
+
 				content[index][1] = java.util.ResourceBundle.getBundle("intl/SummaryPanel").getString("SummaryPanel.sum");
 				content[index][2] = Integer.toString(solver.getScore());
-				
+
 			} else {
-				
+
 				content = new Object[1][4];
 				content[0][0] = "";
 				content[0][1] = "";
 				content[0][2] = "";
-				content[0][3] = null;				
+				content[0][3] = null;
 			}
-			
+
 			fireTableDataChanged();
 		}
 
@@ -193,7 +193,7 @@ public class SummaryPanel extends javax.swing.JPanel {
 	}
 
 	class SummaryTableRenderer extends JLabel implements TableCellRenderer {
-		
+
 		private static final long serialVersionUID = 1L;
 		private Color backColor;
 
@@ -204,19 +204,19 @@ public class SummaryPanel extends javax.swing.JPanel {
 
 		@Override
 		public Component getTableCellRendererComponent(
-				JTable table, 
-				Object value, 
-				boolean isSelected, 
+				JTable table,
+				Object value,
+				boolean isSelected,
 				boolean hasFocus,
-				int row, 
+				int row,
 				int column) {
-			
+
 			if (model.content[row][3] != null) {
 				setBackground((Color) model.content[row][3]);
 			} else {
 				setBackground(backColor);
 			}
-			
+
 			String text = (value != null) ? value.toString() : "";
 			if (column == 0 || column == 2) {
 				setHorizontalAlignment(SwingConstants.RIGHT);
@@ -225,7 +225,7 @@ public class SummaryPanel extends javax.swing.JPanel {
 				setHorizontalAlignment(SwingConstants.LEFT);
 				text = " " + text;
 			}
-			
+
 			setText(text);
 			return this;
 		}

@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with HoDoKu. If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * This code is actually a Java port of code posted by Glenn Fowler
  * in the Sudoku Player's Forum (http://www.setbb.com/sudoku).
  * Many thanks for letting me use it!
@@ -34,11 +34,11 @@ import sudoku.SudokuStatus;
 
 /**
  * Bit based backtracking solver.
- * 
+ *
  * @author hobiwan
  */
 public class SudokuGenerator {
-	
+
 	/** Debug flag */
 	private static final boolean DEBUG = false;
 
@@ -101,57 +101,57 @@ public class SudokuGenerator {
 	/**
 	 * Checks if <code>sudoku</code> has exactly one solution. If it has, the
 	 * solution is stored in the sudoku.
-	 * 
+	 *
 	 * @param sudoku
 	 * @return 0 (invalid), 1 (valid), or 2 (multiple solutions)
 	 */
 	public int getNumberOfSolutions(Sudoku2 sudoku, int maxSolutionCount) {
-		
+
 		long ticks = System.currentTimeMillis();
-		
+
 		solve(sudoku, maxSolutionCount);
-		
+
 		if (solutionCount == 1) {
 			sudoku.setSolution(Arrays.copyOf(solution, solution.length));
 		}
-		
+
 		ticks = System.currentTimeMillis() - ticks;
 		Logger.getLogger(getClass().getName()).log(Level.FINE, "validSolution() {0}ms", ticks);
-		
+
 		return solutionCount;
 	}
 
 	/**
 	 * Checks if <code>sudoku</code> has exactly one solution. If it has, the
 	 * solution is stored in the sudoku.
-	 * 
+	 *
 	 * @param sudoku
 	 * @return
 	 */
 	public boolean validSolution(Sudoku2 sudoku) {
-		
+
 		long ticks = System.currentTimeMillis();
-		
+
 		solve(sudoku, 1);
-		
+
 		boolean unique = solutionCount == 1;
 		if (unique) {
 			sudoku.setSolution(Arrays.copyOf(solution, solution.length));
 		}
-		
+
 		ticks = System.currentTimeMillis() - ticks;
 		Logger.getLogger(getClass().getName()).log(Level.FINE, "validSolution() {0}ms", ticks);
-		
+
 		return unique;
 	}
 
 	/**
 	 * Solves <code>sudoku</code>.
-	 * 
+	 *
 	 * @param sudoku
 	 */
 	public void solve(Sudoku2 sudoku, int maxSolutionCount) {
-		
+
 		// start with the current state of the sudoku
 		stack[0].sudoku.set(sudoku);
 		stack[0].index = 0;
@@ -164,16 +164,16 @@ public class SudokuGenerator {
 
 	/**
 	 * Solves a sudoku given by a 81 character string.
-	 * 
+	 *
 	 * @param sudokuString
 	 */
 	public void solve(String sudokuString, int maxSolutionCount) {
-		
+
 		// start with an empty sudoku
 		stack[0].sudoku.set(EMPTY_GRID);
 		stack[0].candidates = null;
 		stack[0].candIndex = 0;
-		
+
 		// set up the sudoku
 		for (int i = 0; i < sudokuString.length() && i < Sudoku2.LENGTH; i++) {
 			int value = sudokuString.charAt(i) - '0';
@@ -182,14 +182,14 @@ public class SudokuGenerator {
 				setAllExposedSingles(stack[0].sudoku);
 			}
 		}
-		
+
 		// solve it
 		solve(maxSolutionCount);
 	}
 
 	/**
 	 * Solves a sudoku given by a 81 int array.
-	 * 
+	 *
 	 * @param cellValues
 	 */
 	public void solve(int[] cellValues, int maxSolutionCount) {
@@ -229,76 +229,76 @@ public class SudokuGenerator {
 	 * ({@link #stack}), if Singles are exposed during solving, they are set.
 	 */
 	private void solve(int maxSolutionCount) {
-		
+
 		anzTries = 0;
 		anzNS = 0;
 		anzHS = 0;
 		solutionCount = 0;
-		
+
 		// first set all Singles exposed by building up the Sudoku grid
 		if (DEBUG) {
 			System.out.println("solve start:");
 		}
-		
+
 		// puzzle was invalid all along
 		if (!setAllExposedSingles(stack[0].sudoku)) {
-			
+
 			if (DEBUG) {
 				System.out.println("  puzzle was invalid!");
 			}
-			
+
 			return;
 		}
 
 		// already solved, nothing to do
 		if (stack[0].sudoku.getUnsolvedCellsAnz() == 0) {
-			
+
 			solution = Arrays.copyOf(stack[0].sudoku.getValues(), Sudoku2.LENGTH);
 			solutionCount++;
-			
+
 			if (DEBUG) {
 				System.out.println("  puzzle was already solved!");
 			}
-			
+
 			return;
 		}
-		
+
 		int level = 0;
 		while (true) {
-			
+
 			// a sanity check to avoid infinite loops.
 			if (anzTries >= MAX_TRIES) {
 				System.out.println("Exceeded tries");
 				break;
 			}
-			
+
 			//System.out.println("Infinite While Loop");
-			
+
 			// get the next unsolved cells with the fewest number of candidates
 			if (stack[level].sudoku.getUnsolvedCellsAnz() == 0) {
-				
+
 				// sudoku is solved
 				solutionCount++;
-				
+
 				// count the solutions
 				if (solutionCount == 1) {
 					// first solution is recorded
 					solution = Arrays.copyOf(stack[level].sudoku.getValues(), Sudoku2.LENGTH);
 				} else if (solutionCount > maxSolutionCount) {
-					
+
 					if (DEBUG) {
 						System.out.println("  puzzle has more than one solution (" + solutionCount + ")!");
 					}
-					
+
 					return;
 				}
-				
+
 			} else {
-				
+
 				int index = -1;
 				int anzCand = 9;
 				Sudoku2 sudoku = stack[level].sudoku;
-				
+
 				for (int i = 0; i < Sudoku2.LENGTH; i++) {
 
 					if (sudoku.getCell(i) != 0 && Sudoku2.ANZ_VALUES[sudoku.getCell(i)] < anzCand) {
@@ -306,15 +306,15 @@ public class SudokuGenerator {
 						anzCand = Sudoku2.ANZ_VALUES[sudoku.getCell(i)];
 					}
 				}
-				
+
 				level++;
-				
+
 				// missing candidates lead to exception -> avoid that
 				if (index < 0) {
 					solutionCount = 0;
 					return;
 				}
-				
+
 				stack[level].index = (short) index;
 				stack[level].candidates = Sudoku2.POSSIBLE_VALUES[stack[level - 1].sudoku.getCell(index)];
 				stack[level].candIndex = 0;
@@ -322,51 +322,51 @@ public class SudokuGenerator {
 
 			// go to the next level
 			boolean done = false;
-			
+
 			// this loop runs as long as the next candidate tried produces an
 			// invalid sudoku or until all possibilities have been tried
 			do {
 
 				// fall back all levels, where nothing is to do anymore
 				while (stack[level].candIndex >= stack[level].candidates.length) {
-					
+
 					level--;
-					
+
 					// no level with candidates left
 					if (level <= 0) {
 						done = true;
 						break;
 					}
 				}
-				
+
 				if (done) {
 					break;
 				}
-				
+
 				// try the next candidate
 				int nextCand = stack[level].candidates[stack[level].candIndex++];
-				
+
 				// start with a fresh sudoku
 				anzTries++;
 				stack[level].sudoku.setBS(stack[level - 1].sudoku);
-				
+
 				// invalid -> try next candidate
 				if (!stack[level].sudoku.setCell(stack[level].index, nextCand, false, false)) {
 					continue;
-				}				
-				
+				}
+
 				// valid move, break from the inner loop to advance to the next level
 				if (setAllExposedSingles(stack[level].sudoku)) {
 					break;
 				}
-				
+
 			} while (true);
-			
+
 			if (done) {
 				break;
 			}
 		}
-		
+
 		if (DEBUG) {
 			System.out.println("  puzzle has " + solutionCount + " solution!");
 		}
@@ -376,9 +376,9 @@ public class SudokuGenerator {
 	 * Generates a new valid sudoku. If a pattern is set in {@link Options} and it
 	 * has already be checked for validity, it is used automatically.<br>
 	 * <br>
-	 * 
+	 *
 	 * This method is used by the {@link BackgroundGenerator}.
-	 * 
+	 *
 	 * @param symmetric
 	 * @return
 	 */
@@ -398,10 +398,10 @@ public class SudokuGenerator {
 	 * sudoku could be generated (only possible if a <code>pattern</code> is
 	 * applied), the method returns <code>null</code>.<br>
 	 * <br>
-	 * 
+	 *
 	 * This method is used by the validity checker in the
 	 * {@link ConfigGeneratorPanel}.
-	 * 
+	 *
 	 * @param symmetric
 	 * @param pattern
 	 * @return
@@ -558,7 +558,7 @@ public class SudokuGenerator {
 	 * by deleting the cells indicated by <code>pattern</code>. If the resulting
 	 * puzzle is invalid, <code>false</code> is returned and the caller is
 	 * responsible for continuing the search.
-	 * 
+	 *
 	 * @param pattern
 	 * @return
 	 */
@@ -589,12 +589,12 @@ public class SudokuGenerator {
 	 * by deleting cells. If a deletion produces a grid with more than one solution
 	 * it is of course undone.<br>
 	 * <br>
-	 * 
+	 *
 	 * @param isSymmetric
 	 * @param pattern
 	 */
 	private void generateInitPos(boolean isSymmetric) {
-		
+
 		int maxPosToFill = 17; // no less than 17 givens
 		boolean[] used = new boolean[81]; // try every cell only once
 		int usedCount = used.length;
@@ -655,7 +655,7 @@ public class SudokuGenerator {
 	/**
 	 * Sets all Singles that have been exposed by a previous operation. All Singles
 	 * exposed by the method itself are set too.
-	 * 
+	 *
 	 * @param sudoku
 	 * @return <code>false</code>, if the puzzle has become invalid.
 	 */

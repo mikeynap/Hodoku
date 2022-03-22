@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 /**
  * A bitset class that can hold candidates. It can contain digits 1 to 9. For
  * easier iteration the bitset is backed by an array.
- * 
+ *
  * @author hobiwan
  */
 public final class SudokuSetShort implements Cloneable, Serializable {
@@ -191,7 +191,7 @@ public final class SudokuSetShort implements Cloneable, Serializable {
 
 	/**
 	 * gibt ((this & set) == this) zur�ck
-	 * 
+	 *
 	 * @param set
 	 * @return
 	 */
@@ -202,7 +202,7 @@ public final class SudokuSetShort implements Cloneable, Serializable {
 
 	/**
 	 * gibt ((this & ~set) == this) zur�ck
-	 * 
+	 *
 	 * @param set
 	 * @return
 	 */
@@ -213,7 +213,7 @@ public final class SudokuSetShort implements Cloneable, Serializable {
 
 	/**
 	 * gibt ((this & set) == 0) zur�ck
-	 * 
+	 *
 	 * @param set
 	 * @return
 	 */

@@ -122,7 +122,7 @@ public class SudokuSet extends SudokuSetBase implements Cloneable {
 	/**
 	 * pr�ft, ob alle Elemente in values im Set s1 vorkommen. Alle nicht
 	 * enthaltenen Kandidaten werden in das SudokuSet fins geschrieben
-	 * 
+	 *
 	 * @param s1
 	 * @param fins
 	 * @return

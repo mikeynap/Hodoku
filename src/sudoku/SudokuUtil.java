@@ -60,7 +60,7 @@ public class SudokuUtil {
 	/**
 	 * Clears the list. To avoid memory leaks all steps in the list are explicitly
 	 * nullified.
-	 * 
+	 *
 	 * @param steps
 	 */
 	public static void clearStepListWithNullify(List<SolutionStep> steps) {
@@ -75,7 +75,7 @@ public class SudokuUtil {
 
 	/**
 	 * Clears the list. The steps are not nullfied, but the list items are.
-	 * 
+	 *
 	 * @param steps
 	 */
 	public static void clearStepList(List<SolutionStep> steps) {
@@ -155,25 +155,25 @@ public class SudokuUtil {
 	 * printer. To make things more complicated just reversing the scale is not
 	 * enough: for Landscape printing a rotation is applied after the scale.<br>
 	 * <br>
-	 * 
+	 *
 	 * The easiest way to really achieve hires printing is to directly manipulate
 	 * the transformation matrix. The default matrix looks like this:<br>
-	 * 
+	 *
 	 * <pre>
 	 *      Portrait     Landscape
 	 *    [ d  0  x ]   [  0  d  x ]
 	 *    [ 0  d  y ]   [ -d  0  y ]
 	 *    [ 0  0  1 ]   [  0  0  1 ]
-	 * 
+	 *
 	 *    d = printerResolution / 72.0
 	 * </pre>
-	 * 
+	 *
 	 * x and y are set by the printer engine and should not be changed.<br>
 	 * <br>
-	 * 
+	 *
 	 * The values from the {@link PageFormat} object are scaled down to 72dpi as
 	 * well and have to be multiplied with d to get the correct hires values.
-	 * 
+	 *
 	 * @param g2
 	 * @return The scale factor
 	 */
@@ -205,7 +205,7 @@ public class SudokuUtil {
 	 * {@link Options#customFontSize} can be used for all GUI elements, if
 	 * {@link Options#useDefaultFontSize} is set to <code>false</code>.<br>
 	 * <br>
-	 * 
+	 *
 	 * This is where the problems starts: On most LaFs (GTK excluded, nothing can be
 	 * changed in GTK LaF) changing the font size works by changing all Font
 	 * instances in <code>UIManager.getDefaults()</code>. Not with Nimbus though:
@@ -214,9 +214,9 @@ public class SudokuUtil {
 	 * http://stackoverflow.com/questions/949353/java-altering-ui-fonts-nimbus-doesnt-work
 	 * for details).<br>
 	 * <br>
-	 * 
+	 *
 	 * Changing the font size in Nimbus can be done in one of two ways:
-	 * 
+	 *
 	 * <ul>
 	 * <li>Subclass <code>NimbusLookAndFeel</code> and override
 	 * <code>getDefaults()</code></li>
@@ -224,7 +224,7 @@ public class SudokuUtil {
 	 * <code>defaultFont</code> option on the instance directly (<b>not</b> on
 	 * <code>UIManager.getDefaults()</code>).</li>
 	 * </ul>
-	 * 
+	 *
 	 * Although both methods seem to be simple enough, there is a slight
 	 * complication: The package of the <code>NimbusLookAndFeel</code> class changed
 	 * between Java 1.6 (<code>sun.swing.plaf.nimbus</code>) and 1.7
@@ -235,7 +235,7 @@ public class SudokuUtil {
 	 * possiblilty, that the class stored in {@link Options#laf} doesnt exist at
 	 * all, if the hcfg file is moved between platforms.<br>
 	 * <br>
-	 * 
+	 *
 	 */
 	public static void setLookAndFeel() {
 		// ok: start by getting the correct AND existing LaF class
@@ -353,7 +353,7 @@ public class SudokuUtil {
 
 	/**
 	 * Reformat a sudoku given by a 81 character string to SimpleSudoku format.
-	 * 
+	 *
 	 * @param values
 	 * @return
 	 */
@@ -383,7 +383,7 @@ public class SudokuUtil {
 	/**
 	 * Build one line of a sudoku defined by <code>clues</code> in SimpleSudoku
 	 * format.
-	 * 
+	 *
 	 * @param tmp
 	 * @param clues
 	 * @param startIndex
@@ -401,7 +401,7 @@ public class SudokuUtil {
 
 	/**
 	 * Reformat a HoDoKu PM grid to SimpleSudoku format.
-	 * 
+	 *
 	 * @param grid
 	 * @return
 	 */
@@ -465,7 +465,7 @@ public class SudokuUtil {
 
 	/**
 	 * Write one line containing cells for a SimpleSudoku PM grid.
-	 * 
+	 *
 	 * @param tmp
 	 * @param cells
 	 * @param index
@@ -495,7 +495,7 @@ public class SudokuUtil {
 
 	/**
 	 * Write one frame line for a SimpleSudoku PM grid.
-	 * 
+	 *
 	 * @param tmp
 	 * @param maxLength
 	 * @param outer
@@ -531,10 +531,10 @@ public class SudokuUtil {
 
 	/**
 	 * STUB!!
-	 * 
+	 *
 	 * Is meant for replacing candidate numbers with colors for colorKu. Doesnt do
 	 * anything meaningful right now.
-	 * 
+	 *
 	 * @param candidate
 	 * @return
 	 */
@@ -549,7 +549,7 @@ public class SudokuUtil {
 
 	/**
 	 * testing...
-	 * 
+	 *
 	 * @param args
 	 */
 	/*

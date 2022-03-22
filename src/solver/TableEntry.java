@@ -60,9 +60,9 @@ import sudoku.SudokuSet;
  * can hold a maximum of five references to predecessors thus limiting the
  * complexity of networks.<br>
  * <br>
- * 
+ *
  * Format of entries in retIndices:
- * 
+ *
  * <pre>
  *   bit  0 .. 11: Index of first predecessor (indices in extendedTable
  *                 can be longer than 10 bits)
@@ -172,7 +172,7 @@ public class TableEntry {
 	/**
 	 * Adds an entry for cell <code>cellIndex</code>, candidate <code>cand</code>
 	 * using an ALS penalty.
-	 * 
+	 *
 	 * @param cellIndex
 	 * @param cand
 	 * @param penalty
@@ -185,7 +185,7 @@ public class TableEntry {
 	/**
 	 * Adds a simple node without a reverse index. Used for filling the initial
 	 * tables.
-	 * 
+	 *
 	 * @param cellIndex
 	 * @param cand
 	 * @param set
@@ -196,7 +196,7 @@ public class TableEntry {
 
 	/**
 	 * Adds a simple node with a reverse index. Used for expanding tables.
-	 * 
+	 *
 	 * @param cellIndex
 	 * @param cand
 	 * @param set
@@ -208,7 +208,7 @@ public class TableEntry {
 
 	/**
 	 * Adds a simple node with up to 5 reverse indices.
-	 * 
+	 *
 	 * @param cellIndex
 	 * @param cand
 	 * @param set
@@ -224,7 +224,7 @@ public class TableEntry {
 
 	/**
 	 * Adds an ALS node with a possible penalty.
-	 * 
+	 *
 	 * @param cellIndex1
 	 * @param alsIndex
 	 * @param nodeType
@@ -242,7 +242,7 @@ public class TableEntry {
 	 */
 	/**
 	 * Adds entries to the table.
-	 * 
+	 *
 	 * @param cellIndex1 The index of the cell for {@link Chain#NORMAL_NODE}; the
 	 *                   index of the first cell for {@link Chain#GROUP_NODE}; the
 	 *                   index of the cell that provides entry into an ALS for
@@ -324,7 +324,7 @@ public class TableEntry {
 
 	/**
 	 * Returns the entry with index <code>index</code>.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -337,9 +337,9 @@ public class TableEntry {
 	 * <code>cand</code> and type <code>set</code>. If it can be found, the index is
 	 * returned. Used to construct net dependencies.<br>
 	 * <br>
-	 * 
+	 *
 	 * It is possible, that the entry doesnt yet exist.
-	 * 
+	 *
 	 * @param cellIndex
 	 * @param set
 	 * @param cand
@@ -361,7 +361,7 @@ public class TableEntry {
 	/**
 	 * Tries to find <code>entry</code> in {@link #entries} using {@link #indices}.
 	 * The index into {@link #entries} is returned.
-	 * 
+	 *
 	 * @param entry
 	 * @return
 	 */
@@ -375,7 +375,7 @@ public class TableEntry {
 
 	/**
 	 * Checks if the table is already full.
-	 * 
+	 *
 	 * @return
 	 */
 	boolean isFull() {
@@ -384,7 +384,7 @@ public class TableEntry {
 
 	/**
 	 * Returns the cell index contained in <code>entries[index]</code>.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -394,7 +394,7 @@ public class TableEntry {
 
 	/**
 	 * Checks if <code>entries[index]</code> is a strong link or not.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -404,7 +404,7 @@ public class TableEntry {
 
 	/**
 	 * Returns the candidate contained in <code>entries[index]</code>.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -420,7 +420,7 @@ public class TableEntry {
 	 * <br>
 	 *
 	 * The largest value has to be first (I have forgotten why!).
-	 * 
+	 *
 	 * @param index1
 	 * @param index2
 	 * @param index3
@@ -489,7 +489,7 @@ public class TableEntry {
 	/**
 	 * Calculates the number of reverse indices contained in <code>retindex</code>.
 	 * The first reverse index is always set, even if it is 0.
-	 * 
+	 *
 	 * @param retIndex
 	 * @return
 	 */
@@ -508,7 +508,7 @@ public class TableEntry {
 	/**
 	 * Calculate the number of reverse indices contained in
 	 * <code>retIndices[index]</code>. Delegates to {@link #getSRetIndexAnz(long)}.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -518,7 +518,7 @@ public class TableEntry {
 
 	/**
 	 * Gets the reverse index <code>which</code> from entry <code>retIndex</code>.
-	 * 
+	 *
 	 * @param retIndex A valid reverse index entry.
 	 * @param which    0 to 4 for reverse indices, 5 for distance.
 	 * @return
@@ -540,7 +540,7 @@ public class TableEntry {
 	 * Gets the reverse index <code>which</code> from entry
 	 * <code>retIndices[index]</code>. Delegates to
 	 * {@link #getSRetIndex(long, int)}.
-	 * 
+	 *
 	 * @param index
 	 * @param which
 	 * @return
@@ -551,7 +551,7 @@ public class TableEntry {
 
 	/**
 	 * Sets the distance in <code>retIndices[index]</code>.
-	 * 
+	 *
 	 * @param index
 	 * @param distance
 	 */
@@ -564,7 +564,7 @@ public class TableEntry {
 
 	/**
 	 * Retrieves the distance from <code>retIndices[index]</code>.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -583,7 +583,7 @@ public class TableEntry {
 	 * is {@link TablingSolver#onTable} or {@link TablingSolver#offTable} and
 	 * {@link #getRetIndex(int, int) getRetIndex(index, 0)} is the index in the
 	 * source table.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -593,7 +593,7 @@ public class TableEntry {
 
 	/**
 	 * Entry comes from another table.
-	 * 
+	 *
 	 * @param index
 	 */
 	public void setExpanded(int index) {
@@ -603,7 +603,7 @@ public class TableEntry {
 	/**
 	 * Checks if the source of the expanded entry <code>entries[index]</code> was
 	 * {@link TablingSolver#onTable} or {@link TablingSolver#offTable}.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -614,7 +614,7 @@ public class TableEntry {
 	/**
 	 * The source of the expanded entry <code>entries[index]</code> was
 	 * {@link TablingSolver#onTable}.
-	 * 
+	 *
 	 * @param index
 	 */
 	public void setOnTable(int index) {
@@ -624,7 +624,7 @@ public class TableEntry {
 	/**
 	 * Checks if the source of <code>entries[index]</code> was
 	 * {@link TablingSolver#extendedTable}.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -635,7 +635,7 @@ public class TableEntry {
 	/**
 	 * The source of <code>entries[index]</code> was
 	 * {@link TablingSolver#extendedTable}.
-	 * 
+	 *
 	 * @param index
 	 */
 	public void setExtendedTable(int index) {
@@ -652,7 +652,7 @@ public class TableEntry {
 
 	/**
 	 * Retrieves the node type of the entry <code>entries[index]</code>.
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */

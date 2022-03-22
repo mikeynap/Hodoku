@@ -354,7 +354,7 @@ public class ConfigProgressPanel extends javax.swing.JPanel implements ListDragA
 
 	/**
 	 * Enable all techniques with {@link DifficultyLevel} &lt;= <code>level</code>.
-	 * 
+	 *
 	 * @param level
 	 */
 	private void setAllBelowLevel(DifficultyLevel level) {
@@ -394,7 +394,7 @@ public class ConfigProgressPanel extends javax.swing.JPanel implements ListDragA
 	 * {@link SSTSConfig#progressIndex progressIndex} is used by another step, the
 	 * indices are swapped. If the step itself is not enabled, it is added to
 	 * {@link #invalidTypes}.
-	 * 
+	 *
 	 * @param config
 	 */
 	private void setOneSSTSStep(SSTSConfig config) {
@@ -425,7 +425,7 @@ public class ConfigProgressPanel extends javax.swing.JPanel implements ListDragA
 
 	/**
 	 * Sort steps by indexProgress
-	 * 
+	 *
 	 * @param array
 	 */
 	private void sortSteps(StepConfig[] array) {

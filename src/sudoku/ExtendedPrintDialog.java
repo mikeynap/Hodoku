@@ -43,7 +43,7 @@ import javax.swing.ListCellRenderer;
 
 /**
  * Booklet printer
- * 
+ *
  * @author hobiwan
  */
 public class ExtendedPrintDialog extends javax.swing.JDialog {
@@ -87,7 +87,7 @@ public class ExtendedPrintDialog extends javax.swing.JDialog {
 
 	/**
 	 * Creates new form ExtendedPrintDialog
-	 * 
+	 *
 	 * @param parent
 	 * @param modal
 	 */
@@ -696,7 +696,7 @@ public class ExtendedPrintDialog extends javax.swing.JDialog {
 	 * Utility method: reads the contents of the textfield
 	 * {@link #numberTextFields}[<code>index</code>] and returns it as integer. If
 	 * the field is empty or an error occurs, <code>0</code> is returned. #
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */

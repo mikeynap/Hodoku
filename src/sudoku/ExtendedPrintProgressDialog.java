@@ -51,7 +51,7 @@ import solver.SudokuSolverFactory;
  * constructed and called from {@link ExtendedPrintDialog}, where all options
  * have been collected.<br>
  * <br>
- * 
+ *
  * Five different layouts are available:
  * <ul>
  * <li>0: One puzzle per page PORTRAIT</li>
@@ -63,14 +63,14 @@ import solver.SudokuSolverFactory;
  * For layouts 3 and 4 booklet printing is available: The puzzles are printed in
  * a way, that the pages can be folded in the middle and form a booklet.<br>
  * <br>
- * 
+ *
  * The number and format of the sudokus is passed in in five sections, stored in
  * the synchronized array {@link #numberTextFields}, {@link #levelComboBoxes},
  * {@link #modeComboBoxes} and {@link #candCheckBoxes}. To make printing easier,
  * the sudokus are created first and stored in the array {@link #sudokus}. The
  * appropriate option from {@link #candCheckBoxes} is stored in
  * {@link #candidates}.
- * 
+ *
  * @author hobiwan
  */
 public class ExtendedPrintProgressDialog extends javax.swing.JDialog implements Runnable, Printable {
@@ -158,7 +158,7 @@ public class ExtendedPrintProgressDialog extends javax.swing.JDialog implements 
 
 	/**
 	 * Creates new form ExtendedPrintProgressDialog
-	 * 
+	 *
 	 * @param parent
 	 * @param modal
 	 * @param numberTextFields
@@ -369,7 +369,7 @@ public class ExtendedPrintProgressDialog extends javax.swing.JDialog implements 
 
 	/**
 	 * Creates all the necessary sudokus. Returns <code>false</code> if interrupted.
-	 * 
+	 *
 	 * @return
 	 */
 	private boolean createSudokus() {
@@ -428,7 +428,7 @@ public class ExtendedPrintProgressDialog extends javax.swing.JDialog implements 
 	 * {@link GameMode}. The puzzles are taken from the cache if possible.<br>
 	 * If no puzzle could be generated (or the generation was aborted),
 	 * <code>null</code> is returned.
-	 * 
+	 *
 	 * @param level
 	 * @param mode
 	 * @return
@@ -477,7 +477,7 @@ public class ExtendedPrintProgressDialog extends javax.swing.JDialog implements 
 	/**
 	 * The actual printing is handled here. Note, that the method can be called more
 	 * than once for every page.
-	 * 
+	 *
 	 * @param graphics
 	 * @param pageFormat
 	 * @param pageIndex
@@ -652,11 +652,11 @@ public class ExtendedPrintProgressDialog extends javax.swing.JDialog implements 
 	 * determines the placement of the sudoku (starting with 0): top left - top
 	 * right - bottom left - bottom right.<br>
 	 * <br>
-	 * 
+	 *
 	 * Additional info is taken from {@link #printWidth}, {@link #printHeight},
 	 * {@link #borderWidth}, {@link #borderHeight}, {@link #footerHeight},
 	 * {@link #imagePrintSize}, {@link #horizontalGap} and {@link #verticalGap}.
-	 * 
+	 *
 	 * @param g2
 	 * @param index
 	 * @param position
@@ -712,7 +712,7 @@ public class ExtendedPrintProgressDialog extends javax.swing.JDialog implements 
 	 * Utility method: reads the contents of the textfield
 	 * {@link #numberTextFields}[<code>index</code>] and returns it as integer. If
 	 * the field is empty or an error occurs, <code>0</code> is returned. #
-	 * 
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -752,9 +752,9 @@ public class ExtendedPrintProgressDialog extends javax.swing.JDialog implements 
 	 * Shows a message dialog to ask the user to turn the paper. Is used, when in a
 	 * booklet print {@link #manualDuplex} is selected.<br>
 	 * <br>
-	 * 
+	 *
 	 * The second half of the print job can be aborted by the user.
-	 * 
+	 *
 	 */
 	private void showMessageDialog() {
 		int ret = JOptionPane.showConfirmDialog(null,
@@ -775,7 +775,7 @@ public class ExtendedPrintProgressDialog extends javax.swing.JDialog implements 
 
 	/**
 	 * Set {@link #percentage}.
-	 * 
+	 *
 	 * @param p
 	 */
 	private synchronized void setPercentage(int p) {
@@ -784,7 +784,7 @@ public class ExtendedPrintProgressDialog extends javax.swing.JDialog implements 
 
 	/**
 	 * Retrieve {@link #percentage}.
-	 * 
+	 *
 	 * @return
 	 */
 	private synchronized int getPercentage() {
@@ -800,7 +800,7 @@ public class ExtendedPrintProgressDialog extends javax.swing.JDialog implements 
 
 	/**
 	 * Set {@link #jobAborted}.
-	 * 
+	 *
 	 * @param p
 	 */
 	private synchronized void setJobAborted(boolean ja) {
@@ -809,7 +809,7 @@ public class ExtendedPrintProgressDialog extends javax.swing.JDialog implements 
 
 	/**
 	 * Retrieve {@link #jobAborted}.
-	 * 
+	 *
 	 * @return
 	 */
 	private synchronized boolean isJobAborted() {

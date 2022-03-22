@@ -58,7 +58,7 @@ public class RestoreSavePointDialog extends javax.swing.JDialog {
 
 	/**
 	 * Creates new form HistoryDialog
-	 * 
+	 *
 	 * @param parent
 	 * @param modal
 	 */
@@ -237,7 +237,7 @@ public class RestoreSavePointDialog extends javax.swing.JDialog {
 	/**
 	 * Selection listener for {@link #historyTable}. Sets the puzzle in
 	 * {@link MainFrame}.
-	 * 
+	 *
 	 * @param e
 	 */
 	private void tableSelectionChanged(ListSelectionEvent e) {

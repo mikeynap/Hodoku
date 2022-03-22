@@ -65,7 +65,7 @@ import solver.SudokuSolver;
  * retrieves all items from that class.<br>
  * In addition to the attributes described above every GUI state can have a name
  * and a timestamp.
- * 
+ *
  * @author hobiwan
  */
 public class GuiState {
@@ -107,7 +107,7 @@ public class GuiState {
 	/**
 	 * Initializes a state object. If the parameters are null, {@link #get(boolean)}
 	 * and {@link #set()} ignore the respective objects.
-	 * 
+	 *
 	 * @param sudokuPanel
 	 * @param sudokuSolver
 	 * @param solutionPanel
@@ -120,7 +120,7 @@ public class GuiState {
 	 * Sets the internal fields for the state. Is used by
 	 * {@link MainFrame#loadFromFile(boolean)} (the internal fields cannot be
 	 * stored, they have no meaning outside the running program).
-	 * 
+	 *
 	 * @param sudokuPanel
 	 * @param sudokuSolver
 	 * @param solutionPanel
@@ -168,7 +168,7 @@ public class GuiState {
 	 * the step order has been changed (it is assumed, that the order in
 	 * {@link #anzSteps} is the same as in {@link Options#solverSteps}).<br>
 	 * <br>
-	 * 
+	 *
 	 * The method assumes, that {@link #anzSteps} and {@link #steps} have already
 	 * been set.
 	 */

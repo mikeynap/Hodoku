@@ -55,7 +55,7 @@ import javax.swing.event.ListSelectionListener;
  * Der Dialog verwendet NullLayout, es kann daher zu Anzeigeproblemen kommen,
  * wenn nicht das aktuelle Windows-PlugAndFeel des JRE 1.5 verwendet wird.
  * </p>
- * 
+ *
  * @author hobiwan
  */
 @SuppressWarnings("serial")
@@ -96,7 +96,7 @@ public class MyFontChooser extends javax.swing.JDialog implements ListSelectionL
 
 	/**
 	 * Erzeugt den FontChooser.
-	 * 
+	 *
 	 * @param parent Referenz auf den aufrufenden Dialog (darf nicht
 	 *               <CODE>null</CODE> sein).
 	 * @param modal  <CODE>true</CODE>, wenn der Dialog modal sein soll, sonst
@@ -132,7 +132,7 @@ public class MyFontChooser extends javax.swing.JDialog implements ListSelectionL
 	/**
 	 * Initialisiert die statische Instanz {@link chooser} mit den Werten des
 	 * übergebenen Fonts und zeigt den Dialog an.
-	 * 
+	 *
 	 * @param font Font, der beim Öffnen des Dialogs angezeigt werden soll.
 	 */
 	private void showFontChooser(Font font) {
@@ -301,7 +301,7 @@ public class MyFontChooser extends javax.swing.JDialog implements ListSelectionL
 
 	/**
 	 * Gibt die Resourcen des Dialogs wieder frei.
-	 * 
+	 *
 	 * @param evt Auslösendes Event.
 	 */
 	private void jbOKActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbOKActionPerformed
@@ -311,7 +311,7 @@ public class MyFontChooser extends javax.swing.JDialog implements ListSelectionL
 	/**
 	 * Setzt den aktuell gewählten {@link #font} auf <CODE>null</CODE> und gibt die
 	 * Dialog-Resourcen wieder frei.
-	 * 
+	 *
 	 * @param evt Auslösendes Event.
 	 */
 	private void jbCancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbCancelActionPerformed
@@ -325,7 +325,7 @@ public class MyFontChooser extends javax.swing.JDialog implements ListSelectionL
 	 * eines JFonChooser-Objekts zeitaufwendig ist, existiert pro Prozess nur eine
 	 * Instanz, die beim ersten Aufruf erzeugt wird.
 	 * </p>
-	 * 
+	 *
 	 * @param owner
 	 * @param title       Titel des Dialogs.
 	 * @param initialFont Font, der beim Öffnen des Dialogs angezeigt werden soll.
@@ -349,7 +349,7 @@ public class MyFontChooser extends javax.swing.JDialog implements ListSelectionL
 	/**
 	 * Passt {@link #font} und das Demo-Panel an, wenn in einer Liste eine Selektion
 	 * vorgenommen wurde.
-	 * 
+	 *
 	 * @param e Auslösendes Event.
 	 */
 	@Override
@@ -396,7 +396,7 @@ public class MyFontChooser extends javax.swing.JDialog implements ListSelectionL
 	 * Zeichnet eine Linie, die die Baseline des aktuellen Fonts repräsentiert, und
 	 * gibt den Namen des Fonts im aktuell gewählten Schriftschnitt aus.
 	 * </p>
-	 * 
+	 *
 	 * @param g <CODE>Graphics2D</CODE> zum Zeichnen des Panels.
 	 */
 	private void updateDemoPanel(Graphics g) {
@@ -423,7 +423,7 @@ public class MyFontChooser extends javax.swing.JDialog implements ListSelectionL
 
 	/**
 	 * Zum Testen...
-	 * 
+	 *
 	 * @param args the command line arguments
 	 */
 	/*

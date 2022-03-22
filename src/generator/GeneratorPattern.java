@@ -25,12 +25,12 @@ import sudoku.Sudoku2;
  * A pattern, that indicates, which cells should contain givens when generating
  * new puzzles.<br>
  * <br>
- * 
+ *
  * <b>Caution:</b> The setter for {@link #pattern} only sets the reference, the
  * constructor actually makes a copy of the pattern, that has been passed in.
  * When working with new patterns, only the constructore should be used, the
  * setter is used internally by <code>XmlDecoder</code>.
- * 
+ *
  * @author hobiwan
  */
 public class GeneratorPattern implements Cloneable {
@@ -53,7 +53,7 @@ public class GeneratorPattern implements Cloneable {
 
 	/**
 	 * Constructor: Makes a new pattern with a given name.
-	 * 
+	 *
 	 * @param name
 	 */
 	public GeneratorPattern(String name) {
@@ -62,7 +62,7 @@ public class GeneratorPattern implements Cloneable {
 
 	/**
 	 * Constructor: Makes a copy of the pattern and sets it.
-	 * 
+	 *
 	 * @param name
 	 * @param pattern
 	 */
@@ -73,7 +73,7 @@ public class GeneratorPattern implements Cloneable {
 
 	/**
 	 * Makes a copy of a GeneratorPattern.
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -96,7 +96,7 @@ public class GeneratorPattern implements Cloneable {
 
 	/**
 	 * Return a printable representation of the pattern.
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
@@ -107,7 +107,7 @@ public class GeneratorPattern implements Cloneable {
 	/**
 	 * Returns the number of entries in {@link #pattern}, that are
 	 * <code>true</code>.
-	 * 
+	 *
 	 * @return
 	 */
 	public int getAnzGivens() {

@@ -33,7 +33,7 @@ import javax.swing.KeyStroke;
 /**
  * Creates a new sudoku while displaying a progress dialog. The creation is
  * really delegated to {@link #generator}.
- * 
+ *
  * @author hobiwan
  */
 public class GenerateSudokuProgressDialog extends javax.swing.JDialog implements Runnable {
@@ -51,7 +51,7 @@ public class GenerateSudokuProgressDialog extends javax.swing.JDialog implements
 
 	/**
 	 * Creates a new instance.
-	 * 
+	 *
 	 * @param parent
 	 * @param modal
 	 * @param level
@@ -188,7 +188,7 @@ public class GenerateSudokuProgressDialog extends javax.swing.JDialog implements
 
 	/**
 	 * Delivers the newsudoku back to the caller.
-	 * 
+	 *
 	 * @return
 	 */
 	public Sudoku2 getSudoku() {

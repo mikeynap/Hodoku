@@ -45,39 +45,39 @@ import sudoku.SudokuUtil;
  * hat. -- stimmt nicht mehr!
  *
  * Kraken Fish:
- * 
+ *
  * In a finned fish either there is a fish or one of the fins is true. This
  * gives the easiest way to find a Kraken Fish (Type 1):
- * 
+ *
  * - If a candidate that would be eliminated by the unfinned fish can be linked
  * to all fins (fin set -> candidate not set) than that candidate can be
  * eliminated - In a Type 1 KF the eliminated candidate is the same candidate as
  * the fish candidate
- * 
+ *
  * The other way is a bit more complicated: In an unfinned fish in every cover
  * set exactly one of the base candidates has to be true. In a finned fish
  * either this is true or one of the fins is true. That leads to the second type
  * of Kraken Fish (Type 2):
- * 
+ *
  * - If chains can be found that link all base candidates of one cover set to a
  * specific candidate (CEC) (base candidate set -> CEC candidate not set) than
  * that candidate can be eliminated. - If the fish has fins, additional chains
  * have to be found for every fin - In a Type 2 KF the deleted candidate can be
  * an arbitrary candidate
- * 
+ *
  * Endo fins: Have to be treated like normal fins. In Type 2 KF nothing is
  * changed Cannibalism: In Type 1 KF they count as normal possible elimination.
  * In Type 2 KF no chain from the cannibalistic candidate to the CEC has to be
  * found.
- * 
+ *
  * Implementation: - Type 1: For every possible elimination look after a chain
  * to all the fins - Type 2: For every intersection of a cover set with all base
  * candidates look for possible eliminations; if they exist, try to link them to
  * the fins
- * 
+ *
  * Caution: Since the Template optimization cannot be applied, KF search can be
  * very slow!
- * 
+ *
  * @author hobiwan
  */
 public class FishSolver extends AbstractSolver {
@@ -368,7 +368,7 @@ public class FishSolver extends AbstractSolver {
 
 	/**
 	 * Creates a new instance of FishSolver
-	 * 
+	 *
 	 * @param finder
 	 */
 	protected FishSolver(SudokuStepFinder finder) {
@@ -561,7 +561,7 @@ public class FishSolver extends AbstractSolver {
 	/**
 	 * Get all fishes, display a progress dialog (optional). The search can be
 	 * restricted to a certain size, to a candidate and to certain types of fish.
-	 * 
+	 *
 	 * @param minSize      Minimum fish size for search
 	 * @param maxSize      Maximum fish size for search
 	 * @param maxFins      Maximum number of fins allowed (speeds up search)
@@ -624,7 +624,7 @@ public class FishSolver extends AbstractSolver {
 
 	/**
 	 * Search for a fish of a given size and shape.
-	 * 
+	 *
 	 * @param size
 	 * @param withoutFins
 	 * @param withFins
@@ -679,7 +679,7 @@ public class FishSolver extends AbstractSolver {
 	/**
 	 * Find all Kraken Fishes. Arguments see
 	 * {@link #getAllFishes(int, int, int, int, sudoku.FindAllStepsProgressDialog, int, int)}.
-	 * 
+	 *
 	 * @param minSize
 	 * @param maxSize
 	 * @param maxFins
@@ -750,7 +750,7 @@ public class FishSolver extends AbstractSolver {
 
 	/**
 	 * Find a Kraken Fish. All options are taken from {@link Options}.
-	 * 
+	 *
 	 * @return
 	 */
 	private SolutionStep getKrakenFish() {
@@ -795,7 +795,7 @@ public class FishSolver extends AbstractSolver {
 	/**
 	 * Searches for fishes, delegates to {@link #getFishes(boolean)}. For BASIC and
 	 * FRANKEN FISH lines/cols is tried first, then cols/lines.
-	 * 
+	 *
 	 * @param candidate    The fish candidate
 	 * @param minSize      Minimum number of base units (no smaller fishes are
 	 *                     found)
@@ -1017,7 +1017,7 @@ public class FishSolver extends AbstractSolver {
 	/**
 	 * The complete cover unit search: all possible combinations of cover units that
 	 * are not identical with base units are tried.
-	 * 
+	 *
 	 * @return
 	 */
 	private SolutionStep searchCoverUnits(long baseSetM1, long baseSetM2, long endoFinSetM1, long endoFinSetM2) {
@@ -1221,7 +1221,7 @@ public class FishSolver extends AbstractSolver {
 
 	/**
 	 * Search the current base/cover set combination for possible Kraken Fish
-	 * 
+	 *
 	 * @param deleteSetM1     All potential eliminations, including cannibalistic
 	 *                        ones
 	 * @param deleteSetM2
@@ -1356,7 +1356,7 @@ public class FishSolver extends AbstractSolver {
 	 * If more than one step is collected ({@link #searchAll} or {@link #siamese}
 	 * are set), the step is added to {@link #steps}, in all other cases a copy of
 	 * {@link #globalStep} is returned.
-	 * 
+	 *
 	 * @return
 	 */
 	private SolutionStep addFishStep() {
@@ -1405,7 +1405,7 @@ public class FishSolver extends AbstractSolver {
 	/**
 	 * Adds a Kraken Fish to {@link #steps} if an equivalent smaller fish doesnt
 	 * already exist.
-	 * 
+	 *
 	 * @param step
 	 * @return
 	 */
@@ -1430,11 +1430,11 @@ public class FishSolver extends AbstractSolver {
 	 * Siamese Fish are two fishes that have the same base sets and differ only in
 	 * which candidates are fins; they provide different eliminations. only fishes
 	 * of the same category are checked
-	 * 
+	 *
 	 * To find them: Compare all pairs of fishes, if the base sets match create a
 	 * new steps, that contains the same base set and both cover sets/fins/
 	 * eliminations.
-	 * 
+	 *
 	 * @param fishes All available fishes
 	 */
 	private void findSiameseFish(List<SolutionStep> fishes) {
@@ -1637,7 +1637,7 @@ public class FishSolver extends AbstractSolver {
 	/**
 	 * Creates a mask that contains bits for every type of constraint contained in
 	 * <code>used</code>.
-	 * 
+	 *
 	 * @param used
 	 * @return
 	 */
@@ -1660,7 +1660,7 @@ public class FishSolver extends AbstractSolver {
 	 * for basic and franken fish.<br>
 	 * {@link #candidate}, {@link #candidates} and {@link #fishType} must already be
 	 * set.
-	 * 
+	 *
 	 * @param size     The maximum size of the fish
 	 * @param withFins If <code>false</code>, no base set can have more than
 	 *                 <code>size</code> candidates
@@ -1734,7 +1734,7 @@ public class FishSolver extends AbstractSolver {
 	/**
 	 * Adds a unit to the base or cover units. If the search is for finnless fish,
 	 * base units are only added if they have atmost <code>size</code> candidates.
-	 * 
+	 *
 	 * @param unit
 	 * @param setM1
 	 * @param setM2
@@ -1759,7 +1759,7 @@ public class FishSolver extends AbstractSolver {
 	/**
 	 * Determines the number of bits set in <code>mask1</code> and
 	 * <code>mask2</code>.
-	 * 
+	 *
 	 * @param mask1
 	 * @param mask2
 	 * @return
@@ -1782,7 +1782,7 @@ public class FishSolver extends AbstractSolver {
 	/**
 	 * Determines if only 0 or 1 bit is set in <code>mask1</code> and
 	 * <code>mask2</code>.
-	 * 
+	 *
 	 * @param mask1
 	 * @param mask2
 	 * @return
@@ -1811,7 +1811,7 @@ public class FishSolver extends AbstractSolver {
 	/**
 	 * For debugging only: Print the contents of a set contained in two long values
 	 * to the console.
-	 * 
+	 *
 	 * @param text
 	 * @param m1
 	 * @param m2

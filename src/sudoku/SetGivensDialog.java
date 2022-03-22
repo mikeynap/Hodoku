@@ -39,7 +39,7 @@ public class SetGivensDialog extends javax.swing.JDialog {
 
 	/**
 	 * Creates new form SetGivensDialog
-	 * 
+	 *
 	 * @param parent
 	 * @param modal
 	 */

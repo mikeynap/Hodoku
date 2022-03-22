@@ -29,7 +29,7 @@ package sudoku;
  * solutions</li>
  * </ul>
  * The SudokuStatus doesnt say anything about givens.
- * 
+ *
  * @author hobiwan
  */
 public enum SudokuStatus {

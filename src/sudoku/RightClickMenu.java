@@ -1,11 +1,11 @@
 /*
  * Copyright (C) 2019-20 PseudoFish
- * 
+ *
  * This is the menu that is displayed when the user right
  * clicks on a cell. Originally, Bernhard Hobiger embedded this
  * in the SudokuPanel, but I felt that it needed to be decoupled
  * and made into it's own proper class.
- * 
+ *
  * I dislike the circular dependency that this created, but
  * at least it fees-up a couple hundred lines from the SudokuPanel.
  */
@@ -28,16 +28,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
 public class RightClickMenu extends JPopupMenu implements ActionListener {
-	
+
 	private static final long serialVersionUID = 2320401834850980638L;
-	
+
 	private MainFrame mainFrame;
 	private SudokuPanel sudokuPanel;
-	
+
 	private JMenuItem[] toggleColorItems;
 	private JMenuItem[] makeItems = null;
 	private JMenuItem[] excludeItems = null;
-	
+
 	private javax.swing.JMenuItem color1aMenuItem;
 	private javax.swing.JMenuItem color1bMenuItem;
 	private javax.swing.JMenuItem color2aMenuItem;
@@ -71,40 +71,40 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 	private javax.swing.JMenuItem make7MenuItem;
 	private javax.swing.JMenuItem make8MenuItem;
 	private javax.swing.JMenuItem make9MenuItem;
-	
+
 	public RightClickMenu(MainFrame mainFrame, SudokuPanel sudokuPanel) {
-		
+
 		super();
-		
+
 		this.mainFrame = mainFrame;
 		this.sudokuPanel = sudokuPanel;
-		
+
 		initialize();
-		
-		makeItems = new JMenuItem[] { 
-			make1MenuItem, make2MenuItem, make3MenuItem, 
-			make4MenuItem, make5MenuItem, make6MenuItem, 
+
+		makeItems = new JMenuItem[] {
+			make1MenuItem, make2MenuItem, make3MenuItem,
+			make4MenuItem, make5MenuItem, make6MenuItem,
 			make7MenuItem, make8MenuItem, make9MenuItem
 		};
-		
+
 		excludeItems = new JMenuItem[] {
 			exclude1MenuItem, exclude2MenuItem, exclude3MenuItem,
 			exclude4MenuItem, exclude5MenuItem, exclude6MenuItem,
 			exclude7MenuItem, exclude8MenuItem, exclude9MenuItem
 		};
-		
+
 		toggleColorItems = new JMenuItem[] {
 			color1aMenuItem, color1bMenuItem, color2aMenuItem,
 			color2bMenuItem, color3aMenuItem, color3bMenuItem,
 			color4aMenuItem, color4bMenuItem, color5aMenuItem,
 			color5bMenuItem
 		};
-		
+
 		setColorIconsInPopupMenu();
 	}
-	
+
 	private void initialize() {
-		
+
 		make1MenuItem = new javax.swing.JMenuItem();
 		make2MenuItem = new javax.swing.JMenuItem();
 		make3MenuItem = new javax.swing.JMenuItem();
@@ -262,10 +262,10 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 		deleteValueMenuItem.addActionListener(this);
 		deleteValuePopupMenu.add(deleteValueMenuItem);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == make1MenuItem || e.getSource() == make2MenuItem ||
 			e.getSource() == make3MenuItem || e.getSource() == make4MenuItem ||
 			e.getSource() == make5MenuItem || e.getSource() == make6MenuItem ||
@@ -276,7 +276,7 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 			this.sudokuPanel.repaint();
 			return;
 		}
-		
+
 		if (e.getSource() == exclude1MenuItem || e.getSource() == exclude2MenuItem ||
 			e.getSource() == exclude3MenuItem || e.getSource() == exclude4MenuItem ||
 			e.getSource() == exclude5MenuItem || e.getSource() == exclude6MenuItem ||
@@ -287,14 +287,14 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 			this.sudokuPanel.repaint();
 			return;
 		}
-		
+
 		if (e.getSource() == excludeSeveralMenuItem) {
 			excludeSeveralMenuItemActionPerformed(e);
 			this.setVisible(false);
 			this.sudokuPanel.repaint();
 			return;
 		}
-		
+
 		if (e.getSource() == color1aMenuItem || e.getSource() == color1bMenuItem ||
 			e.getSource() == color2aMenuItem || e.getSource() == color2bMenuItem ||
 			e.getSource() == color3aMenuItem || e.getSource() == color3bMenuItem ||
@@ -304,7 +304,7 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 			this.sudokuPanel.repaint();
 			return;
 		}
-		
+
 		if (e.getSource() == deleteValueMenuItem) {
 			popupDeleteValueFromCell();
 			this.setVisible(false);
@@ -312,7 +312,7 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 			return;
 		}
 	}
-	
+
 	/**
 	 * Creates an icon (rectangle showing color) and sets it on the MenuItem.
 	 *
@@ -320,17 +320,17 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 	 * @param color
 	 */
 	public void setColorIconInPopupMenu(JMenuItem item, Color color, boolean colorKu) {
-		
+
 		if (color == null) {
 			// delete the icon
 			item.setIcon(null);
 			return;
 		}
-		
+
 		try {
-			
+
 			BufferedImage img = null;
-			
+
 			if (colorKu) {
 				img = new ColorKuImage(12, color);
 			} else {
@@ -339,14 +339,14 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 				gImg.setColor(color);
 				gImg.fillRect(1, 1, 12, 12);
 			}
-			
+
 			item.setIcon(new ImageIcon(img));
-			
+
 		} catch (Exception ex) {
 			Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Error setting color icons in popup menu", ex);
 		}
 	}
-	
+
 	/**
 	 * Sets all the color icons in the popup menu.
 	 */
@@ -364,9 +364,9 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 	}
 
 	public void setColorkuInPopupMenu(boolean on) {
-		
+
 		if (on) {
-			
+
 			setColorIconInPopupMenu(make1MenuItem, Options.getInstance().getColorKuColor(1), true);
 			setColorIconInPopupMenu(make2MenuItem, Options.getInstance().getColorKuColor(2), true);
 			setColorIconInPopupMenu(make3MenuItem, Options.getInstance().getColorKuColor(3), true);
@@ -388,9 +388,9 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 			setColorIconInPopupMenu(exclude9MenuItem, Options.getInstance().getColorKuColor(9), true);
 
 			excludeSeveralMenuItem.setEnabled(false);
-			
+
 		} else {
-			
+
 			setColorIconInPopupMenu(make1MenuItem, null, false);
 			setColorIconInPopupMenu(make2MenuItem, null, false);
 			setColorIconInPopupMenu(make3MenuItem, null, false);
@@ -414,7 +414,7 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 			excludeSeveralMenuItem.setEnabled(true);
 		}
 	}
-	
+
 	/**
 	 * Handles activation of an "Exclude x" menu item. The selected number is
 	 * deleted in all selected cells (if they present).
@@ -422,7 +422,7 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 	 * @param menuItem
 	 */
 	public void popupExcludeCandidate(JMenuItem menuItem) {
-		
+
 		int candidate = -1;
 		for (int i = 0; i < excludeItems.length; i++) {
 			if (excludeItems[i] == menuItem) {
@@ -430,26 +430,26 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 				break;
 			}
 		}
-		
+
 		if (candidate != -1) {
-			
+
 			sudokuPanel.pushUndo();
 			boolean changed = sudokuPanel.removeCandidateFromCellSelection(candidate);
-			
+
 			if (changed) {
 				sudokuPanel.clearRedoStack();
 				sudokuPanel.checkProgress();
 			} else {
 				sudokuPanel.popUndo();
 			}
-			
+
 			sudokuPanel.updateCellZoomPanel();
 			mainFrame.check();
 			mainFrame.fixFocus();
 			repaint();
 		}
 	}
-	
+
 	/**
 	 * Handles activation of an "Toggle color x" menu item. Th color is set in the
 	 * cell if not present or deleted if already present.
@@ -457,7 +457,7 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 	 * @param menuItem
 	 */
 	public void popupToggleColor(JMenuItem menuItem) {
-		
+
 		Color color = null;
 		for (int i = 0; i < toggleColorItems.length; i++) {
 			if (toggleColorItems[i] == menuItem) {
@@ -465,7 +465,7 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 				break;
 			}
 		}
-		
+
 		// coloring is active
 		if (color != null) {
 			int aktRow = sudokuPanel.getActiveRow();
@@ -476,7 +476,7 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 			repaint();
 		}
 	}
-	
+
 	/**
 	 * Brings up the popup menu for the cell at row/col. If the cell is already
 	 * set, a different menu is displayed, that allowsto delete the value from the
@@ -490,56 +490,56 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 	 * @param col
 	 */
 	public void showPopupMenu(int row, int col, int cellSize) {
-		
+
 		if (!Sudoku2.isValidIndex(row, col)) {
 			return;
 		}
-		
-		boolean isSingleCell = 
+
+		boolean isSingleCell =
 				sudokuPanel.getSelectedCells().isEmpty() ||
 				sudokuPanel.getSelectedCells().size() == 1 &&
 				sudokuPanel.getSelectedCells().get(0).intValue() == Sudoku2.getIndex(row, col);
-		
+
 		jSeparator2.setVisible(true);
 		if (sudokuPanel.getSudoku().getValue(row, col) != 0 && isSingleCell) {
-			
-			// cell is already set -> delete value popup (not for givens!)			
+
+			// cell is already set -> delete value popup (not for givens!)
 			if (!sudokuPanel.getSudoku().isFixed(row, col)) {
 				deleteValuePopupMenu.show(sudokuPanel, sudokuPanel.getX(row, col) + cellSize, sudokuPanel.getY(row, col));
 			}
-			
+
 			return;
 		}
-		
+
 		excludeSeveralMenuItem.setVisible(false);
 		for (int i = 1; i <= 9; i++) {
 			makeItems[i - 1].setVisible(false);
 			excludeItems[i - 1].setVisible(false);
 		}
-		
+
 		SudokuSet candSet = sudokuPanel.collectCandidates(true);
 		for (int i = 0; i < candSet.size(); i++) {
 			makeItems[candSet.get(i) - 1].setVisible(true);
 		}
-		
+
 		candSet = sudokuPanel.collectCandidates(false);
 		if (candSet.size() > 1) {
-			
+
 			if (candSet.size() > 2) {
 				excludeSeveralMenuItem.setVisible(true);
 			}
-			
+
 			for (int i = 0; i < candSet.size(); i++) {
 				excludeItems[candSet.get(i) - 1].setVisible(true);
 			}
-			
+
 		} else {
 			jSeparator2.setVisible(false);
 		}
-		
+
 		this.show(sudokuPanel, sudokuPanel.getX(row, col) + cellSize, sudokuPanel.getY(row, col));
 	}
-	
+
 	/**
 	 * Handles activation of a "Make x" menu item. The selected number is set in all
 	 * selected cells (if they are not already set).
@@ -547,7 +547,7 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 	 * @param menuItem
 	 */
 	public void popupSetCell(JMenuItem menuItem) {
-		
+
 		int candidate = -1;
 		for (int i = 0; i < makeItems.length; i++) {
 			if (makeItems[i] == menuItem) {
@@ -555,12 +555,12 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 				break;
 			}
 		}
-		
+
 		int aktRow = sudokuPanel.getActiveRow();
 		int aktCol = sudokuPanel.getActiveCol();
-		
+
 		if (candidate != -1) {
-			
+
 			sudokuPanel.pushUndo();
 			boolean changed = false;
 			if (sudokuPanel.getSelectedCells().isEmpty()) {
@@ -576,14 +576,14 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 					}
 				}
 			}
-			
+
 			if (changed) {
 				sudokuPanel.clearRedoStack();
 				sudokuPanel.checkProgress();
 			} else {
 				sudokuPanel.popUndo();
 			}
-			
+
 			sudokuPanel.updateCellZoomPanel();
 			mainFrame.check();
 			mainFrame.fixFocus();
@@ -595,38 +595,38 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 	 * Deletes the value from the active cell.
 	 */
 	public void popupDeleteValueFromCell() {
-		
+
 		sudokuPanel.pushUndo();
 		boolean changed = false;
 		int aktRow = sudokuPanel.getActiveRow();
 		int aktCol = sudokuPanel.getActiveCol();
-		
+
 		if (sudokuPanel.getSudoku().getValue(aktRow, aktCol) != 0 && !sudokuPanel.getSudoku().isFixed(aktRow, aktCol)) {
 			sudokuPanel.getSudoku().setCell(aktRow, aktCol, 0);
 			changed = true;
 		}
-		
+
 		if (changed) {
 			sudokuPanel.clearRedoStack();
 			sudokuPanel.checkProgress();
 		} else {
 			sudokuPanel.popUndo();
 		}
-		
+
 		sudokuPanel.updateCellZoomPanel();
 		mainFrame.fixFocus();
 		mainFrame.check();
 		repaint();
 	}
-	
+
 	public void excludeSeveralMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
-		
+
 		String input = JOptionPane.showInputDialog(this,
 			ResourceBundle.getBundle("intl/SudokuPanel").getString("SudokuPanel.cmessage"),
 			ResourceBundle.getBundle("intl/SudokuPanel").getString("SudokuPanel.ctitle"),
 			JOptionPane.QUESTION_MESSAGE
 		);
-		
+
 		if (input != null) {
 			sudokuPanel.pushUndo();
 			boolean changed = false;
@@ -638,20 +638,20 @@ public class RightClickMenu extends JPopupMenu implements ActionListener {
 					}
 				}
 			}
-			
+
 			if (changed) {
 				sudokuPanel.clearRedoStack();
 				sudokuPanel.checkProgress();
 			} else {
 				sudokuPanel.popUndo();
 			}
-			
+
 			sudokuPanel.updateCellZoomPanel();
 			mainFrame.check();
 			repaint();
 		}
 	}
-	
+
 	public void deleteValuePopup(int row, int col, int cellSize) {
 		deleteValuePopupMenu.show(this, sudokuPanel.getX(row, col) + cellSize, sudokuPanel.getY(row, col));
 	}

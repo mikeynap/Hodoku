@@ -49,7 +49,7 @@ public class ConfigDialog extends javax.swing.JDialog {
 
 	/**
 	 * Creates new form ConfigDialog
-	 * 
+	 *
 	 * @param parent
 	 * @param modal
 	 * @param tabIndex

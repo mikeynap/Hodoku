@@ -51,7 +51,7 @@ public class ConfigLevelFontPanel extends javax.swing.JPanel {
 
 	/**
 	 * Creates new form ConfigGeneralPanel
-	 * 
+	 *
 	 * @param mainFrame
 	 */
 	public ConfigLevelFontPanel(Component mainFrame) {

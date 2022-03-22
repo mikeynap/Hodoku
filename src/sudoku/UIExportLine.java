@@ -32,7 +32,7 @@ public class UIExportLine extends JFrame implements ActionListener {
 		super();
 
 		this.sudokuPanel = sudokuPanel;
-		
+
 		ResourceBundle bundle = ResourceBundle.getBundle("intl/UIExportLine");
 
 		this.setVisible(false);
@@ -40,7 +40,7 @@ public class UIExportLine extends JFrame implements ActionListener {
 		this.setLayout(new FlowLayout());
 		this.setTitle(bundle.getString("UIExportLine.title"));
 		this.setResizable(false);
-		
+
 		label = new JLabel(bundle.getString("UIExportLine.label.text"));
 		this.add(label, FlowLayout.LEFT);
 
