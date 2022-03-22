@@ -114,19 +114,19 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 	private SudokuPanel sudokuPanel;
 	// private DifficultyLevel level =
 	// Options.getInstance().getDifficultyLevels()[DifficultyType.EASY.ordinal()];
-	private JToggleButton[] toggleButtons = new JToggleButton[10];
+	private JToggleButton[] toggleButtons = new JToggleButton[11];
 	/** Icons for the filter toggle buttons in the toolbar (original version) */
-	private Icon[] toggleButtonIconsOrg = new Icon[10];
+	private Icon[] toggleButtonIconsOrg = new Icon[11];
 	/** Icons for the filter toggle buttons in the toolbar (original version) */
-	private Icon[] emptyToggleButtonIconsOrg = new Icon[10];
+	private Icon[] emptyToggleButtonIconsOrg = new Icon[11];
 	/** Images for the filter toggle button icons (ColorKu version) */
-	private ColorKuImage[] toggleButtonImagesColorKu = new ColorKuImage[10];
+	private ColorKuImage[] toggleButtonImagesColorKu = new ColorKuImage[11];
 	/** Icons for the filter toggle buttons in the toolbar (ColorKu version) */
-	private Icon[] toggleButtonIconsColorKu = new Icon[10];
+	private Icon[] toggleButtonIconsColorKu = new Icon[11];
 	/** Icons for the filter toggle buttons in the toolbar (currently displayed) */
-	private Icon[] toggleButtonIcons = new Icon[10];
+	private Icon[] toggleButtonIcons = new Icon[11];
 	/** Icons for the filter toggle buttons in the toolbar (no candidates left) */
-	private Icon[] emptyToggleButtonIcons = new Icon[10];
+	private Icon[] emptyToggleButtonIcons = new Icon[11];
 	/** One empty icon for disabled filter buttons - digits */
 	@SuppressWarnings("unused")
 	private Icon emptyToggleButtonIconOrg = new ImageIcon(getClass().getResource("/img/f_0c.png"));
@@ -251,6 +251,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 	private javax.swing.JToggleButton f9ToggleButton;
 	private javax.swing.JCheckBoxMenuItem fullScreenMenuItem;
 	private javax.swing.JToggleButton fxyToggleButton;
+	private javax.swing.JToggleButton fxyzToggleButton;
 	private javax.swing.JMenu helpMenu;
 	private javax.swing.JPanel hintPanel;
 	private javax.swing.JButton hinweisAbbrechenButton;
@@ -572,6 +573,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		toggleButtons[7] = f8ToggleButton;
 		toggleButtons[8] = f9ToggleButton;
 		toggleButtons[9] = fxyToggleButton;
+		toggleButtons[10] = fxyzToggleButton;
 
 		for (int i = 0, lim = toggleButtons.length; i < lim; i++) {
 
@@ -710,6 +712,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		f8ToggleButton = new javax.swing.JToggleButton();
 		f9ToggleButton = new javax.swing.JToggleButton();
 		fxyToggleButton = new javax.swing.JToggleButton();
+		fxyzToggleButton = new javax.swing.JToggleButton();
 		outerSplitPane = new javax.swing.JSplitPane();
 		hintPanel = new javax.swing.JPanel();
 		newNoteButton = new javax.swing.JButton();
@@ -1163,6 +1166,20 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 			}
 		});
 		jToolBar1.add(fxyToggleButton);
+
+		// TODO: change icon and text
+		fxyzToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/f_xyzc.png")));
+		fxyzToggleButton.setToolTipText(bundle.getString("MainFrame.fxyzToggleButton.toolTipText"));
+		fxyzToggleButton.setFocusable(false);
+		fxyzToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		fxyzToggleButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+		fxyzToggleButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				fxyzToggleButtonActionPerformed(evt);
+			}
+		});
+		jToolBar1.add(fxyzToggleButton);
+
 
 		getContentPane().add(jToolBar1, java.awt.BorderLayout.NORTH);
 
@@ -3007,6 +3024,10 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		setToggleButton((JToggleButton) evt.getSource(), false);
 	}
 
+	private void fxyzToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		setToggleButton((JToggleButton) evt.getSource(), false);
+	}
+
 	private void showHintButtonsCheckBoxMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
 		Options.getInstance().setShowHintButtonsInToolbar(showHintButtonsCheckBoxMenuItem.isSelected());
 		setShowHintButtonsInToolbar();
@@ -3644,13 +3665,17 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 				}
 			}
 
-			if (index == Sudoku2.UNITS) {
+			// xy or xyz filter
+			if (index >= Sudoku2.UNITS) {
 				sudokuPanel.setShowHintCellValue(index + 1);
 			} else {
 				boolean isActive = sudokuPanel.getShowHintCellValues()[index + 1];
 				if (ctrlPressed) {
 					sudokuPanel.getShowHintCellValues()[index + 1] = !isActive;
-					sudokuPanel.getShowHintCellValues()[10] = false;
+					// TODO: allow both bi/try
+					if (index + 1 < 10) {
+						sudokuPanel.getShowHintCellValues()[10] = false;
+					}
 				} else {
 					if (isActive) {
 						sudokuPanel.resetShowHintCellValues();
