@@ -1705,15 +1705,10 @@ public class Sudoku2 implements Cloneable {
 			return false;
 		}
 
-		// TODO: make both selectable.
 		// TODO: use enum for [10] and [11]
-
-		if (candidates[10] == true) {
-			return getAnzCandidates(index) == 2;
-		}
-
-		if (candidates[11] == true) {
-			return getAnzCandidates(index) == 3;
+		int numCand = getAnzCandidates(index);
+		if (candidates[10] || candidates[11]) {
+			return (candidates[10] && numCand == 2) || (candidates[11] && numCand == 3);
 		}
 
 		if (!Options.getInstance().isUseOrInsteadOfAndForFilter()) {

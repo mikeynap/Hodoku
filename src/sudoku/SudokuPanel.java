@@ -3762,11 +3762,9 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 	public void setShowHintCellValue(int candidate) {
 
 		if (candidate == 10 || candidate == 11) {
-			// filter bivalue cells
-			for (int i = 0; i < showHintCellValues.length; i++) {
-				if (i != candidate) {
-					showHintCellValues[i] = false;
-				}
+			// filter bi/tri value cells
+			for (int i = 0; i < 10; i++) {
+				showHintCellValues[i] = false;
 			}
 			showHintCellValues[candidate] = !showHintCellValues[candidate];
 		} else {

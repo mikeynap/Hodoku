@@ -1168,8 +1168,8 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		jToolBar1.add(fxyToggleButton);
 
 		// TODO: change icon and text
-		fxyzToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/f_xyc.png")));
-		fxyzToggleButton.setToolTipText(bundle.getString("MainFrame.fxyToggleButton.toolTipText"));
+		fxyzToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/f_xyzc.png")));
+		fxyzToggleButton.setToolTipText(bundle.getString("MainFrame.fxyzToggleButton.toolTipText"));
 		fxyzToggleButton.setFocusable(false);
 		fxyzToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		fxyzToggleButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -3665,14 +3665,17 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 				}
 			}
 
-			if (index == Sudoku2.UNITS) {
+			// xy or xyz filter
+			if (index >= Sudoku2.UNITS) {
 				sudokuPanel.setShowHintCellValue(index + 1);
 			} else {
 				boolean isActive = sudokuPanel.getShowHintCellValues()[index + 1];
 				if (ctrlPressed) {
 					sudokuPanel.getShowHintCellValues()[index + 1] = !isActive;
 					// TODO: allow both bi/try
-					sudokuPanel.getShowHintCellValues()[10] = false;
+					if (index + 1 < 10) {
+						sudokuPanel.getShowHintCellValues()[10] = false;
+					}
 				} else {
 					if (isActive) {
 						sudokuPanel.resetShowHintCellValues();
