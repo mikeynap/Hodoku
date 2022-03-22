@@ -2,7 +2,7 @@ Hodoku is a solver/generator/trainer/analyzer for standard sudoku. It is written
 Java/Swing and should therefore run on any platform supported by Java (tested
 on Windows and Linux - Ubuntu/GTK+-LAF). Since it is written in Java the
 Java Runtime Environment (JRE) version 1.8 or higher must be installed on your computer
-before you can run Hodoku. The JRE am be downloaded from 
+before you can run Hodoku. The JRE am be downloaded from
 http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
 ![screenshot](https://raw.githubusercontent.com/PseudoFish/Hodoku/master/showcase/showcase.png)
@@ -16,18 +16,32 @@ to run Hodoku is:
 
 	java -Xmx512m -jar Hodoku.jar
 
-Note: the parameter "-Xmx" is specific to the JRE provided by Oracle. If you use a 
-different JRE, please look up the correct parameter for setting the maximum 
+Note: the parameter "-Xmx" is specific to the JRE provided by Oracle. If you use a
+different JRE, please look up the correct parameter for setting the maximum
 heap size at startup.
 
-Hodoku was created by Bernhard Hobiger who unfortunately passed away. I have taken 
-it upon myself to create a fork of the main project so that I could maintain Hodoku 
-and add new features which I felt were lacking. My apologies for the bad German 
-translation, I use Google translate since I don't speak German, but I try to retain 
+Hodoku was created by Bernhard Hobiger who unfortunately passed away. I have taken
+it upon myself to create a fork of the main project so that I could maintain Hodoku
+and add new features which I felt were lacking. My apologies for the bad German
+translation, I use Google translate since I don't speak German, but I try to retain
 international support.
 
 Change log
 ==========
+
+Version 3.0.0-beta1
+-------------------
+Forked into mikeynap/Hoduko. I will maintain the code here unless
+PseudoFish wants to merge my changes. Please excuse my java...
++ Added a filter for cells that contain exactly 3 candidates (temporary ugly icon)
++ Added a toggle (t) for switching between coloring modes
+
+
+Bug Fix:
++ Bottom coloring bar was previously completely broken, it now works as expected
++ Fixed a bug where the escape key would not clear the coloring/reset the mode.
+
+
 
 Version 2.3.2 (WIP)
 -------------------
@@ -60,7 +74,7 @@ Features:
   - Added Reset Candidates under the Puzzle menu
   - Digit filter/highlight has a distinguished color with customization in config.
   - Bottom window status shows selector location as RyCx notation.
-  
+
 Minor:
 
   - Added color option to customize the new colors in the color palette.
@@ -87,7 +101,7 @@ Bug Fix:
   - Selecting a primary color in Default Mouse Mode no longer generates a colored mouse.
   - Filter/Highlight bivalue cells did not work when Show filter on candidate was enabled.
   - Fixed an infinite loop bug related to inputting digits on a multi solution puzzle.
-  
+
 Version 2.2.10 (2019-12-24)
 ---------------------------
 
@@ -98,7 +112,7 @@ Minor:
   - Added German translation for those new components.
   - Added 2 colors to the color palette (Cyan and Yellow) which is often used for AICs.
   - Selection head is now part of the cell selection.
-  
+
 Bug Fix:
 
   - Primary color now updates correctly when setting its color to a custom value.
@@ -162,7 +176,7 @@ Features:
   - The active cell selector has been made larger then the rest of the cell selection to distinguish it.
   - Cell selection is more responsive. Immediate selection on down event.
   - German translation support has been added.
-  
+
 Bug Fixes:
 
   - Active cell selector position now updates correctly on mouse drag.
@@ -179,7 +193,7 @@ Version 2.2.6 (2019-11-22)
 Features:
 
   - The cell selector now wraps around the board instead of getting stuck at the edge.
-  
+
 Bug Fixes:
 
   - The Active Cell panel color selection has been made more responsive.
@@ -192,7 +206,7 @@ Version 2.2.5 (2019-11-17)
 
 Features:
 
-  - Single Click Mode has replaced Alternative Mouse Mode from: 
+  - Single Click Mode has replaced Alternative Mouse Mode from:
     - edit -> preferences -> General -> Appearance/Behaviour -> Single click mode
   - Single Click Mode is off by default.
   - Single Click Mode cannot toggle a missing candidate in a single click because this would break the multi-selection behaviour. For this reason, toggling empty candidates must remain a double click.
@@ -469,7 +483,7 @@ Features added:
   - #2512895: Support for Kraken Fish added
   - Support for Turbot fish added
   - #2579893: ERs with only two cells in the ER are now found
-  - #2512881: Sue de Coqs with the same additional candidate in both 
+  - #2512881: Sue de Coqs with the same additional candidate in both
               flanking sets are now supported
   - #2512876: Support for doubly linked ALS-XZ added
   - #2512874: Change chain ordering (size of ALS is taken into account)
