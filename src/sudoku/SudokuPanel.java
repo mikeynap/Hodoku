@@ -537,16 +537,28 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 		mainFrame.fixFocus();
 	}
 
-	private void onKeyPressed(java.awt.event.KeyEvent evt) {
+	public void resetColoring() {
+			cellZoomPanel.resetColoring();
+			clearColoring();
+			setActiveColor(null);
 
-		int keyCode = evt.getKeyCode();
-		switch (keyCode) {
-		case KeyEvent.VK_ESCAPE:
 			mainFrame.coloringPanelClicked(null);
 			clearRegion();
 			if (step != null) {
 				mainFrame.abortStep();
 			}
+			repaint();
+	}
+
+	private void onKeyPressed(java.awt.event.KeyEvent evt) {
+
+		int keyCode = evt.getKeyCode();
+		switch (keyCode) {
+		case KeyEvent.VK_ESCAPE:
+			resetColoring();
+			break;
+		case KeyEvent.VK_T:
+			cellZoomPanel.nextColoringMode();
 			break;
 		default:
 			handleKeys(evt);

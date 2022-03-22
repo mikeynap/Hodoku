@@ -324,6 +324,10 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 		}
 	}
 
+	public void setPrimaryColor(Color color) {
+		colorPalette.setPrimaryColor(color);
+	}
+
 	private void handleColorChange(JPanel panel, boolean isCtrlDown) {
 
 		boolean found = false;
@@ -659,6 +663,24 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 		return isColoringCells() || isColoringCandidates();
 	}
 
+	public void nextColoringMode() {
+		if (radioButtonDefault.isSelected()) {
+			radioButtonColorCandidates.setSelected(true);
+			mainFrame.setColoring(getPrimaryColor(), false);
+		} else if (radioButtonColorCandidates.isSelected()) {
+			radioButtonColorCells.setSelected(true);
+			mainFrame.setColoring(getPrimaryColor(), true);
+		} else {
+			resetColoring();
+			mainFrame.setColoring(null, false);
+		}
+	}
+
+	public void resetColoring() {
+		setDefaultMouse(true);
+		radioButtonDefault.setSelected(true);
+	}
+
 	public void setDefaultMouse(boolean enable) {
 		if (!radioButtonDefault.isSelected() && enable) {
 			radioButtonDefault.setSelected(true);
@@ -669,7 +691,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 		if (radioButtonColorCells.isSelected() && !enable) {
 			radioButtonDefault.setSelected(true);
 		} else if (!radioButtonColorCells.isSelected()) {
-			radioButtonDefault.setSelected(true);
+			radioButtonColorCells.setSelected(true);
 		}
 	}
 
@@ -677,7 +699,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 		if (radioButtonColorCandidates.isSelected() && !enable) {
 			radioButtonDefault.setSelected(true);
 		} else if (!radioButtonColorCandidates.isSelected()) {
-			radioButtonDefault.setSelected(true);
+			radioButtonColorCandidates.setSelected(true);
 		}
 	}
 
@@ -691,7 +713,6 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
 		if (e.getSource() == radioButtonDefault) {
 			mainFrame.setColoring(null, false);
 		} else if (e.getSource() == radioButtonColorCells) {

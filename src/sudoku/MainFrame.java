@@ -2793,7 +2793,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 	}
 
 	private void statusPanelColorResetMouseClicked(java.awt.event.MouseEvent evt) {
-		coloringPanelClicked(null);
+		coloringPanelReset();
 	}
 
 	private void colorCellsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
@@ -3325,12 +3325,19 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		fixFocus();
 	}
 
+	public void coloringPanelReset() {
+		sudokuPanel.resetColoring();
+		check();
+		fixFocus();
+	}
+
 	public void coloringPanelClicked(Color color) {
 
 		if (color == null) {
 
 			statusPanelColorResult.setBackground(Options.getInstance().getDefaultCellColor());
 			sudokuPanel.setActiveColor(null);
+			cellZoomPanel.resetColoring();
 			/*
 			if (colorNumber == -2) {
 				sudokuPanel.clearColoring();
@@ -3338,6 +3345,10 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 			}*/
 
 		} else {
+			if (!cellZoomPanel.isColoring()) {
+				cellZoomPanel.setColorCandidates(true);
+			}
+			cellZoomPanel.setPrimaryColor(color);
 
 			statusPanelColorResult.setBackground(color);
 			sudokuPanel.setActiveColor(color);
