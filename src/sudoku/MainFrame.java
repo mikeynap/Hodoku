@@ -106,11 +106,11 @@ import sudoku.FileDrop;
 public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 
 	private static final long serialVersionUID = 1L;
-	public static final String VERSION = "Hodoku - v3.0.0-beta1";
+	public static final String VERSION = "Hodoku - v3.0.0-beta2";
 
 	// public static final String BUILD = "Build 16";
 	public static final String BUILD;
-	public static final String REV = "$LastChangedRevision: 117 $";
+	public static final String REV = "$LastChangedRevision: 118 $";
 
 	/** The size of the toggle button icons */
 	private static final int TOGGLE_BUTTON_ICON_SIZE = 32;
