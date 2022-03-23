@@ -9,8 +9,7 @@ http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
 Available languages: English and German
 
-For all Windows versions hodoku.exe is the preferred program version. For all other
-operating systems Hodoku.jar has to be used. Hodoku uses rather a lot of memory
+Hodoku uses rather a lot of memory
 (especially if you use the "Find all available steps" feature). The recommended way
 to run Hodoku is:
 
@@ -20,19 +19,23 @@ Note: the parameter "-Xmx" is specific to the JRE provided by Oracle. If you use
 different JRE, please look up the correct parameter for setting the maximum
 heap size at startup.
 
-Hodoku was created by Bernhard Hobiger who unfortunately passed away. I have taken
-it upon myself to create a fork of the main project so that I could maintain Hodoku
-and add new features which I felt were lacking. My apologies for the bad German
-translation, I use Google translate since I don't speak German, but I try to retain
-international support.
+Forked from PseudoFish's fork.
+
+
+Wish List:
++ Ability to draw arrows or hard/dashed lines
++ Find out how to make an exe/installer
 
 Change log
 ==========
 
+Version 3.0.0-beta2
+-------------------
++ Added a timer (it currently does not pause, should add that eventually)
++ Added option to have candidate coloring alternate colors with each mark. Useful for coloring and chaining.
+
 Version 3.0.0-beta1
 -------------------
-Forked into mikeynap/Hoduko. I will maintain the code here unless
-PseudoFish wants to merge my changes. Please excuse my java...
 + Added a filter for cells that contain exactly 3 candidates (temporary ugly icon)
 + Added a toggle (t) for switching between coloring modes
 
