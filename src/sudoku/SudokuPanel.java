@@ -55,6 +55,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.SortedMap;
 import java.util.Stack;
 import java.util.TreeMap;
@@ -934,7 +935,7 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 	}
 
 	void onColoring(MouseClickDTO dto) {
-
+		System.out.println("On Coloring");
 		if (cellZoomPanel.isColoringCells()) {
 			// coloring for cells
 			if (dto.isCellClicked) {
@@ -947,6 +948,9 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 					handleColoring(dto.row, dto.col, dto.candidate, cellZoomPanel.getPrimaryColor());
 				}
 			}
+		}
+		if (cellZoomPanel.isColoringCandidatesToggle()){
+			cellZoomPanel.swapColors();
 		}
 	}
 
@@ -2071,12 +2075,17 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 
 			sudoku.setCell(row, col, number);
 			repaint();
+			String time = "";
+			if (sudoku.isSolved()){
+				time = mainFrame.stopTimer();
+			}
 
 			if (sudoku.isSolved() && Options.getInstance().isShowSudokuSolved()) {
+				ResourceBundle m = java.util.ResourceBundle.getBundle("intl/MainFrame");
 				JOptionPane.showMessageDialog(
 					this,
-					java.util.ResourceBundle.getBundle("intl/MainFrame").getString("MainFrame.sudoku_solved"),
-					java.util.ResourceBundle.getBundle("intl/MainFrame").getString("MainFrame.congratulations"),
+					String.format("%s %s %s", m.getString("MainFrame.sudoku_solved"), m.getString("MainFrame.time"), time),
+					m.getString("MainFrame.congratulations"),
 					JOptionPane.INFORMATION_MESSAGE
 				);
 			}
@@ -2745,7 +2754,6 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 							// highlight/filters candidates instead of cells
 							if (candidateValid && (isFilteringCandidates || isFilteringBivalueCandidates || isFilteringTrivalueCandidates) && !isInvalidCells()) {
 								if (isFilteringTrivalueCandidates) {
-									// TODO: make this configerable
 									Color lightYellow = new Color(255,255,153);
 									setColor(g2, allBlack, lightYellow);
 								} else {
