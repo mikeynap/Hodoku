@@ -29,6 +29,16 @@ Wish List:
 Change log
 ==========
 
+Version 3.0.0-beta3
+-------------------
++ Chaining has been added! It is listed as a coloring choice. There are still some bugs with
+  drawing them [especially in connecting existing chains etc] but it's functional!
+  Currently, you click the candidate agian to change the link type, and it auto alternates weak/strong.
+  Triple click candidate to remove chain. Future work will iron out the buggy interactions.
+
++ Clicking "Coloring" on bottom bar now properly enables the color modes.
+
+
 Version 3.0.0-beta2
 -------------------
 + Added a timer (it currently does not pause, should add that eventually)

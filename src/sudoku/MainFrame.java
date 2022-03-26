@@ -235,6 +235,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 	private javax.swing.JRadioButtonMenuItem colorCandidatesMenuItem;
 	private javax.swing.JRadioButtonMenuItem colorCandidatesToggleMenuItem;
 	private javax.swing.JRadioButtonMenuItem colorCellsMenuItem;
+	private javax.swing.JRadioButtonMenuItem chainCandidatesMenuItem;
 	private javax.swing.JMenuItem configMenuItem;
 	private javax.swing.JMenuItem copyCluesMenuItem;
 	private javax.swing.JMenuItem copyFilledMenuItem;
@@ -339,6 +340,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 	private javax.swing.JMenuItem editGivensMenuItem;
 	private javax.swing.JMenuItem playGameMenuItem;
 	private javax.swing.JLabel statusLabelCellCandidate;
+	private javax.swing.JLabel statusLabelChainCandidate;
 	private javax.swing.JLabel statusLabelLevel;
 	private javax.swing.JLabel statusLabelModus;
 	private javax.swing.JLabel statusLabelCellSelection;
@@ -783,6 +785,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		showWrongValuesMenuItem = new javax.swing.JCheckBoxMenuItem();
 		showDeviationsMenuItem = new javax.swing.JCheckBoxMenuItem();
 		showColorKuMenuItem = new javax.swing.JCheckBoxMenuItem();
+		chainCandidatesMenuItem = new javax.swing.JRadioButtonMenuItem();
 		colorCellsMenuItem = new javax.swing.JRadioButtonMenuItem();
 		colorCandidatesMenuItem = new javax.swing.JRadioButtonMenuItem();
 		colorCandidatesToggleMenuItem = new javax.swing.JRadioButtonMenuItem();
@@ -1779,6 +1782,18 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		optionMenu.add(colorCandidatesToggleMenuItem);
 
 
+		// TODO: localize
+		colorButtonGroup.add(chainCandidatesMenuItem);
+		chainCandidatesMenuItem.setMnemonic(java.util.ResourceBundle.getBundle("intl/MainFrame")
+				.getString("MainFrame.chainCandidatesMenuItem.mnemonic").charAt(0));
+		chainCandidatesMenuItem.setText(bundle.getString("MainFrame.chainCandidatesMenuItem.text"));
+		chainCandidatesMenuItem.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				chainCandidatesMenuItemActionPerformed(evt);
+			}
+		});
+
+		optionMenu.add(chainCandidatesMenuItem);
 
 		optionMenu.add(new javax.swing.JPopupMenu.Separator());
 
@@ -2221,6 +2236,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 	}
 
 	private void statusLabelCellCandidateMouseClicked(java.awt.event.MouseEvent evt) {
+		cellZoomPanel.nextColoringMode();
 		sudokuPanel.updateCellZoomPanel();
 		check();
 		fixFocus();
@@ -2876,6 +2892,14 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		fixFocus();
 	}
 
+	private void chainCandidatesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+		//sudokuPanel.setColorCells(false);
+		cellZoomPanel.setChaining(true);
+		sudokuPanel.updateCellZoomPanel();
+		check();
+		fixFocus();
+	}
+
 	public void toggleSingleClickMode() {
 		Options.getInstance().setSingleClickMode(!Options.getInstance().isSingleClickMode());
 		if (Options.getInstance().isSingleClickMode()) {
@@ -3373,25 +3397,22 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		savePoints.clear();
 	}
 
-	public void setColoring(Color color, boolean isCell) {
-		setColoring(color, isCell, false);
-	}
-
 	/**
 	 * Should be called only from {@link CellZoomPanel}.
 	 *
 	 * @param colorNumber
-	 * @param isCell
+	 * @param type
 	 */
-	public void setColoring(Color color, boolean isCell, boolean toggle) {
-
+	public void setColoring(Color color, CellZoomPanel.ColoringType type) {
 		//sudokuPanel.setColorCells(isCell);
-		if (isCell) {
+		if (type == CellZoomPanel.ColoringType.CELLS) {
 			cellZoomPanel.setColorCells(true);
-		} else if (toggle) {
+		} else if (type == CellZoomPanel.ColoringType.CANDIDATES_TOGGLE) {
 			cellZoomPanel.setColorCandidatesToggle(true);
-		} else {
+		} else if (type == CellZoomPanel.ColoringType.CANDIDATES) {
 			cellZoomPanel.setColorCandidates(true);
+		} else if (type == CellZoomPanel.ColoringType.CHAINING) {
+			cellZoomPanel.setChaining(true);
 		}
 
 		coloringPanelClicked(color);
@@ -3623,6 +3644,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		editGivensMenuItem.setEnabled(isPlaying);
 		setStartTime();
 		clockTimer.start();
+		sudokuPanel.reset();
 	}
 
 	public void setSolutionStep(SolutionStep step, boolean setInSudokuPanel) {
@@ -4038,6 +4060,9 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		long HH = seconds / 3600;
 		long MM = (seconds % 3600) / 60;
 		long SS = seconds % 60;
+		if (HH > 99) {
+			return String.format("%d:%02d:%02d:%02d", HH / 24,  HH % 24, MM, SS);
+		}
 		return (HH == 0) ? String.format("%02d:%02d", MM, SS) : String.format("%02d:%02d:%02d", HH, MM, SS);
 	}
 
@@ -4427,7 +4452,10 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 				statusLabelLevel.setText(ResourceBundle.getBundle("intl/MainFrame").getString("MainFrame.statusLabelLevel.text"));
 			}
 
-			if (cellZoomPanel.isColoringCells()) {
+			if (cellZoomPanel.isChaining()) {
+				chainCandidatesMenuItem.setSelected(true);
+				statusLabelCellCandidate.setText(ResourceBundle.getBundle("intl/MainFrame").getString("MainFrame.statusLabelCellCandidate.text.chain"));
+			} else if (cellZoomPanel.isColoringCells()) {
 				colorCellsMenuItem.setSelected(true);
 				statusLabelCellCandidate.setText(ResourceBundle.getBundle("intl/MainFrame").getString("MainFrame.statusLabelCellCandidate.text.cell"));
 			} else if (cellZoomPanel.isColoringCandidatesToggle()) {

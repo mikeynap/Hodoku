@@ -45,6 +45,13 @@ import javax.swing.JRadioButton;
  */
 @SuppressWarnings("serial")
 public class CellZoomPanel extends JPanel implements ActionListener {
+	public enum ColoringType {
+		NONE,
+		CELLS,
+		CANDIDATES,
+		CANDIDATES_TOGGLE,
+		CHAINING
+	}
 
 	private static final int X_OFFSET = 10;
 	private static final int Y_OFFSET = 33;
@@ -85,6 +92,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 	private JRadioButton radioButtonColorCells;
 	private JRadioButton radioButtonColorCandidates;
 	private JRadioButton radioButtonColorCandidatesToggle;
+	private JRadioButton radioButtonChainCandidates;
 	private UIColorPalette colorPalette;
 	private UIColorTools colorTools;
 
@@ -168,28 +176,34 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 		//String colorCandidatesToggleText = bundle.getString("CellZoomPanel.radioButtonColorCandidatesToggle.text");
 		// TODO: localize
 		String colorCandidatesToggleText = "Toggle Color Candidates";
+		// TODO: localize
+		String chainCandidatesText = "Chain Candidates";
 		String colorCellsText = bundle.getString("CellZoomPanel.radioButtonColorCells.text");
 
-		radioButtonPanel = new JPanel(new GridLayout(4, 1));
+		radioButtonPanel = new JPanel(new GridLayout(5, 1));
 		radioButtonPanel.setSize(200, colorPalette.getHeight());
 		radioButtonGroup = new ButtonGroup();
 		radioButtonDefault = new JRadioButton(defaultText);
 		radioButtonDefault.setSelected(true);
 		radioButtonColorCandidates = new JRadioButton(colorCandidatesText);
 		radioButtonColorCandidatesToggle = new JRadioButton(colorCandidatesToggleText);
+		radioButtonChainCandidates = new JRadioButton(chainCandidatesText);
 		radioButtonColorCells = new JRadioButton(colorCellsText);
 		radioButtonDefault.addActionListener(this);
 		radioButtonColorCells.addActionListener(this);
 		radioButtonColorCandidates.addActionListener(this);
 		radioButtonColorCandidatesToggle.addActionListener(this);
+		radioButtonChainCandidates.addActionListener(this);
 		radioButtonGroup.add(radioButtonDefault);
 		radioButtonGroup.add(radioButtonColorCandidates);
 		radioButtonGroup.add(radioButtonColorCandidatesToggle);
 		radioButtonGroup.add(radioButtonColorCells);
+		radioButtonGroup.add(radioButtonChainCandidates);
 		radioButtonPanel.add(radioButtonDefault);
 		radioButtonPanel.add(radioButtonColorCandidates);
 		radioButtonPanel.add(radioButtonColorCandidatesToggle);
 		radioButtonPanel.add(radioButtonColorCells);
+		radioButtonPanel.add(radioButtonChainCandidates);
 		add(radioButtonPanel);
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -297,7 +311,6 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 	}
 
 	private void onToggleCandidate(JButton button) {
-		System.out.println("onToggleCandidate");
 		int candidate = -1;
 
 		for (int i = 0; i < toggleCandidatesButtons.length; i++) {
@@ -358,15 +371,22 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 			if (isCtrlDown && colorNumber > 0) {
 				if (isColoringCells()) {
 					sudokuPanel.clearCellColor(Options.getInstance().getColoringColors()[colorNumber]);
+				} else if (isChaining()) {
+					// should maybe make the icon something to tell if it's strong or weak... TODO:
+					sudokuPanel.clearCandidateColor(Options.getInstance().getColoringColors()[colorNumber]);
 				} else if (isColoringCandidates()) {
 					sudokuPanel.clearCandidateColor(Options.getInstance().getColoringColors()[colorNumber]);
 				}
 			} else {
 				if (isColoring()) {
 					if (isColoringCells()) {
-						mainFrame.setColoring(colorPalette.getPrimaryColor(), true);
+						mainFrame.setColoring(colorPalette.getPrimaryColor(), ColoringType.CELLS);
+					} else if (isChaining()) {
+						ColoringType type = isColoringCandidatesToggle() ? ColoringType.CANDIDATES_TOGGLE : ColoringType.CANDIDATES;
+						mainFrame.setColoring(colorPalette.getPrimaryColor(), ColoringType.CHAINING);
 					} else if (isColoringCandidates()) {
-						mainFrame.setColoring(colorPalette.getPrimaryColor(), false, isColoringCandidatesToggle());
+						ColoringType type = isColoringCandidatesToggle() ? ColoringType.CANDIDATES_TOGGLE : ColoringType.CANDIDATES;
+						mainFrame.setColoring(colorPalette.getPrimaryColor(), type);
 					}
 				}
 			}
@@ -664,16 +684,28 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 	}
 
 	public boolean isColoringCandidates() {
-		return radioButtonColorCandidates.isSelected() || radioButtonColorCandidatesToggle.isSelected();
+		return radioButtonColorCandidates.isSelected() || radioButtonColorCandidatesToggle.isSelected() || radioButtonChainCandidates.isSelected();
+	}
+
+	public boolean isColoringCandidatesOrToggling() {
+		return radioButtonColorCandidates.isSelected() || radioButtonColorCandidatesToggle.isSelected() || radioButtonChainCandidates.isSelected();
 	}
 
 	public boolean isColoringCandidatesToggle() {
 		return radioButtonColorCandidatesToggle.isSelected();
 	}
 
+	public boolean isChaining() {
+		return radioButtonChainCandidates.isSelected();
+	}
+
 
 	public boolean isColoring() {
 		return isColoringCells() || isColoringCandidates();
+	}
+
+	private boolean isColoringCandidatesNotChaining() {
+		return !isChaining() && isColoringCandidates();
 	}
 
 	public void nextColoringMode() {
@@ -682,13 +714,17 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 			if (toggleDefault) {
 				radioButtonColorCandidatesToggle.setSelected(true);
 			}
-			mainFrame.setColoring(getPrimaryColor(), false, toggleDefault);
-		} else if (isColoringCandidates()) {
+			ColoringType type = toggleDefault ? ColoringType.CANDIDATES_TOGGLE : ColoringType.CANDIDATES;
+			mainFrame.setColoring(colorPalette.getPrimaryColor(), type);
+		} else if (isColoringCandidatesNotChaining()) {
 			radioButtonColorCells.setSelected(true);
-			mainFrame.setColoring(getPrimaryColor(), true);
+			mainFrame.setColoring(getPrimaryColor(), ColoringType.CELLS);
+		} else if (isColoringCells()) {
+			radioButtonChainCandidates.setSelected(true);
+			mainFrame.setColoring(getPrimaryColor(), ColoringType.CHAINING);
 		} else {
 			resetColoring();
-			mainFrame.setColoring(null, false);
+			mainFrame.setColoring(null, ColoringType.NONE);
 		}
 	}
 
@@ -727,6 +763,15 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 		}
 	}
 
+	public void setChaining(boolean enable) {
+		// reset the tmpChain from before.
+		sudokuPanel.clearTmpChains();
+		if (radioButtonChainCandidates.isSelected() && !enable) {
+			radioButtonDefault.setSelected(true);
+		} else if (!radioButtonChainCandidates.isSelected()) {
+			radioButtonChainCandidates.setSelected(true);
+		}
+	}
 
 	public Color getPrimaryColor() {
 		return colorPalette.getPrimaryColor();
@@ -739,13 +784,15 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == radioButtonDefault) {
-			mainFrame.setColoring(null, false);
+			mainFrame.setColoring(null, ColoringType.NONE);
 		} else if (e.getSource() == radioButtonColorCells) {
-			mainFrame.setColoring(getPrimaryColor(), true);
+			mainFrame.setColoring(getPrimaryColor(), ColoringType.CELLS);
 		} else if (e.getSource() == radioButtonColorCandidates) {
-			mainFrame.setColoring(getPrimaryColor(), false);
+			mainFrame.setColoring(getPrimaryColor(), ColoringType.CANDIDATES);
 		} else if (e.getSource() == radioButtonColorCandidatesToggle) {
-			mainFrame.setColoring(getPrimaryColor(), false, true);
+			mainFrame.setColoring(getPrimaryColor(), ColoringType.CANDIDATES_TOGGLE);
+		} else if (e.getSource() == radioButtonChainCandidates) {
+			mainFrame.setColoring(getPrimaryColor(), ColoringType.CHAINING);
 		}
 
 		mainFrame.check();
