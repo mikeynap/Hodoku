@@ -699,6 +699,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 		return radioButtonChainCandidates.isSelected();
 	}
 
+
 	public boolean isColoring() {
 		return isColoringCells() || isColoringCandidates();
 	}

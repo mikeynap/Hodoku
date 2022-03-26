@@ -2236,6 +2236,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 	}
 
 	private void statusLabelCellCandidateMouseClicked(java.awt.event.MouseEvent evt) {
+		cellZoomPanel.nextColoringMode();
 		sudokuPanel.updateCellZoomPanel();
 		check();
 		fixFocus();
@@ -4060,7 +4061,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		long MM = (seconds % 3600) / 60;
 		long SS = seconds % 60;
 		if (HH > 99) {
-			return String.format("%02d:%02d:%02d:%02d", HH / 24,  HH % 24, MM, SS);
+			return String.format("%d:%02d:%02d:%02d", HH / 24,  HH % 24, MM, SS);
 		}
 		return (HH == 0) ? String.format("%02d:%02d", MM, SS) : String.format("%02d:%02d:%02d", HH, MM, SS);
 	}
