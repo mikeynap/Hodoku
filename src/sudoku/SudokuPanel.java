@@ -134,6 +134,8 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 	private CellZoomPanel cellZoomPanel;
 	private SolutionStep step;
 	private int chainIndex = -1;
+	private Chain prepChain = null;
+	private ChainMap chainMap = new ChainMap();
 	private List<Integer> alsToShow = new ArrayList<Integer>();
 	private Rectangle gridRegion = new Rectangle();
 	private float strokeWidth = 1;
@@ -548,6 +550,7 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 			if (step != null) {
 				mainFrame.abortStep();
 			}
+
 			repaint();
 	}
 
@@ -935,7 +938,13 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 	}
 
 	void onColoring(MouseClickDTO dto) {
-		System.out.println("On Coloring");
+		if (cellZoomPanel.isChaining()) {
+			if (dto.candidate != -1) {
+				if (dto.isCandidateClicked) {
+					handleChaining(dto.row, dto.col, dto.candidate);
+				}
+			}
+		}
 		if (cellZoomPanel.isColoringCells()) {
 			// coloring for cells
 			if (dto.isCellClicked) {
@@ -949,7 +958,7 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 				}
 			}
 		}
-		if (cellZoomPanel.isColoringCandidatesToggle()){
+		if (cellZoomPanel.isColoringCandidatesToggle() || cellZoomPanel.isChaining()){
 			cellZoomPanel.swapColors();
 		}
 	}
@@ -1962,9 +1971,16 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 	public void clearColoring() {
 		coloringMap.clear();
 		coloringCandidateMap.clear();
+		chainMap.clear();
+		clearTmpChains();
 		updateCellZoomPanel();
 		mainFrame.check();
 	}
+
+	public void clearTmpChains() {
+		prepChain = null;
+	}
+
 
 	/**
 	 * Handles coloring for all selected cells, delegates to
@@ -2003,6 +2019,54 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 		updateCellZoomPanel();
 		mainFrame.fixFocus();
 		repaint();
+	}
+
+	public boolean canInsertValidLink(Chain chain, int index, int candidate) {
+		// unit must be in the same cell, row, col or block to be a valid target.
+		int chainIndex = chain.getCellIndex(chain.getEnd());
+		if (chainIndex == index) {
+			return true;
+		}
+
+		return chain.getCandidate(chain.getEnd()) == candidate && (
+			   Sudoku2.getRow(index) == Sudoku2.getRow(chainIndex)
+			   || Sudoku2.getCol(index) == Sudoku2.getCol(chainIndex)
+			   || Sudoku2.getBlock(index) == Sudoku2.getBlock(chainIndex));
+	}
+
+	public void handleChaining(int row, int col, int candidate) {
+		// temporary chain
+		int index = Sudoku2.getIndex(row, col);
+		int toggles = chainMap.maybeToggle(prepChain, index, candidate);
+
+		if (sudoku.getAnzCandidates(index) == 0) {
+			chainMap.resetToggles();
+			prepChain = null;
+			return;
+		}
+
+		if (toggles == 1 || toggles == 2) {
+			return;
+		} else if (toggles == 3) {
+			chainMap.delete(index, candidate);
+			chainMap.resetToggles();
+			prepChain = null;
+			return;
+		}
+
+		if (prepChain == null) {
+			prepChain = chainMap.prep(index, candidate, true);
+			chainMap.resetToggles();
+			return;
+		}
+		// check if link is valid. otherwise, new prep chain
+		if (!canInsertValidLink(prepChain, index, candidate)) {
+			prepChain = chainMap.prep(index, candidate, true);
+			chainMap.resetToggles();
+			return;
+		}
+
+		prepChain = chainMap.insert(prepChain, index, candidate);
 	}
 
 	/**
@@ -2062,6 +2126,11 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 		updateCellZoomPanel();
 		mainFrame.check();
 		repaint();
+	}
+
+	public void reset() {
+		chainMap.clear();
+		prepChain = null;
 	}
 
 	public void setCell(int row, int col, int number) {
@@ -2948,6 +3017,11 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 				drawChain(g2, chain, cellSize, ddy, allBlack);
 			}
 		}
+
+		// chain drawing
+		for (Chain chain : chainMap.getActiveChains()) {
+			drawChain(g2, chain, cellSize, ddy, allBlack);
+		}
 	}
 
 	/**
@@ -2985,6 +3059,9 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 		// Calculate the coordinates of the startpoint for every link
 		int[] ch = chain.getChain();
 		List<Point2D.Double> points1 = new ArrayList<Point2D.Double>(chain.getEnd() + 1);
+		// There's a random crash with chain length that happens here... TODO: find it.
+		//System.out.printf("chain: %s [%d, %d]\n", Arrays.toString(ch), chain.getStart(), chain.getEnd());
+
 		for (int i = 0; i <= chain.getEnd(); i++) {
 			if (i < chain.getStart()) {
 				// belongs to some other chain-> ignore!

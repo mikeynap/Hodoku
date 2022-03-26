@@ -155,6 +155,8 @@ public class Chain implements Cloneable {
 	/** Array holding the links for the current chain. */
 	private int[] chain;
 
+	private int capacity = 0;
+
 	/** Create an empty instance. */
 	public Chain() {
 	}
@@ -173,6 +175,14 @@ public class Chain implements Cloneable {
 		this.length = -1;
 	}
 
+	public Chain(int start, int end, int[] chain, int capacity) {
+		this.start = start;
+		this.end = end;
+		this.chain = chain;
+		this.length = -1;
+		this.capacity = capacity;
+	}
+
 	/**
 	 * Makes a deep copy of the current chain.
 	 *
@@ -184,6 +194,7 @@ public class Chain implements Cloneable {
 			Chain newChain = (Chain) super.clone();
 			newChain.start = start;
 			newChain.end = end;
+			newChain.capacity = capacity;
 //        newChain.chain = chain.clone();
 			newChain.chain = Arrays.copyOf(chain, end + 1);
 			return newChain;
@@ -434,6 +445,46 @@ public class Chain implements Cloneable {
 		setEntry(index, makeSEntry(cellIndex, candidate, isStrong));
 	}
 
+	public int getSimpleLength() {
+		return this.end - this.start;
+	}
+
+	private void growAndEnsureCapacity() {
+		this.end += 1;
+		if (this.capacity == 0) {
+			this.capacity = 20;
+			this.chain = Arrays.copyOf(this.chain, this.capacity);
+		} else if (this.end >= this.capacity) {
+			this.capacity *= 2;
+			this.chain = Arrays.copyOf(this.chain, this.capacity);
+		}
+	}
+
+
+	// SHOULD HAVE CAPACITY SET!
+	public void appendEntry(int cellIndex, int candidate, boolean isStrong) {
+		growAndEnsureCapacity();
+		setEntry(this.end, cellIndex, candidate, isStrong);
+	}
+
+	public int head() {
+		return this.chain[this.start];
+	}
+
+	public int tail() {
+		return this.chain[this.end];
+	}
+
+	// SHOULD HAVE CAPACITY SET!
+	public void prependEntry(int cellIndex, int candidate, boolean isStrong) {
+		growAndEnsureCapacity();
+		for (int i = this.end; i > this.start; i--) {
+			this.chain[i] = this.chain[i - 1];
+		}
+		this.chain[this.start] = makeSEntry(cellIndex, candidate, isStrong);
+	}
+
+
 	/**
 	 * Return the upper 7 bits of an index.
 	 *
@@ -584,6 +635,10 @@ public class Chain implements Cloneable {
 		return getSCandidate(chain[index]);
 	}
 
+	public boolean isEqual(int index, int cellIndex, int cand) {
+		return getCandidate(index) == cand && getCellIndex(index) == cellIndex;
+	}
+
 	/**
 	 * Tests if <code>entry</code> is a strong link.
 	 *
@@ -632,6 +687,15 @@ public class Chain implements Cloneable {
 		return getSNodeType(chain[index]);
 	}
 
+	public int getEntryIndex(int cellIndex, int candidate) {
+		for (int i = start; i <= end; i++){
+			if (getCellIndex(i) == cellIndex && getCandidate(i) == candidate) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
 	/**
 	 * Changes the link type (weak/strong) of <code>entry</code>.
 	 *
@@ -647,6 +711,8 @@ public class Chain implements Cloneable {
 		}
 		return entry;
 	}
+
+
 
 	/**
 	 * Fills an instance of type {@link SudokuSetBase} with all cells, that can see
