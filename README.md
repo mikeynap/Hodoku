@@ -9,21 +9,10 @@ http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
 Available languages: English and German
 
-Hodoku uses rather a lot of memory
-(especially if you use the "Find all available steps" feature). The recommended way
-to run Hodoku is:
-
-	java -Xmx512m -jar Hodoku.jar
-
-Note: the parameter "-Xmx" is specific to the JRE provided by Oracle. If you use a
-different JRE, please look up the correct parameter for setting the maximum
-heap size at startup.
-
 Forked from PseudoFish's fork.
 
 
 Wish List:
-+ Ability to draw arrows or hard/dashed lines
 + Find out how to make an exe/installer
 
 Change log
@@ -551,3 +540,17 @@ Version 0.9.0 (2009-01-15)
 
 This is the first release of HoDoKu. No new features will be added before the release
 of version 1.0. This release is extensively tested and should be stable.
+
+
+===========================
+Notes:
+===========================
+Hodoku uses rather a lot of memory
+(especially if you use the "Find all available steps" feature). The recommended way
+to run Hodoku is:
+
+	java -Xmx512m -jar Hodoku.jar
+
+Note: the parameter "-Xmx" is specific to the JRE provided by Oracle. If you use a
+different JRE, please look up the correct parameter for setting the maximum
+heap size at startup.
