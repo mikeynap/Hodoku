@@ -446,6 +446,7 @@ public final class Options {
 	public static final boolean TOGGLE_CANDIDATES_BY_DEFAULT = true;
 	public static final boolean COLORS_VISIBLE = true;
 	public static final boolean HIGHLIGHT_GIVENS = false;
+	public static final boolean AUTOFILL_SINGLES = false;
 	private boolean showCandidates = SHOW_CANDIDATES;
 	private boolean showCandidateHighlight = SHOW_CANDIDATE_HIGHLIGHT;
 	private boolean showWrongValues = SHOW_WRONG_VALUES;
@@ -481,6 +482,7 @@ public final class Options {
 	private boolean isToggleCandidatesByDefault = TOGGLE_CANDIDATES_BY_DEFAULT;
 	private boolean isColoringVisible = COLORS_VISIBLE;
 	private boolean isHighlightingGivens = HIGHLIGHT_GIVENS;
+	private boolean isAutofillingSingles = AUTOFILL_SINGLES;
 	// Clipboard
 	public static final boolean USE_ZERO_INSTEAD_OF_DOT = false; // as the name says...
 	private boolean useZeroInsteadOfDot = USE_ZERO_INSTEAD_OF_DOT;
@@ -2498,6 +2500,10 @@ public final class Options {
 		this.isHighlightingGivens = highlightGivens;
 	}
 
+	public void setAutoFillSingles(boolean autofill) {
+		this.isAutofillingSingles = autofill;
+	}
+
 	public boolean isAutoHighlighting() {
 		return isAutoHighlighting;
 	}
@@ -2508,6 +2514,10 @@ public final class Options {
 
 	public boolean isHighlightingGivens() {
 		return isHighlightingGivens;
+	}
+
+	public boolean isAutofillingSingles() {
+		return isAutofillingSingles;
 	}
 
 	/**

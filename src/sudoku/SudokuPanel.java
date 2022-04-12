@@ -941,7 +941,9 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 		if (cellZoomPanel.isChaining()) {
 			if (dto.candidate != -1) {
 				if (dto.isCandidateClicked) {
-					handleChaining(dto.row, dto.col, dto.candidate);
+					if (!handleChaining(dto.row, dto.col, dto.candidate)) {
+						return;
+					}
 				}
 			}
 		}
@@ -1059,6 +1061,18 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 			updateCellZoomPanel();
 			mainFrame.check();
 			repaint();
+
+			if (Options.getInstance().isAutofillingSingles()) {
+				boolean repaint = false;
+				while (autoFillSingles()){
+					repaint = true;
+				}
+				if (repaint) {
+					updateCellZoomPanel();
+					mainFrame.check();
+					repaint();
+				}
+			}
 		}
 	}
 
@@ -1240,6 +1254,30 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 				setCursor(colorCursor);
 			}
 		}
+	}
+
+	public boolean autoFillAllSingles() {
+		boolean filled = false;
+		while(autoFillSingles()){
+			filled = true;
+		}
+		return filled;
+	}
+
+	public boolean autoFillSingles() {
+		SudokuStepFinder finder = SudokuSolverFactory.getDefaultSolverInstance().getStepFinder();
+
+		List<SolutionStep> steps = finder.findAllNakedSingles(sudoku);
+		steps.addAll(finder.findAllHiddenSingles(sudoku));
+		for (int i = 0; i < steps.size(); i++) {
+			SolutionStep step = steps.get(i);
+			List<Integer> indicies = step.getIndices();
+			for (int j = 0; j < indicies.size(); j++) {
+				int index = step.getIndices().get(0);
+				setCell(Sudoku2.getRow(index), Sudoku2.getCol(index), step.getValues().get(j));
+			}
+		}
+		return steps.size() > 0;
 	}
 
 	public void handleKeys(KeyEvent evt) {
@@ -2021,52 +2059,49 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 		repaint();
 	}
 
-	public boolean canInsertValidLink(Chain chain, int index, int candidate) {
-		// unit must be in the same cell, row, col or block to be a valid target.
-		int chainIndex = chain.getCellIndex(chain.getEnd());
-		if (chainIndex == index) {
-			return true;
-		}
-
-		return chain.getCandidate(chain.getEnd()) == candidate && (
-			   Sudoku2.getRow(index) == Sudoku2.getRow(chainIndex)
-			   || Sudoku2.getCol(index) == Sudoku2.getCol(chainIndex)
-			   || Sudoku2.getBlock(index) == Sudoku2.getBlock(chainIndex));
-	}
-
-	public void handleChaining(int row, int col, int candidate) {
+	// True -> Should still color
+	// False -> do not color
+	public boolean handleChaining(int row, int col, int candidate) {
 		// temporary chain
 		int index = Sudoku2.getIndex(row, col);
-		int toggles = chainMap.maybeToggle(prepChain, index, candidate);
 
 		if (sudoku.getAnzCandidates(index) == 0) {
 			chainMap.resetToggles();
 			prepChain = null;
-			return;
+			return true;
 		}
 
+		// maybe close chain
+		Chain to = chainMap.getChain(index, candidate);
+		if (prepChain != null && prepChain == to && !to.isComplete() && to.getStart() == to.getEntryIndex(index, candidate) &&
+			Sudoku2.canSee(to.getEndIndex(), to.getEndCandidate(), to.getStartIndex(), to.getStartCandidate())) {
+			boolean lastLinkIsStrong = Chain.isSStrong(to.tail());
+			to.append(to.head());
+			to.getChain()[to.getEnd()] = Chain.setSStrong(to.tail(), !lastLinkIsStrong);
+			return false;
+		}
+
+
+		Chain maybeChain = chainMap.tryInsert(prepChain, index, candidate);
+		if (maybeChain != null) {
+			prepChain = maybeChain;
+			return true;
+		}
+
+		int toggles = chainMap.maybeToggle(prepChain, index, candidate);
+
 		if (toggles == 1 || toggles == 2) {
-			return;
+			return true;
 		} else if (toggles == 3) {
 			chainMap.delete(index, candidate);
 			chainMap.resetToggles();
 			prepChain = null;
-			return;
+			return false;
 		}
 
-		if (prepChain == null) {
-			prepChain = chainMap.prep(index, candidate, true);
-			chainMap.resetToggles();
-			return;
-		}
-		// check if link is valid. otherwise, new prep chain
-		if (!canInsertValidLink(prepChain, index, candidate)) {
-			prepChain = chainMap.prep(index, candidate, true);
-			chainMap.resetToggles();
-			return;
-		}
-
-		prepChain = chainMap.insert(prepChain, index, candidate);
+		prepChain = chainMap.prep(index, candidate, false);
+		chainMap.resetToggles();
+		return true;
 	}
 
 	/**
@@ -2372,7 +2407,6 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 			boolean withBorder,
 			boolean allBlack,
 			double scale) {
-
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
@@ -3060,7 +3094,6 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 		int[] ch = chain.getChain();
 		List<Point2D.Double> points1 = new ArrayList<Point2D.Double>(chain.getEnd() + 1);
 		// There's a random crash with chain length that happens here... TODO: find it.
-		//System.out.printf("chain: %s [%d, %d]\n", Arrays.toString(ch), chain.getStart(), chain.getEnd());
 
 		for (int i = 0; i <= chain.getEnd(); i++) {
 			if (i < chain.getStart()) {
@@ -3569,7 +3602,6 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 	}
 
 	public void setSudoku(String init, boolean alreadySolved) {
-
 		step = null;
 		setChainInStep(-1);
 		undoStack.clear();
@@ -3650,6 +3682,10 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 					sudoku.setScore(getSolver().getSudoku().getScore());
 				}
 			}
+		}
+
+		if (Options.getInstance().isAutofillingSingles()) {
+			autoFillAllSingles();
 		}
 
 		updateCellZoomPanel();

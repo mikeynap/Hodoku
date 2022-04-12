@@ -120,6 +120,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 		editModeAutoAdvanceCheckBox = new javax.swing.JCheckBox();
 		showFilterOnGivens = new javax.swing.JCheckBox();
 		autoHighlight = new javax.swing.JCheckBox();
+		autoFillSingles = new javax.swing.JCheckBox();
 		toggleCandidatesByDefault = new javax.swing.JCheckBox();
 		drawExtraBoxesCheckBox = new javax.swing.JCheckBox();
 
@@ -302,6 +303,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 
 		showFilterOnGivens.setText(bundle.getString("ConfigGeneralPanel.showFilterOnGivens.text"));
 		autoHighlight.setText(bundle.getString("ConfigGeneralPanel.autoHighlight.text"));
+		autoFillSingles.setText(bundle.getString("ConfigGeneralPanel.autoFillSingles.text"));
 		toggleCandidatesByDefault.setText(bundle.getString("ConfigGeneralPanel.toggleCandidatesByDefault.text"));
 
 
@@ -326,7 +328,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 						.addComponent(singleClickModeCheckBox).addComponent(onlySmallFiltersCheckBox)
 						.addComponent(editModeAutoAdvanceCheckBox).addComponent(showFilterOnGivens)
 						.addComponent(toggleCandidatesByDefault)
-						.addComponent(autoHighlight)).addContainerGap(26, Short.MAX_VALUE)));
+						.addComponent(autoHighlight).addComponent(autoFillSingles)).addContainerGap(26, Short.MAX_VALUE)));
 		jPanel4Layout.setVerticalGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel4Layout.createSequentialGroup().addContainerGap().addComponent(drawExtraBoxesCheckBox)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -358,6 +360,8 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 						.addComponent(toggleCandidatesByDefault)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 						.addComponent(autoHighlight)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(autoFillSingles)
 						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -421,6 +425,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 		Options.getInstance().setEditModeAutoAdvance(editModeAutoAdvanceCheckBox.isSelected());
 		Options.getInstance().setToggleCandidatesByDefault(toggleCandidatesByDefault.isSelected());
 		Options.getInstance().setAutoHighlighting(autoHighlight.isSelected());
+		Options.getInstance().setAutoFillSingles(autoFillSingles.isSelected());
 		Options.getInstance().setHighlightingGivens(showFilterOnGivens.isSelected());
 		Options.getInstance().setDrawMode(drawExtraBoxesCheckBox.isSelected() ? 0 : 1);
 
@@ -488,6 +493,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 			editModeAutoAdvanceCheckBox.setSelected(Options.EDIT_MODE_AUTO_ADVANCE);
 			toggleCandidatesByDefault.setSelected(Options.TOGGLE_CANDIDATES_BY_DEFAULT);
 			autoHighlight.setSelected(Options.AUTO_HIGHLIGHTING);
+			autoFillSingles.setSelected(Options.AUTOFILL_SINGLES);
 			showFilterOnGivens.setSelected(Options.HIGHLIGHT_GIVENS);
 
 			colorValuesCheckBox.setSelected(Options.COLOR_VALUES);
@@ -511,6 +517,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 			editModeAutoAdvanceCheckBox.setSelected(Options.getInstance().isEditModeAutoAdvance());
 			toggleCandidatesByDefault.setSelected(Options.getInstance().isToggleCandidatesByDefault());
 			autoHighlight.setSelected(Options.getInstance().isAutoHighlighting());
+			autoFillSingles.setSelected(Options.getInstance().isAutofillingSingles());
 			showFilterOnGivens.setSelected(Options.getInstance().isHighlightingGivens());
 
 			language = Options.getInstance().getLanguage();
@@ -607,6 +614,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 	private javax.swing.JCheckBox showFilterOnGivens;
 	private javax.swing.JCheckBox toggleCandidatesByDefault;
 	private javax.swing.JCheckBox autoHighlight;
+	private javax.swing.JCheckBox autoFillSingles;
 	private javax.swing.JLabel fontSizeLabel;
 	private javax.swing.JTextField fontSizeTextField;
 	private javax.swing.JLabel jLabel1;

@@ -157,6 +157,8 @@ public class Chain implements Cloneable {
 
 	private int capacity = 0;
 
+	private boolean complete = false;
+
 	/** Create an empty instance. */
 	public Chain() {
 	}
@@ -197,6 +199,7 @@ public class Chain implements Cloneable {
 			newChain.capacity = capacity;
 //        newChain.chain = chain.clone();
 			newChain.chain = Arrays.copyOf(chain, end + 1);
+			newChain.complete = complete;
 			return newChain;
 		} catch (CloneNotSupportedException ex) {
 			return null;
@@ -210,6 +213,7 @@ public class Chain implements Cloneable {
 		start = 0;
 		end = 0;
 		length = -1;
+		complete = false;
 	}
 
 	/**
@@ -280,6 +284,14 @@ public class Chain implements Cloneable {
 		return start;
 	}
 
+	public int getStartIndex() {
+		return getCellIndex(start);
+	}
+
+	public int getStartCandidate() {
+		return getCandidate(start);
+	}
+
 	/**
 	 * Setter for {@link #start}.
 	 *
@@ -296,6 +308,14 @@ public class Chain implements Cloneable {
 	 */
 	public int getEnd() {
 		return end;
+	}
+
+	public int getEndIndex() {
+		return getCellIndex(end);
+	}
+
+	public int getEndCandidate() {
+		return getCandidate(end);
 	}
 
 	/**
@@ -445,14 +465,38 @@ public class Chain implements Cloneable {
 		setEntry(index, makeSEntry(cellIndex, candidate, isStrong));
 	}
 
+	public void normalizeStart() {
+		if (this.start == 0) {
+			return;
+		}
+
+		for (int i = 0; i <= this.end - this.start; i++) {
+			this.chain[i] = this.chain[this.start + i];
+		}
+	}
+
 	public int getSimpleLength() {
-		return this.end - this.start;
+		if (this.end == 0) {
+			return 0;
+		}
+
+		return this.end - this.start + 1;
+	}
+
+	private void expandBy(int delta) {
+		this.capacity += delta;
+		this.chain = Arrays.copyOf(this.chain, this.capacity);
 	}
 
 	private void growAndEnsureCapacity() {
 		this.end += 1;
+		if (this.chain.length == this.end) {
+			this.capacity *= 2;
+			this.chain = Arrays.copyOf(this.chain, this.capacity);
+		}
+
 		if (this.capacity == 0) {
-			this.capacity = 20;
+			this.capacity = this.end * 2;
 			this.chain = Arrays.copyOf(this.chain, this.capacity);
 		} else if (this.end >= this.capacity) {
 			this.capacity *= 2;
@@ -460,9 +504,41 @@ public class Chain implements Cloneable {
 		}
 	}
 
+	public void append(Chain from) {
+		// TODO: use isStrong?
+		int newEnd = getSimpleLength() + from.getSimpleLength();
+		int[] newChain = new int[newEnd * 2];
+		int idx = 0;
+		for (int i = start; i <= end; i++) {
+			newChain[idx++] = getChain()[i];
+		}
+
+		for (int i = from.getStart(); i <= from.getEnd(); i++) {
+			newChain[idx++] = from.getChain()[i];
+		}
+
+		this.start = 0;
+		this.end = idx - 1;
+		this.chain = newChain;
+		this.capacity = newEnd * 2;
+	}
+
+	public void append(int entry) {
+		if (this.chain[this.end] == entry) {
+			System.out.println("Not adding dup to head");
+			return;
+		}
+		growAndEnsureCapacity();
+		this.chain[this.end] = entry;
+	}
+
 
 	// SHOULD HAVE CAPACITY SET!
-	public void appendEntry(int cellIndex, int candidate, boolean isStrong) {
+	public void append(int cellIndex, int candidate, boolean isStrong) {
+		if (isEqual(this.end, cellIndex, candidate)) {
+			System.out.println("Not adding dup to head");
+			return;
+		}
 		growAndEnsureCapacity();
 		setEntry(this.end, cellIndex, candidate, isStrong);
 	}
@@ -471,13 +547,62 @@ public class Chain implements Cloneable {
 		return this.chain[this.start];
 	}
 
+	public void popHead() {
+		for (int i = this.start + 1; i <= this.end; i++) {
+			this.chain[i - 1] = this.chain[i];
+		}
+		this.end--;
+	}
+
+	public void makeChainStartAt(int i) {
+		int j = 0;
+		if (this.start >= i) {
+			this.start = i;
+			return;
+		}
+		int newEnd = i - this.start;
+		for (; i <= this.end; j++) {
+			this.chain[this.start + j] = this.chain[i++];
+		}
+		this.end -= newEnd;
+	}
+
 	public int tail() {
 		return this.chain[this.end];
 	}
 
+	public void popTail() {
+		this.end--;
+	}
+
+	public void prepend(Chain from) {
+		// TODO: use isStrong?
+		int newEnd = getSimpleLength() + from.getSimpleLength();
+		int[] newChain = new int[newEnd * 2];
+		int idx = 0;
+
+		for (int i = from.getStart(); i <= from.getEnd(); i++) {
+			newChain[idx++] = from.getChain()[i];
+		}
+
+		for (int i = start; i <= end; i++) {
+			newChain[idx++] = getChain()[i];
+		}
+
+		this.start = 0;
+		this.end = idx - 1;
+		this.chain = newChain;
+		this.capacity = newEnd * 2;
+	}
+
 	// SHOULD HAVE CAPACITY SET!
-	public void prependEntry(int cellIndex, int candidate, boolean isStrong) {
+	public void prepend(int cellIndex, int candidate, boolean isStrong) {
+		if (isEqual(this.start, cellIndex, candidate)) {
+			System.out.println("Not adding dup to head");
+			return;
+		}
 		growAndEnsureCapacity();
+
 		for (int i = this.end; i > this.start; i--) {
 			this.chain[i] = this.chain[i - 1];
 		}
@@ -687,6 +812,7 @@ public class Chain implements Cloneable {
 		return getSNodeType(chain[index]);
 	}
 
+
 	public int getEntryIndex(int cellIndex, int candidate) {
 		for (int i = start; i <= end; i++){
 			if (getCellIndex(i) == cellIndex && getCandidate(i) == candidate) {
@@ -705,6 +831,22 @@ public class Chain implements Cloneable {
 	 */
 	public static int setSStrong(int entry, boolean strong) {
 		if (strong) {
+			entry |= STRONG_MASK;
+		} else {
+			entry &= ~STRONG_MASK;
+		}
+		return entry;
+	}
+
+	/**
+	 * Changes the link type (weak/strong) of <code>entry</code>.
+	 *
+	 * @param entry
+	 * @param strong
+	 * @return
+	 */
+	public static int toggleSStrong(int entry) {
+		if (!isSStrong(entry)) {
 			entry |= STRONG_MASK;
 		} else {
 			entry &= ~STRONG_MASK;
@@ -763,9 +905,65 @@ public class Chain implements Cloneable {
 		}
 	}
 
-//    public static boolean equalsIndexCandidate(int entry1, int entry2) {
-//        return (entry1 & EQUALS_MASK) == (entry2 & EQUALS_MASK);
-//    }
+	public int entryFromStart(int index) {
+		return this.chain[this.start + index];
+	}
+
+	public void insertAt(int insertIdx, int idx, int cand){
+		// if start == end, insert at end.
+		if (insertIdx == start && start != end) {
+			prepend(idx, cand, !isStrong(start));
+			return;
+		}
+		append(idx, cand, !isStrong(end));
+	}
+
+	public void reverse() {
+        int i, k, t;
+		int e = end + 1;
+        for (i = start; i < e / 2; i++) {
+            t = chain[i];
+            chain[i] = chain[e - i - 1];
+            chain[e - i - 1] = t;
+        }
+
+		for (i = start; i <= end; i++) {
+			chain[i] = Chain.toggleSStrong(chain[i]);
+		}
+	}
+
+	public boolean isComplete() {
+		if (end - start < 2) {
+			return false;
+		}
+		return getCandidate(end) == getCandidate(start) && getCellIndex(end) == getCellIndex(start);
+	}
+
+	// -1 == false
+	// >0 -> index
+	public int canInsertValidLink(int index, int candidate) {
+		// cannot already contain the element.
+		int target = getEntryIndex(index, candidate);
+		if (target != -1) {
+			return -1;
+		}
+
+		// cannot insert if chain is closed.
+		if (isComplete()) {
+			return -1;
+		}
+
+		// try the end first.
+		if (Sudoku2.canSee(getCellIndex(end), getCandidate(end), index, candidate)) {
+			return end;
+		}
+
+		if (Sudoku2.canSee(getCellIndex(start), getCandidate(start), index, candidate)) {
+			return start;
+		}
+
+		return -1;
+	}
 
 	/**
 	 * Returns a string representation for the node contained in <code>entry</code>.
