@@ -2840,4 +2840,13 @@ public class Sudoku2 implements Cloneable {
 		}
 		return result;
 	}
+
+	public static boolean canSee(int fIdx, int fCand, int tIdx, int tCand) {
+		if (fIdx == tIdx) return true;
+
+		return tCand == fCand && (
+					Sudoku2.getRow(fIdx) == Sudoku2.getRow(tIdx)
+					|| Sudoku2.getCol(fIdx) == Sudoku2.getCol(tIdx)
+					|| Sudoku2.getBlock(fIdx) == Sudoku2.getBlock(tIdx));
+	}
 }

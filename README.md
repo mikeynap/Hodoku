@@ -29,6 +29,13 @@ Wish List:
 Change log
 ==========
 
+Version 3.0.0-beta4
+-------------------
++ Added "Auto Fill Singles" support in the prefs! TODO: add some smooth animation.
++ Added support for combining chains/chaining backwards.
++ Fixed a bunch of bugs/crashes with chaining
+
+
 Version 3.0.0-beta3
 -------------------
 + Chaining has been added! It is listed as a coloring choice. There are still some bugs with

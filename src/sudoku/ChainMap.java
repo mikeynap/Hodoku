@@ -1,8 +1,10 @@
 
 package sudoku;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.TreeMap;
 
 
@@ -11,9 +13,9 @@ import java.util.TreeMap;
 public class ChainMap {
     // index 0, cand 8 = 8
     // index 1, cand 1 = 9
-    private Chain[] chains = new Chain[9*9*9];
+    private Chain[] chains = new Chain[9*9*9 + 9];
 
-    private List<Chain> activeChains = new ArrayList<Chain>();
+    private ArrayList<Chain> activeChains = new ArrayList<Chain>();
 
     private Chain prepChain = null;
 
@@ -29,7 +31,24 @@ public class ChainMap {
         chains[index * 9 + cand] = chain;
     }
 
-    public List<Chain> getActiveChains() {
+    public void setChain(Chain chain) {
+        for (int i = chain.getStart(); i <= chain.getEnd(); i++) {
+            int entry = chain.getChain()[i];
+            setChain(chain, Chain.getSCellIndex(entry), Chain.getSCandidate(entry));
+        }
+    }
+
+    private void pruneChains() {
+        ListIterator<Chain> iter = activeChains.listIterator();
+        while (iter.hasNext()) {
+            if (iter.next().getSimpleLength() == 0) {
+                iter.remove();
+            }
+        }
+    }
+
+    public ArrayList<Chain> getActiveChains() {
+        pruneChains();
         return activeChains;
     }
 
@@ -56,9 +75,61 @@ public class ChainMap {
 
 
 
-    public Chain insert(Chain from, int index, int cand) {
-        return insert(from.getCellIndex(0), from.getCandidate(0), index, cand, from.isStrong(0));
+    public Chain tryInsert(Chain from, int index, int cand) {
+        if (from == null) {
+            return null;
+        }
+
+        int idx = from.canInsertValidLink(index, cand);
+        if (idx == -1) {
+            return null;
+        }
+
+
+        Chain to = getChain(index, cand);
+        if (to == null) {
+            from.insertAt(idx, index, cand);
+            setChain(from);
+            if (!activeChains.contains(from)) {
+                activeChains.add(from);
+            }
+            return from;
+        }
+
+        if (to == from) {
+            return null;
+        }
+
+        if (to.isComplete()) {
+            System.out.println("Not combining with completed chain");
+            return null;
+        }
+
+        System.out.printf("Combining: %s and %s\n", from, to);
+        if (Sudoku2.canSee(from.getEndIndex(),from.getEndCandidate(), to.getStartIndex(), to.getStartCandidate())) {
+            from.append(to); // check
+        }   else if (Sudoku2.canSee(from.getStartIndex(), from.getStartCandidate(), to.getEndIndex(), to.getEndCandidate())) {
+            from.prepend(to);
+        } else if (Sudoku2.canSee(from.getEndIndex(),from.getEndCandidate(), to.getEndIndex(), to.getEndCandidate())) {
+            to.reverse();
+            from.append(to);
+        } else if (Sudoku2.canSee(from.getStartIndex(), from.getStartCandidate(), to.getStartIndex(), to.getStartCandidate())) {
+            System.out.println("Start only sees Start, not combining chains");
+            return null;
+        } else {
+            System.out.println("Chains cannot be combined");
+            return null;
+        }
+
+        if (!activeChains.contains(from)) {
+            activeChains.add(from);
+        }
+        setChain(from);
+        activeChains.remove(to);
+        return from;
     }
+
+
 
     public int maybeToggle(Chain prep, int index, int cand) {
         if (prep == null){
@@ -85,6 +156,7 @@ public class ChainMap {
         return toggles;
     }
 
+
     public void delete(int index, int cand){
         Chain chain = getChain(index, cand);
         if (chain == null) {
@@ -103,17 +175,16 @@ public class ChainMap {
         int ind = chain.getEntryIndex(index, cand);
         if (ind == chain.getStart()) {
             setChain(null, index, cand);
-            chain.setStart(chain.getStart() + 1);
-            setChain(null, index, cand);
+            chain.popHead();
         } else if (ind == chain.getEnd()) {
-            chain.setEnd(chain.getEnd() - 1);
+            chain.popTail();
             setChain(null, index, cand);
         } else {
             // remove from middle, make two new chains.
             Chain left = (Chain)chain.clone();
             Chain right = (Chain)chain.clone();
             left.setEnd(ind - 1);
-            right.setStart(ind + 1);
+            right.makeChainStartAt(ind + 1);
             activeChains.remove(chain);
             activeChains.add(left);
             activeChains.add(right);
@@ -127,34 +198,5 @@ public class ChainMap {
         }
 
         setChain(null, index, cand);
-    }
-
-    // insert link in chain. Can join existing chains IFF they start/end
-    // with the from/to.
-    // TODO: better logic for finding candidate to connect to. Currently, sometimes connects to the
-    // start of the chain that is not visible when the end of the chain is right there....
-    // TODO: make it so chain always starts at index 0
-    public Chain insert(int fromIndex, int fromCand, int toIndex, int toCand, boolean isStrong) {
-        Chain fromChain = getChain(fromIndex, fromCand);
-        Chain toChain = getChain(toIndex, toCand);
-        if (fromChain == null && toChain == null) {
-            int[] chainArr = new int[16];
-            chainArr[0] = Chain.makeSEntry(fromIndex, fromCand, isStrong);
-            chainArr[1] = Chain.makeSEntry(toIndex, toCand, !isStrong);
-            Chain chain = new Chain(0, 1, chainArr, 16);
-            setChain(chain, fromIndex, fromCand);
-            setChain(chain, toIndex, toCand);
-            activeChains.add(chain);
-            return chain;
-        } else if (fromChain != null) {
-            fromChain.appendEntry(toIndex, toCand, !fromChain.isStrong(fromChain.getEnd()));
-            setChain(fromChain, toIndex, toCand);
-            return fromChain;
-        } else if (toChain != null) {
-            toChain.prependEntry(fromIndex, fromCand, !toChain.isStrong(toChain.getStart()));
-            setChain(toChain, fromIndex, fromCand);
-            return toChain;
-        }
-        return toChain;
     }
 }
