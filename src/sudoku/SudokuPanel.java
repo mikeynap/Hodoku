@@ -1062,7 +1062,7 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 			mainFrame.check();
 			repaint();
 
-			if (Options.getInstance().isAutofillingSingles()) {
+			if (Options.getInstance().isAutofillSingles()) {
 				boolean repaint = false;
 				while (autoFillSingles()){
 					repaint = true;
@@ -3684,7 +3684,7 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 			}
 		}
 
-		if (Options.getInstance().isAutofillingSingles()) {
+		if (Options.getInstance().isAutofillSingles()) {
 			autoFillAllSingles();
 		}
 

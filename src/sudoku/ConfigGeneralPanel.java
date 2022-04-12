@@ -425,7 +425,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 		Options.getInstance().setEditModeAutoAdvance(editModeAutoAdvanceCheckBox.isSelected());
 		Options.getInstance().setToggleCandidatesByDefault(toggleCandidatesByDefault.isSelected());
 		Options.getInstance().setAutoHighlighting(autoHighlight.isSelected());
-		Options.getInstance().setAutoFillSingles(autoFillSingles.isSelected());
+		Options.getInstance().setAutofillSingles(autoFillSingles.isSelected());
 		Options.getInstance().setHighlightingGivens(showFilterOnGivens.isSelected());
 		Options.getInstance().setDrawMode(drawExtraBoxesCheckBox.isSelected() ? 0 : 1);
 
@@ -517,7 +517,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 			editModeAutoAdvanceCheckBox.setSelected(Options.getInstance().isEditModeAutoAdvance());
 			toggleCandidatesByDefault.setSelected(Options.getInstance().isToggleCandidatesByDefault());
 			autoHighlight.setSelected(Options.getInstance().isAutoHighlighting());
-			autoFillSingles.setSelected(Options.getInstance().isAutofillingSingles());
+			autoFillSingles.setSelected(Options.getInstance().isAutofillSingles());
 			showFilterOnGivens.setSelected(Options.getInstance().isHighlightingGivens());
 
 			language = Options.getInstance().getLanguage();
