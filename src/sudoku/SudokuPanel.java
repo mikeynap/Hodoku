@@ -492,9 +492,7 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 	}
 
 	private void updateCandidateMouseHighlight(Point mouse) {
-
 		if (showCandidateHighlight()) {
-
 			int row = getRow(mouse);
 			int col = getCol(mouse);
 			int candidate = getCandidate(mouse, row, col);
@@ -2135,6 +2133,14 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 			map.remove(key);
 		} else {
 			// either newly colored cell or change of cell color
+
+			// IF auto highlight color'd is set:
+			if (candidate != -1 && Options.getInstance().isAutoHighlightCandidateWhenColoring()) {
+				resetShowHintCellValues();
+				setShowHintCellValue(candidate);
+				checkIsShowInvalidOrPossibleCells();
+			}
+
 			map.put(key, color);
 		}
 
@@ -4426,6 +4432,12 @@ public class SudokuPanel extends javax.swing.JPanel implements Printable {
 
 	public void setColorsVisible(boolean isVisible) {
 		isColoringVisible = isVisible;
+	}
+
+	public void swapColorRow() {
+		cellZoomPanel.swapColorRow();
+		// TODO: change to non toggle...
+
 	}
 
 	public void resetColorKuImages() {

@@ -102,6 +102,10 @@ public class UIColorPalette extends JPanel implements MouseListener, ActionListe
 		primaryColor.setBackground(color);
 	}
 
+	public void setSecondaryColor(Color color) {
+		secondaryColor.setBackground(color);
+	}
+
 	public Color getPrimaryColor() {
 		return primaryColor.getBackground();
 	}

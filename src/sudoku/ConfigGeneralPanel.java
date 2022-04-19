@@ -122,6 +122,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 		autoHighlight = new javax.swing.JCheckBox();
 		autoFillSingles = new javax.swing.JCheckBox();
 		toggleCandidatesByDefault = new javax.swing.JCheckBox();
+		autoHighlightCandidateWhenColoring = new javax.swing.JCheckBox();
 		drawExtraBoxesCheckBox = new javax.swing.JCheckBox();
 
 		java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("intl/ConfigGeneralPanel");
@@ -302,6 +303,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 		editModeAutoAdvanceCheckBox.setText(bundle.getString("ConfigGeneralPanel.editModeAutoAdvanceCheckBox.text"));
 
 		showFilterOnGivens.setText(bundle.getString("ConfigGeneralPanel.showFilterOnGivens.text"));
+		autoHighlightCandidateWhenColoring.setText(bundle.getString("ConfigGeneralPanel.autoHighlightCandidateWhenColoring.text"));
 		autoHighlight.setText(bundle.getString("ConfigGeneralPanel.autoHighlight.text"));
 		autoFillSingles.setText(bundle.getString("ConfigGeneralPanel.autoFillSingles.text"));
 		toggleCandidatesByDefault.setText(bundle.getString("ConfigGeneralPanel.toggleCandidatesByDefault.text"));
@@ -327,6 +329,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 								.addComponent(jLabel1))
 						.addComponent(singleClickModeCheckBox).addComponent(onlySmallFiltersCheckBox)
 						.addComponent(editModeAutoAdvanceCheckBox).addComponent(showFilterOnGivens)
+						.addComponent(autoHighlightCandidateWhenColoring)
 						.addComponent(toggleCandidatesByDefault)
 						.addComponent(autoHighlight).addComponent(autoFillSingles)).addContainerGap(26, Short.MAX_VALUE)));
 		jPanel4Layout.setVerticalGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,6 +359,8 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 						.addComponent(editModeAutoAdvanceCheckBox)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 						.addComponent(showFilterOnGivens)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(autoHighlightCandidateWhenColoring)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 						.addComponent(toggleCandidatesByDefault)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -427,6 +432,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 		Options.getInstance().setAutoHighlighting(autoHighlight.isSelected());
 		Options.getInstance().setAutofillSingles(autoFillSingles.isSelected());
 		Options.getInstance().setHighlightingGivens(showFilterOnGivens.isSelected());
+		Options.getInstance().setAutoHighlightCandidateWhenColoring(autoHighlightCandidateWhenColoring.isSelected());
 		Options.getInstance().setDrawMode(drawExtraBoxesCheckBox.isSelected() ? 0 : 1);
 
 		if ((!Options.getInstance().isUseDefaultFontSize()
@@ -495,7 +501,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 			autoHighlight.setSelected(Options.AUTO_HIGHLIGHTING);
 			autoFillSingles.setSelected(Options.AUTOFILL_SINGLES);
 			showFilterOnGivens.setSelected(Options.HIGHLIGHT_GIVENS);
-
+			autoHighlightCandidateWhenColoring.setSelected(Options.AUTO_HIGHLIGHT_CANDIDATE_WHEN_COLORING);
 			colorValuesCheckBox.setSelected(Options.COLOR_VALUES);
 			showSudokuSolvedCheckBox.setSelected(Options.SHOW_SUDOKU_SOLVED);
 			deleteCursorAfterCheckBox.setSelected(Options.DELETE_CURSOR_DISPLAY);
@@ -519,7 +525,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 			autoHighlight.setSelected(Options.getInstance().isAutoHighlighting());
 			autoFillSingles.setSelected(Options.getInstance().isAutofillSingles());
 			showFilterOnGivens.setSelected(Options.getInstance().isHighlightingGivens());
-
+			autoHighlightCandidateWhenColoring.setSelected(Options.getInstance().isAutoHighlightCandidateWhenColoring());
 			language = Options.getInstance().getLanguage();
 			laf = Options.getInstance().getLaf();
 			shiftKeyCheckBox.setSelected(Options.getInstance().isUseShiftForRegionSelect());
@@ -612,6 +618,7 @@ public class ConfigGeneralPanel extends javax.swing.JPanel {
 	private javax.swing.JCheckBox drawExtraBoxesCheckBox;
 	private javax.swing.JCheckBox editModeAutoAdvanceCheckBox;
 	private javax.swing.JCheckBox showFilterOnGivens;
+	private javax.swing.JCheckBox autoHighlightCandidateWhenColoring;
 	private javax.swing.JCheckBox toggleCandidatesByDefault;
 	private javax.swing.JCheckBox autoHighlight;
 	private javax.swing.JCheckBox autoFillSingles;

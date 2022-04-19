@@ -373,7 +373,8 @@ public final class Options {
 	private boolean allStepsAlsChainForwardOnly = ALL_STEPS_ALS_CHAIN_FORWARD_ONLY;
 	// SudokuPanel
 	// Coloring Solver
-	public static final Color DEFAULT_PRIMARY_COLOR = new Color(134, 242, 128);
+	// 243162164
+	public static final Color DEFAULT_PRIMARY_COLOR = new Color(255, 255, 0);
 	public static final Color DEFAULT_SECONDARY_COLOR = new Color(247, 165, 167);
 	public static final Color[] COLORING_COLORS = {
 		new Color(255, 192, 89),  // 'a' - first color of first color pair
@@ -386,8 +387,9 @@ public final class Options {
 		new Color(206, 251, 237), // 'D' - second color of fourth color pair
 		new Color(134, 242, 128), // 'e' - first color of fifth color pair
 		new Color(215, 255, 215), // 'E' - second color of fifth color pair
-		new Color(51, 204, 255),  // first color of sixth color pair
-		new Color(255, 255, 0)    // second color of sixth color pair
+		new Color(255, 255, 0),    // first color of sixth color pair
+		new Color(51, 204, 255)  // second color of sixth color pair
+
 	};
 
 	public static final boolean COLOR_VALUES = true;
@@ -410,6 +412,7 @@ public final class Options {
 															// (Constraint-Verletzungen)
 	public static final boolean SHOW_DEVIATIONS = true; // Abweichungen von der richtigen Lösung anzeigen
 	public static final boolean SHOW_COLORKU = false; // use colors instead of numbers
+	public static final boolean AUTO_HIGHLIGHT_CANDIDATE_WHEN_COLORING = false;
 	public static final boolean INVALID_CELLS = false; // show possible cells
 	public static final boolean COLOR_CELLS = true; // color cells or candidates
 	public static final boolean SAVE_WINDOW_LAYOUT = true; // save window layout at shutdown
@@ -452,6 +455,7 @@ public final class Options {
 	private boolean showWrongValues = SHOW_WRONG_VALUES;
 	private boolean showDeviations = SHOW_DEVIATIONS;
 	private boolean showColorKu = SHOW_COLORKU;
+	private boolean autoHighlightCandidateWhenColoring = AUTO_HIGHLIGHT_CANDIDATE_WHEN_COLORING;
 	/** Current state, set by {@link MainFrame}. */
 	private boolean showColorKuAct = SHOW_COLORKU;
 	private boolean invalidCells = INVALID_CELLS;
@@ -2384,6 +2388,17 @@ public final class Options {
 	 */
 	public void setShowColorKu(boolean showColorKu) {
 		this.showColorKu = showColorKu;
+	}
+
+	public boolean isAutoHighlightCandidateWhenColoring() {
+		return autoHighlightCandidateWhenColoring;
+	}
+
+	/**
+	 * @param showColorKu the showColorKu to set
+	 */
+	public void setAutoHighlightCandidateWhenColoring(boolean ahc) {
+		this.autoHighlightCandidateWhenColoring = ahc;
 	}
 
 //    /**
