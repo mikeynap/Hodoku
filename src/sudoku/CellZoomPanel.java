@@ -470,7 +470,7 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 		chooseColorPanel.setLocation(setValuePanel.getX(), y);
 		chooseColorPanel.doLayout();
 		chooseColorPanel.setSize(colorPanelHeight/2*COLOR_BUTTON_COUNT/2, colorPanelHeight);
-		colorTools.setSize(colorPanelHeight/2, colorPanelHeight/2);
+		colorTools.setSize(colorPanelHeight/2, colorPanelHeight);
 		colorTools.setLocation(chooseColorPanel.getX() + chooseColorPanel.getWidth(), y);
 		colorTools.doLayout();
 		y += colorPanelHeight;
@@ -672,6 +672,38 @@ public class CellZoomPanel extends JPanel implements ActionListener {
 
 	public void swapColors() {
 		colorPalette.swap();
+		sudokuPanel.updateCellZoomPanel();
+	}
+
+	public void swapColorRow() {
+		Color primary = colorPalette.getPrimaryColor();
+		Color secondary = colorPalette.getSecondaryColor();
+		int idx = 0;
+
+		for (Color c : Options.COLORING_COLORS) {
+			int newIdx = idx + ((idx % 2 == 0) ? 1 : -1);
+			if (c.equals(primary)) {
+				// arranged in pairs top row, bottom row.
+				colorPalette.setPrimaryColor(Options.COLORING_COLORS[newIdx]);
+			}
+			if (c.equals(secondary)) {
+				colorPalette.setSecondaryColor(Options.COLORING_COLORS[newIdx]);
+			}
+			idx++;
+		}
+
+		if (radioButtonColorCandidatesToggle.isSelected()) {
+			radioButtonColorCandidates.setSelected(true);
+			mainFrame.setColoring(colorPalette.getPrimaryColor(), ColoringType.CANDIDATES);
+		} else if (radioButtonColorCandidates.isSelected()) {
+			radioButtonColorCandidatesToggle.setSelected(true);
+			mainFrame.setColoring(colorPalette.getPrimaryColor(), ColoringType.CANDIDATES_TOGGLE);
+		}
+
+		if (isColoring()) {
+			sudokuPanel.updateColorCursor();
+		}
+
 		sudokuPanel.updateCellZoomPanel();
 	}
 

@@ -328,6 +328,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 	private javax.swing.JCheckBoxMenuItem showCandidatesMenuItem;
 	private javax.swing.JCheckBoxMenuItem showCandidateHighlightMenuItem;
 	private javax.swing.JCheckBoxMenuItem showColorKuMenuItem;
+	private javax.swing.JCheckBoxMenuItem autoHighlightCandidateWhenColoringMenuItem;
 	private javax.swing.JCheckBoxMenuItem showDeviationsMenuItem;
 	private javax.swing.JCheckBoxMenuItem showHintButtonsCheckBoxMenuItem;
 	private javax.swing.JCheckBoxMenuItem showHintPanelMenuItem;
@@ -605,6 +606,9 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		showColorKuMenuItem.setSelected(Options.getInstance().isShowColorKu());
 		Options.getInstance().setShowColorKuAct(Options.getInstance().isShowColorKu());
 
+		autoHighlightCandidateWhenColoringMenuItem.setSelected(Options.getInstance().isAutoHighlightCandidateWhenColoring());
+		Options.getInstance().setAutoHighlightCandidateWhenColoring(Options.getInstance().isAutoHighlightCandidateWhenColoring());
+
 		// Caret-Listener for display of Forcing Chains
 		hinweisTextArea.addCaretListener(caretListener);
 
@@ -782,6 +786,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		optionMenu = new javax.swing.JMenu();
 		showCandidatesMenuItem = new javax.swing.JCheckBoxMenuItem();
 		showCandidateHighlightMenuItem = new javax.swing.JCheckBoxMenuItem();
+		autoHighlightCandidateWhenColoringMenuItem = new javax.swing.JCheckBoxMenuItem();
 		showWrongValuesMenuItem = new javax.swing.JCheckBoxMenuItem();
 		showDeviationsMenuItem = new javax.swing.JCheckBoxMenuItem();
 		showColorKuMenuItem = new javax.swing.JCheckBoxMenuItem();
@@ -1743,6 +1748,19 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 			}
 		});
 		optionMenu.add(showColorKuMenuItem);
+
+		autoHighlightCandidateWhenColoringMenuItem.setMnemonic(java.util.ResourceBundle.getBundle("intl/MainFrame")
+				.getString("MainFrame.autoHighlightCandidateWhenColoringMenuItem.mnemonic").charAt(0));
+		autoHighlightCandidateWhenColoringMenuItem.setSelected(true);
+		autoHighlightCandidateWhenColoringMenuItem.setText(bundle.getString("MainFrame.autoHighlightCandidateWhenColoringMenuItem.text"));
+		autoHighlightCandidateWhenColoringMenuItem.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				autoHighlightCandidateWhenColoringMenuItemActionPerformed(evt);
+			}
+		});
+		optionMenu.add(autoHighlightCandidateWhenColoringMenuItem);
+
+
 		optionMenu.add(new javax.swing.JPopupMenu.Separator());
 
 		colorButtonGroup.add(colorCellsMenuItem);
@@ -3136,6 +3154,12 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		fixFocus();
 	}
 
+	private void autoHighlightCandidateWhenColoringMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
+		Options.getInstance().setAutoHighlightCandidateWhenColoring(autoHighlightCandidateWhenColoringMenuItem.isSelected());
+		check();
+		fixFocus();
+	}
+
 	private void askQuestionMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
 		MyBrowserLauncher.getInstance().launchForum();
 	}
@@ -3639,6 +3663,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		setAllSinglesMenuItem.setEnabled(isPlaying);
 		showDeviationsMenuItem.setEnabled(isPlaying);
 		showColorKuMenuItem.setEnabled(isPlaying);
+		autoHighlightCandidateWhenColoringMenuItem.setEnabled(isPlaying);
 
 		playGameMenuItem.setEnabled(!isPlaying);
 		editGivensMenuItem.setEnabled(isPlaying);
@@ -4398,6 +4423,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 			showWrongValuesMenuItem.setSelected(sudokuPanel.isShowWrongValues());
 			showDeviationsMenuItem.setSelected(sudokuPanel.isShowDeviations());
 			showColorKuMenuItem.setSelected(Options.getInstance().isShowColorKuAct());
+			autoHighlightCandidateWhenColoringMenuItem.setSelected(Options.getInstance().isAutoHighlightCandidateWhenColoring());
 			prepareToggleButtonIcons(Options.getInstance().isShowColorKuAct());
 
 			// either all ToggleButtons are set or none is

@@ -20,13 +20,15 @@ public class UIColorTools extends JPanel implements MouseListener, ActionListene
 	private static final int PANEL_SIZE = DEFAULT_BUTTON_SIZE + DEFAULT_BUTTON_SIZE/2;
 
 	private UIToggleButton btnColorVisible;
+	private UIBorderedImagePanel switchColorRow;
 	private SudokuPanel sudokuPanel;
+
 
 	public UIColorTools() {
 
 		super(true);
 
-		this.setSize(PANEL_SIZE, PANEL_SIZE);
+		this.setSize(PANEL_SIZE, PANEL_SIZE*2);
 		this.setLayout(null);
 		this.addComponentListener(this);
 
@@ -41,6 +43,14 @@ public class UIColorTools extends JPanel implements MouseListener, ActionListene
 		btnColorVisible.setSize(DEFAULT_BUTTON_SIZE, DEFAULT_BUTTON_SIZE);
 		btnColorVisible.setToolTipText(bundle.getString("btnColorVisible.tooltip"));
 		add(btnColorVisible);
+
+		Image switchImage = new ImageIcon(getClass().getResource("/img/swap_color_arrow.png")).getImage();
+		switchColorRow = new UIBorderedImagePanel(switchImage);
+		switchColorRow.addMouseListener(this);
+		switchColorRow.setSize(DEFAULT_BUTTON_SIZE, DEFAULT_BUTTON_SIZE);
+		switchColorRow.setLocation(DEFAULT_BUTTON_SIZE/10, 3*DEFAULT_BUTTON_SIZE/5);
+		switchColorRow.setToolTipText(bundle.getString("switchColorRow.tooltip"));
+		add(switchColorRow);
 	}
 
 	public void setSudokuPanel(SudokuPanel sudokuPanel) {
@@ -54,8 +64,12 @@ public class UIColorTools extends JPanel implements MouseListener, ActionListene
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btnColorVisible) {
 			sudokuPanel.setColorsVisible(btnColorVisible.isOn());
-			sudokuPanel.repaint();
 		}
+		if (e.getSource() == switchColorRow) {
+			sudokuPanel.swapColorRow();
+		}
+		sudokuPanel.repaint();
+
 	}
 
 	@Override
@@ -78,8 +92,11 @@ public class UIColorTools extends JPanel implements MouseListener, ActionListene
 
 	@Override
 	public void componentResized(ComponentEvent e) {
-		btnColorVisible.setSize(getWidth(), getHeight());
+		btnColorVisible.setSize(getWidth(), getHeight()/2);
+		switchColorRow.setSize(getWidth(), getHeight()/2);
+		switchColorRow.setLocation(getWidth()/10, 3*getHeight() / 5);
 		btnColorVisible.repaint();
+		switchColorRow.repaint();
 	}
 
 	@Override
