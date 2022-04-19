@@ -14,9 +14,17 @@ Forked from PseudoFish's fork.
 
 Wish List:
 + Find out how to make an exe/installer
++ Make chaining smoother, especially when trying to delete links or change their 'strength'.
 
 Change log
 ==========
+
+Version 3.0.0-beta5
+-------------------
++ "auto highlight when coloring": when chaining or coloring, you can have the selected candidate automatically become the active filter.
++ when chaining or coloring, you can have the selected candidate automatically become the active filter.
+I also added a little arrow button on the color selector page to allow quickly swapping between shades of colors. This was a selfish add, I like alternate shades for forcing chains, but that required too many clicks :p
+
 
 Version 3.0.0-beta4
 -------------------
