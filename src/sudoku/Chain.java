@@ -506,7 +506,16 @@ public class Chain implements Cloneable {
 
 	public void append(Chain from) {
 		// TODO: use isStrong?
+		if (getSimpleLength() == 0) {
+			this.chain = from.chain;
+			this.end = from.end;
+			this.start = from.start;
+			this.capacity = from.capacity;
+			return;
+		}
+
 		int newEnd = getSimpleLength() + from.getSimpleLength();
+
 		int[] newChain = new int[newEnd * 2];
 		int idx = 0;
 		for (int i = start; i <= end; i++) {

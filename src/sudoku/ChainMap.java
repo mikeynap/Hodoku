@@ -13,7 +13,8 @@ import java.util.TreeMap;
 public class ChainMap {
     // index 0, cand 8 = 8
     // index 1, cand 1 = 9
-    private Chain[] chains = new Chain[9*9*9 + 9];
+    private static final int MAX_CHAINS = 9*9*9 + 1;
+    private Chain[] chains = new Chain[MAX_CHAINS];
 
     private ArrayList<Chain> activeChains = new ArrayList<Chain>();
 
@@ -59,7 +60,7 @@ public class ChainMap {
     }
 
     public void clear() {
-        chains = new Chain[9*9*9];
+        chains = new Chain[MAX_CHAINS];
         activeChains.clear();
         resetToggles();
     }
