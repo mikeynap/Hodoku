@@ -63,7 +63,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Duration;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -166,7 +166,7 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 		new MyFileFilter(1), new MyFileFilter(8), new MyFileFilter(9)
 	};
 
-	private LocalTime startTime = null;
+	private LocalDateTime startTime = null;
 
 	private MyFileFilter[] configFileFilters = new MyFileFilter[] { new MyFileFilter(0) };
 	private MyCaretListener caretListener = new MyCaretListener();
@@ -4067,20 +4067,20 @@ public class MainFrame extends javax.swing.JFrame implements FlavorListener {
 	}
 
 	public synchronized void setStartTime() {
-		startTime = LocalTime.now();
+		startTime = LocalDateTime.now();
 	}
 
-	public synchronized LocalTime getStartTime() {
+	public synchronized LocalDateTime getStartTime() {
 		return startTime;
 	}
 
 	public String getFormattedTime() {
-		LocalTime startTime = getStartTime();
+		LocalDateTime startTime = getStartTime();
 		if (startTime == null) {
 			return "";
 		}
 
-		Duration duration = Duration.between(startTime, LocalTime.now());
+		Duration duration = Duration.between(startTime, LocalDateTime.now());
 		long seconds = duration.getSeconds();
 		long HH = seconds / 3600;
 		long MM = (seconds % 3600) / 60;
